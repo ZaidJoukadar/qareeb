@@ -1,0 +1,91 @@
+{
+  "@@locale": "en",
+  "appTitle": "Qareeb",
+  "@appTitle": {
+    "description": "Application name shown in the app bar and system UI."
+  },
+  "homeTitle": "Qareeb Home",
+  "@homeTitle": {
+    "description": "Title on the home placeholder screen body."
+  },
+  "skip": "Skip",
+  "@skip": {
+    "description": "Onboarding skip action."
+  },
+  "next": "Next",
+  "@next": {
+    "description": "Onboarding next page action."
+  },
+  "getStarted": "Get Started",
+  "@getStarted": {
+    "description": "Onboarding final action to enter the app."
+  },
+  "onboardingSlide1Title": "Begin Your Journey with the Quran",
+  "@onboardingSlide1Title": {
+    "description": "Onboarding slide 1 title — commit to reading."
+  },
+  "onboardingSlide1Description": "Set your intention and build a daily habit of reading — one step at a time, closer to Allah.",
+  "@onboardingSlide1Description": {
+    "description": "Onboarding slide 1 description."
+  },
+  "onboardingSlide2Title": "Understand Every Verse",
+  "@onboardingSlide2Title": {
+    "description": "Onboarding slide 2 title — understand meanings."
+  },
+  "onboardingSlide2Description": "Explore clear meanings and tafsir so every ayah speaks to your heart and mind.",
+  "@onboardingSlide2Description": {
+    "description": "Onboarding slide 2 description."
+  },
+  "onboardingSlide3Title": "Stay Committed, Stay Close",
+  "@onboardingSlide3Title": {
+    "description": "Onboarding slide 3 title — persevere on the path."
+  },
+  "onboardingSlide3Description": "Reminders, progress, and gentle encouragement — we help you persevere on the path.",
+  "@onboardingSlide3Description": {
+    "description": "Onboarding slide 3 description."
+  },
+  "languageEnglish": "English",
+  "@languageEnglish": {
+    "description": "English language label in settings."
+  },
+  "languageArabic": "Arabic",
+  "@languageArabic": {
+    "description": "Arabic language label in settings."
+  },
+  "quranSyncTitle": "Preparing the Quran",
+  "@quranSyncTitle": {
+    "description": "Title on the Quran download/sync screen."
+  },
+  "quranSyncDescription": "Downloading surahs and ayahs for offline reading. This may take a few minutes.",
+  "@quranSyncDescription": {
+    "description": "Description on the Quran sync screen."
+  },
+  "quranSyncProgress": "{completed} of {total} surahs",
+  "@quranSyncProgress": {
+    "description": "Sync progress label.",
+    "placeholders": {
+      "completed": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "quranSyncRetry": "Retry",
+  "@quranSyncRetry": {
+    "description": "Retry button on sync failure."
+  },
+  "surahListError": "Could not load surahs",
+  "@surahListError": {
+    "description": "Error when surah list fails to load."
+  },
+  "ayahCountLabel": "ayahs",
+  "@ayahCountLabel": {
+    "description": "Label for ayah count on surah list."
+  },
+  "dismiss": "Dismiss",
+  "@dismiss": {
+    "description": "Dismiss audio error banner."
+  }
+}

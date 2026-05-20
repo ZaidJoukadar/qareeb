@@ -1,0 +1,33 @@
+{
+  "@@locale": "ar",
+  "appTitle": "قريب",
+  "homeTitle": "الرئيسية",
+  "skip": "تخطي",
+  "next": "التالي",
+  "getStarted": "ابدأ",
+  "onboardingSlide1Title": "ابدأ رحلتك مع القرآن",
+  "onboardingSlide1Description": "اضبط نيتك وابنِ عادة يومية للقراءة خطوة بخطوة، أقرب إلى الله.",
+  "onboardingSlide2Title": "افهم كل آية",
+  "onboardingSlide2Description": "استكشف المعاني والتفسير بوضوح حتى تتكلم كل آية إلى قلبك وعقلك.",
+  "onboardingSlide3Title": "اثبت وابقَ قريبًا",
+  "onboardingSlide3Description": "تذكيرات وتقدم وتشجيع لطيف — نساعدك على الثبات في الطريق.",
+  "languageEnglish": "الإنجليزية",
+  "languageArabic": "العربية",
+  "quranSyncTitle": "جاري تحضير القرآن",
+  "quranSyncDescription": "يتم تنزيل السور والآيات للقراءة دون اتصال. قد يستغرق ذلك بضع دقائق.",
+  "quranSyncProgress": "{completed} من {total} سورة",
+  "@quranSyncProgress": {
+    "placeholders": {
+      "completed": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "quranSyncRetry": "إعادة المحاولة",
+  "surahListError": "تعذر تحميل السور",
+  "ayahCountLabel": "آية",
+  "dismiss": "إغلاق"
+}

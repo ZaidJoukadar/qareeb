@@ -1,0 +1,31 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Qareeb (dev)",
+      "request": "launch",
+      "type": "dart",
+      "args": [
+        "--dart-define=APP_ENV=dev"
+      ]
+    },
+    {
+      "name": "Qareeb (staging)",
+      "request": "launch",
+      "type": "dart",
+      "args": [
+        "--dart-define=APP_ENV=staging",
+        "--dart-define=SENTRY_DSN=YOUR_STAGING_SENTRY_DSN"
+      ]
+    },
+    {
+      "name": "Qareeb (production)",
+      "request": "launch",
+      "type": "dart",
+      "args": [
+        "--dart-define=APP_ENV=production",
+        "--dart-define=SENTRY_DSN=YOUR_PRODUCTION_SENTRY_DSN"
+      ]
+    }
+  ]
+}
