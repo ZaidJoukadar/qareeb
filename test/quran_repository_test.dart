@@ -1,25 +1,36 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:qareeb/features/quran/data/datasources/quran_audio_cache_data_source.dart';
 import 'package:qareeb/features/quran/data/datasources/quran_local_data_source.dart';
 import 'package:qareeb/features/quran/data/datasources/quran_remote_data_source.dart';
 import 'package:qareeb/features/quran/data/models/ayah_dto.dart';
 import 'package:qareeb/features/quran/data/models/surah_detail_dto.dart';
 import 'package:qareeb/features/quran/data/models/surah_summary_dto.dart';
+import 'package:qareeb/core/quran/quran_audio_reciter_settings.dart';
 import 'package:qareeb/features/quran/data/repositories/quran_repository_impl.dart';
 
 class _MockRemote extends Mock implements QuranRemoteDataSource {}
 
 class _MockLocal extends Mock implements QuranLocalDataSource {}
 
+class _MockAudioCache extends Mock implements QuranAudioCacheDataSource {}
+
 void main() {
   late _MockRemote remote;
   late _MockLocal local;
+  late _MockAudioCache audioCache;
   late QuranRepositoryImpl repository;
 
   setUp(() {
     remote = _MockRemote();
     local = _MockLocal();
-    repository = QuranRepositoryImpl(remote, local);
+    audioCache = _MockAudioCache();
+    repository = QuranRepositoryImpl(
+      remote,
+      local,
+      audioCache,
+      QuranAudioReciterSettings(),
+    );
   });
 
   test('sync saves surah list then ayahs for each surah', () async {
@@ -148,6 +159,12 @@ void main() {
   });
 
   test('getAyahAudioUrl returns url from remote surah audio', () async {
+    when(
+      () => remote.fetchAyahAudioUrl(
+        surahNumber: 1,
+        ayahNumber: 1,
+      ),
+    ).thenAnswer((_) async => null);
     when(() => remote.fetchSurahAudioAyahs(1)).thenAnswer(
       (_) async => [
         AyahDto(

@@ -25,9 +25,9 @@ class SurahHeaderFrame extends StatelessWidget {
                   vertical: 14,
                 ),
                 decoration: BoxDecoration(
-                  color: QuranReaderTheme.pageBackground,
+                  color: QuranReaderTheme.pageBackgroundOf(context),
                   border: Border.all(
-                    color: QuranReaderTheme.ornamentBorder,
+                    color: QuranReaderTheme.ornamentBorderOf(context),
                     width: 1.5,
                   ),
                   borderRadius: BorderRadius.circular(4),
@@ -39,17 +39,23 @@ class SurahHeaderFrame extends StatelessWidget {
                   style: QuranTextStyles.hafsStyle(
                     fontSize: 28,
                     height: 1.4,
-                    color: QuranReaderTheme.arabicText,
+                    color: QuranReaderTheme.arabicTextOf(context),
                   ),
                 ),
               ),
               Positioned(
                 left: 0,
-                child: _CornerOrnament(flip: false),
+                child: _CornerOrnament(
+                  flip: false,
+                  color: QuranReaderTheme.ornamentGoldOf(context),
+                ),
               ),
               Positioned(
                 right: 0,
-                child: _CornerOrnament(flip: true),
+                child: _CornerOrnament(
+                  flip: true,
+                  color: QuranReaderTheme.ornamentGoldOf(context),
+                ),
               ),
             ],
           ),
@@ -60,9 +66,10 @@ class SurahHeaderFrame extends StatelessWidget {
 }
 
 class _CornerOrnament extends StatelessWidget {
-  const _CornerOrnament({required this.flip});
+  const _CornerOrnament({required this.flip, required this.color});
 
   final bool flip;
+  final Color color;
 
   @override
   Widget build(BuildContext context) {
@@ -70,17 +77,21 @@ class _CornerOrnament extends StatelessWidget {
       flipX: flip,
       child: CustomPaint(
         size: const Size(18, 18),
-        painter: _CornerPainter(),
+        painter: _CornerPainter(color: color),
       ),
     );
   }
 }
 
 class _CornerPainter extends CustomPainter {
+  const _CornerPainter({required this.color});
+
+  final Color color;
+
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = QuranReaderTheme.ornamentGold
+      ..color = color
       ..style = PaintingStyle.stroke
       ..strokeWidth = 1.5;
 

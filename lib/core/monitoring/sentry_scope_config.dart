@@ -22,7 +22,7 @@ abstract final class SentryScopeConfig {
         })
         ..setContexts('environment_config', {
           'api_base_url': env.apiBaseUrl,
-          'quran_api_base_url': env.quranApiBaseUrl,
+          'ummah_api_base_url': env.ummahApiBaseUrl,
           'sentry_enabled': env.isSentryEnabled,
         });
     });

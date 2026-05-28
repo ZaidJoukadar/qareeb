@@ -1,0 +1,931 @@
+{
+  "@@locale": "tr",
+  "appTitle": "Qareeb",
+  "@appTitle": {
+    "description": "Application name shown in the app bar and system UI."
+  },
+  "homeTitle": "Qareeb Ana Sayfası",
+  "@homeTitle": {
+    "description": "Title on the home placeholder screen body."
+  },
+  "skip": "Atlamak",
+  "@skip": {
+    "description": "Onboarding skip action."
+  },
+  "next": "Sonraki",
+  "@next": {
+    "description": "Onboarding next page action."
+  },
+  "getStarted": "Başlayın",
+  "@getStarted": {
+    "description": "Onboarding final action to enter the app."
+  },
+  "onboardingSlide1Title": "Yolculuğunuza Kur'an'la Başlayın",
+  "@onboardingSlide1Title": {
+    "description": "Onboarding slide 1 title — commit to reading."
+  },
+  "onboardingSlide1Description": "Niyetinizi belirleyin ve günlük okuma alışkanlığını geliştirin; her seferinde bir adım atarak Allah'a daha da yaklaşın.",
+  "@onboardingSlide1Description": {
+    "description": "Onboarding slide 1 description."
+  },
+  "onboardingSlide2Title": "Her Ayeti Anlayın",
+  "@onboardingSlide2Title": {
+    "description": "Onboarding slide 2 title — understand meanings."
+  },
+  "onboardingSlide2Description": "Her ayetin kalbinize ve zihninize hitap etmesi için açık anlamları ve tefsirleri keşfedin.",
+  "@onboardingSlide2Description": {
+    "description": "Onboarding slide 2 description."
+  },
+  "onboardingSlide3Title": "Bağlı Kalın, Yakın Kalın",
+  "@onboardingSlide3Title": {
+    "description": "Onboarding slide 3 title — persevere on the path."
+  },
+  "onboardingSlide3Description": "Hatırlatmalar, ilerleme ve nazik teşvik; yolda sebat etmenize yardımcı oluyoruz.",
+  "@onboardingSlide3Description": {
+    "description": "Onboarding slide 3 description."
+  },
+  "languageEnglish": "İngilizce",
+  "@languageEnglish": {
+    "description": "English language label in settings."
+  },
+  "languageArabic": "Arapça",
+  "@languageArabic": {
+    "description": "Arabic language label in settings."
+  },
+  "languageTurkish": "Türkçe",
+  "@languageTurkish": {
+    "description": "Turkish language label in settings."
+  },
+  "quranSyncTitle": "Kur'an-ı Kerim'in Hazırlanması",
+  "@quranSyncTitle": {
+    "description": "Title on the Quran download/sync screen."
+  },
+  "quranSyncDescription": "Çevrimdışı okumak için sureler ve ayetler indiriliyor. Bu birkaç dakika sürebilir.",
+  "@quranSyncDescription": {
+    "description": "Description on the Quran sync screen."
+  },
+  "quranSyncProgressPercent": "%{percent}",
+  "@quranSyncProgressPercent": {
+    "description": "Sync progress shown as a percentage.",
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "quranSyncRetry": "Yeniden dene",
+  "@quranSyncRetry": {
+    "description": "Retry button on sync failure."
+  },
+  "quranSyncConnectionErrorTitle": "Bağlantınızı kontrol edin",
+  "@quranSyncConnectionErrorTitle": {
+    "description": "Title on the Quran sync connectivity error dialog."
+  },
+  "quranSyncConnectionErrorMessage": "Kuran indirilemedi. Lütfen internet bağlantınızı kontrol edip tekrar deneyin.",
+  "@quranSyncConnectionErrorMessage": {
+    "description": "Message on the Quran sync connectivity error dialog."
+  },
+  "surahListError": "Sureler yüklenemedi",
+  "@surahListError": {
+    "description": "Error when surah list fails to load."
+  },
+  "surahListTitle": "Sureler",
+  "@surahListTitle": {
+    "description": "Title on the surah list screen."
+  },
+  "surahListSearchHint": "Sureleri isme veya numaraya göre arayın…",
+  "@surahListSearchHint": {
+    "description": "Hint on the surah list search field."
+  },
+  "surahListSearchTooltip": "Sureleri ara",
+  "@surahListSearchTooltip": {
+    "description": "Tooltip for the surah list search action."
+  },
+  "surahListNoResults": "Aramanızla eşleşen sure yok.",
+  "@surahListNoResults": {
+    "description": "Empty state when surah search has no matches."
+  },
+  "surahRevelationMakki": "Makki",
+  "@surahRevelationMakki": {
+    "description": "Label for surahs revealed in Mecca."
+  },
+  "surahRevelationMadani": "Medeni",
+  "@surahRevelationMadani": {
+    "description": "Label for surahs revealed in Medina."
+  },
+  "readProgressLabel": "{read}/{total} okuma",
+  "@readProgressLabel": {
+    "description": "Read ayah progress for a surah.",
+    "placeholders": {
+      "read": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "markSurahAsRead": "Sureyi okundu olarak işaretle",
+  "@markSurahAsRead": {
+    "description": "Marks every ayah in the current surah as read."
+  },
+  "readAyahHint": "Okundu olarak işaretlemek için bir ayete uzun basın. Sesi çalmak için bir ayete iki kez dokunun.",
+  "@readAyahHint": {
+    "description": "Hint shown above the mushaf reader."
+  },
+  "mushafPageNumber": "Sayfa {page}",
+  "@mushafPageNumber": {
+    "description": "Current mushaf page number in the book reader.",
+    "placeholders": {
+      "page": {
+        "type": "int"
+      }
+    }
+  },
+  "goToFlaggedAyah": "İşaretli ayete git",
+  "@goToFlaggedAyah": {
+    "description": "Tooltip for the FAB that jumps to the last flagged ayah."
+  },
+  "ayahInsightAyahLabel": "Ayah {number}",
+  "@ayahInsightAyahLabel": {
+    "description": "Ayah number label in the insight dialog title.",
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "ayahInsightMeaning": "Anlam",
+  "@ayahInsightMeaning": {
+    "description": "Section title for the overall ayah meaning in the insight dialog."
+  },
+  "ayahInsightError": "Ayah anlamı yüklenemedi",
+  "@ayahInsightError": {
+    "description": "Error when ayah insight fails to load."
+  },
+  "ayahInsightPlayAudio": "Ayah sesini çal",
+  "@ayahInsightPlayAudio": {
+    "description": "Tooltip for the play button in the ayah insight dialog."
+  },
+  "ayahInsightStory": "Hikaye",
+  "@ayahInsightStory": {
+    "description": "Button label to open the ayah story bottom sheet."
+  },
+  "ayahInsightStoryLoading": "Hikaye yükleniyor...",
+  "@ayahInsightStoryLoading": {
+    "description": "Loading message while AI generates the ayah story."
+  },
+  "ayahInsightStoryAiHint": "Vahyin sebebini, nasıl indiğini ve ayetteki mucizeyi kapsayan açıklama.",
+  "@ayahInsightStoryAiHint": {
+    "description": "Hint shown above the AI-generated ayah story."
+  },
+  "ayahInsightStoryRevelationReason": "Vahiy nedeni",
+  "@ayahInsightStoryRevelationReason": {
+    "description": "Section title for why the ayah was revealed."
+  },
+  "ayahInsightStoryHowRevealed": "Peygamber'e nasıl indiği",
+  "@ayahInsightStoryHowRevealed": {
+    "description": "Section title for the manner of revelation to the Prophet."
+  },
+  "ayahInsightStoryMiracle": "Ayette geçen mucize",
+  "@ayahInsightStoryMiracle": {
+    "description": "Section title for the miracle or sign in the ayah."
+  },
+  "ayahInsightStoryError": "Ayah hikayesi yüklenemedi",
+  "@ayahInsightStoryError": {
+    "description": "Error when ayah story fails to load."
+  },
+  "ayahCountLabel": "ayetler",
+  "@ayahCountLabel": {
+    "description": "Label for ayah count on surah list."
+  },
+  "playSurah": "Sureyi çal",
+  "@playSurah": {
+    "description": "Play audio for the surah from the current page."
+  },
+  "pauseAudio": "Duraklat",
+  "@pauseAudio": {
+    "description": "Pause surah audio playback."
+  },
+  "stopAudio": "Durmak",
+  "@stopAudio": {
+    "description": "Stop surah audio playback."
+  },
+  "audioAyahProgress": "{total} ayetinin {current} ayeti",
+  "@audioAyahProgress": {
+    "description": "Current ayah progress in the audio player bar.",
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "previousAyah": "Önceki ayet",
+  "@previousAyah": {
+    "description": "Skip to the previous ayah in the audio player."
+  },
+  "nextAyah": "Sonraki ayet",
+  "@nextAyah": {
+    "description": "Skip to the next ayah in the audio player."
+  },
+  "dismiss": "Azletmek",
+  "@dismiss": {
+    "description": "Dismiss audio error banner."
+  },
+  "drawerAdhan": "Ezan",
+  "@drawerAdhan": {
+    "description": "Drawer menu item for prayer times and adhan."
+  },
+  "drawerSurahs": "Sureler",
+  "@drawerSurahs": {
+    "description": "Drawer menu item for the surah list."
+  },
+  "drawerJuz": "Cüz",
+  "@drawerJuz": {
+    "description": "Drawer menu item for the juz list."
+  },
+  "juzListTitle": "Cüz",
+  "@juzListTitle": {
+    "description": "Title on the juz list screen."
+  },
+  "juzSurahCountLabel": "{count} sureler",
+  "@juzSurahCountLabel": {
+    "description": "Subtitle on the juz list showing how many surahs are in the juz.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "drawerSettings": "Ayarlar",
+  "@drawerSettings": {
+    "description": "Drawer menu item for app settings."
+  },
+  "drawerQibla": "Kıble",
+  "@drawerQibla": {
+    "description": "Drawer menu item for the Qibla compass."
+  },
+  "drawerNearbyMosques": "Yakındaki Camiler",
+  "@drawerNearbyMosques": {
+    "description": "Drawer menu item that opens nearby mosques in maps."
+  },
+  "drawerNearbyMosquesLaunchError": "Haritalar açılamadı.",
+  "@drawerNearbyMosquesLaunchError": {
+    "description": "Shown when opening nearby mosques in maps fails."
+  },
+  "nearbyMosquesTitle": "Yakındaki Camiler",
+  "@nearbyMosquesTitle": {
+    "description": "Title of the in-app nearby mosques map and list screen."
+  },
+  "nearbyMosquesLoading": "Yakındaki camileri bulma…",
+  "@nearbyMosquesLoading": {
+    "description": "Loading state while fetching nearby mosques."
+  },
+  "nearbyMosquesError": "Yakındaki camiler yüklenemedi.",
+  "@nearbyMosquesError": {
+    "description": "Error state when nearby mosques cannot be loaded."
+  },
+  "nearbyMosquesRetry": "Yeniden dene",
+  "@nearbyMosquesRetry": {
+    "description": "Retry button for nearby mosques loading."
+  },
+  "nearbyMosquesEmpty": "Yakınlarda cami bulunamadı.",
+  "@nearbyMosquesEmpty": {
+    "description": "Empty state when no mosques are returned near the user."
+  },
+  "nearbyMosquesDistanceMeters": "{meters} m uzakta",
+  "@nearbyMosquesDistanceMeters": {
+    "description": "Distance label in meters for a mosque.",
+    "placeholders": {
+      "meters": {
+        "type": "int"
+      }
+    }
+  },
+  "nearbyMosquesDistanceKm": "{kilometers} km uzakta",
+  "@nearbyMosquesDistanceKm": {
+    "description": "Distance label in kilometers for a mosque.",
+    "placeholders": {
+      "kilometers": {
+        "type": "String"
+      }
+    }
+  },
+  "drawerAsmaUlHusna": "Allah'ın 99 İsmi",
+  "@drawerAsmaUlHusna": {
+    "description": "Drawer menu item for Asma ul Husna."
+  },
+  "drawerSelectReciter": "Kuran okuyucusu",
+  "@drawerSelectReciter": {
+    "description": "Drawer menu item to choose audio recitation edition."
+  },
+  "drawerRecitersLoadError": "Okuyucular yüklenemedi. Bağlantınızı kontrol edip tekrar deneyin.",
+  "@drawerRecitersLoadError": {
+    "description": "Error when the audio reciter list fails to load."
+  },
+  "asmaUlHusnaTitle": "Allah'ın 99 İsmi",
+  "@asmaUlHusnaTitle": {
+    "description": "Title on the Asma ul Husna screen."
+  },
+  "asmaUlHusnaSearchHint": "Ada veya anlama göre arayın…",
+  "@asmaUlHusnaSearchHint": {
+    "description": "Placeholder for the Asma ul Husna search field."
+  },
+  "asmaUlHusnaError": "Allah'ın isimleri yüklenemedi.",
+  "@asmaUlHusnaError": {
+    "description": "Error message when Asma ul Husna fails to load."
+  },
+  "asmaUlHusnaNoResults": "Aramanızla eşleşen ad yok.",
+  "@asmaUlHusnaNoResults": {
+    "description": "Empty state when search has no matches."
+  },
+  "asmaUlHusnaMeaningLabel": "Anlam",
+  "@asmaUlHusnaMeaningLabel": {
+    "description": "Label above the meaning text in the name detail sheet."
+  },
+  "asmaUlHusnaNameNumber": "Ad {number} / 99",
+  "@asmaUlHusnaNameNumber": {
+    "description": "Label showing the position of a divine name.",
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "drawerDuaa": "dua",
+  "@drawerDuaa": {
+    "description": "Drawer menu item for supplications."
+  },
+  "drawerHadith": "Hadis",
+  "@drawerHadith": {
+    "description": "Drawer menu item for hadith collections."
+  },
+  "drawerTagline": "Kur'an ve ibadet arkadaşınız",
+  "@drawerTagline": {
+    "description": "Short subtitle under the app name in the navigation drawer header."
+  },
+  "drawerSectionQuran": "Kuran",
+  "@drawerSectionQuran": {
+    "description": "Section label in the drawer for Quran-related destinations."
+  },
+  "drawerSectionWorship": "Tapmak",
+  "@drawerSectionWorship": {
+    "description": "Section label in the drawer for prayer and Qibla."
+  },
+  "drawerSectionKnowledge": "Bilgi",
+  "@drawerSectionKnowledge": {
+    "description": "Section label in the drawer for duas, hadith, and names of Allah."
+  },
+  "hadithTitle": "Hadis",
+  "@hadithTitle": {
+    "description": "Title on the hadith collections screen."
+  },
+  "hadithSearchHint": "Tüm koleksiyonları arayın…",
+  "@hadithSearchHint": {
+    "description": "Placeholder for global hadith search on collections screen."
+  },
+  "hadithSectionsTitle": "Bölümler",
+  "@hadithSectionsTitle": {
+    "description": "Header for themed hadith categories on the main hadith screen."
+  },
+  "hadithBooksTitle": "Kitaplar",
+  "@hadithBooksTitle": {
+    "description": "Header for hadith books (Bukhari, Muslim, etc.)."
+  },
+  "hadithFilterCategoryHint": "Bu bölümde filtreleyin…",
+  "@hadithFilterCategoryHint": {
+    "description": "Placeholder for filtering loaded hadiths within a category."
+  },
+  "hadithSearchCollectionHint": "Bu koleksiyonda arayın…",
+  "@hadithSearchCollectionHint": {
+    "description": "Placeholder for hadith search within one collection."
+  },
+  "hadithError": "Hadis yüklenemedi. Bağlantınızı kontrol edip tekrar deneyin.",
+  "@hadithError": {
+    "description": "Error message when hadith fails to load."
+  },
+  "hadithNoResults": "Aramanızla eşleşen sonuç yok.",
+  "@hadithNoResults": {
+    "description": "Empty state when hadith search has no matches."
+  },
+  "hadithCountLabel": "{count, plural, =1{1 hadis} other{{count} hadis}}",
+  "@hadithCountLabel": {
+    "description": "Subtitle showing how many hadiths are in a collection.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "hadithNumberLabel": "Hadis {number}",
+  "@hadithNumberLabel": {
+    "description": "Title for a hadith detail sheet showing its number.",
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "hadithSourceLabel": "Kaynak",
+  "@hadithSourceLabel": {
+    "description": "Label above the hadith source reference."
+  },
+  "hadithSourceReference": "{collection}, {number}",
+  "@hadithSourceReference": {
+    "description": "Hadith book name and number in the detail sheet.",
+    "placeholders": {
+      "collection": {
+        "type": "String"
+      },
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "hadithOpenDetailHint": "Açık hadis",
+  "@hadithOpenDetailHint": {
+    "description": "Accessibility hint for opening a hadith from the list."
+  },
+  "duaaTitle": "dua",
+  "@duaaTitle": {
+    "description": "Title on the Duaa categories screen."
+  },
+  "duaaSearchCategoriesHint": "Kategorileri ara…",
+  "@duaaSearchCategoriesHint": {
+    "description": "Placeholder for the Duaa category search field."
+  },
+  "duaaSearchDuasHint": "Duaları ara…",
+  "@duaaSearchDuasHint": {
+    "description": "Placeholder for the Duaa search field within a category."
+  },
+  "duaaError": "Dualar yüklenemedi. Bağlantınızı kontrol edip tekrar deneyin.",
+  "@duaaError": {
+    "description": "Error message when Duaa fails to load."
+  },
+  "duaaNoResults": "Aramanızla eşleşen sonuç yok.",
+  "@duaaNoResults": {
+    "description": "Empty state when Duaa search has no matches."
+  },
+  "duaaCountLabel": "{count, plural, =1{1 dua} other{{count} dua}}",
+  "@duaaCountLabel": {
+    "description": "Subtitle showing how many duas are in a category.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "duaaSourceLabel": "Kaynak",
+  "@duaaSourceLabel": {
+    "description": "Label above the hadith source in the dua detail sheet."
+  },
+  "duaaRepeatLabel": "{count} kez tekrarla",
+  "@duaaRepeatLabel": {
+    "description": "Label showing how many times to repeat a dua.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "qiblaTitle": "Kıble",
+  "@qiblaTitle": {
+    "description": "Title on the Qibla compass screen."
+  },
+  "qiblaDescription": "Namazın yönü Kabe'ye doğrudur.",
+  "@qiblaDescription": {
+    "description": "Subtitle explaining the purpose of the Qibla screen."
+  },
+  "qiblaLoading": "Yönünüzü bulmak…",
+  "@qiblaLoading": {
+    "description": "Loading message on the Qibla screen."
+  },
+  "qiblaError": "Kıble yönü belirlenemedi.",
+  "@qiblaError": {
+    "description": "Generic error on the Qibla screen."
+  },
+  "qiblaNoCompass": "Cihazınızda pusula sensörü bulunmamaktadır.",
+  "@qiblaNoCompass": {
+    "description": "Error when the device lacks a magnetometer."
+  },
+  "qiblaCompassPluginUnavailable": "Canlı pusula henüz hazır değil. Uygulamayı tamamen durdurun, ardından IDE'nizden veya terminalinizden tekrar çalıştırın (pusula desteği eklendikten sonra sıcak yeniden yükleme yeterli değildir).",
+  "@qiblaCompassPluginUnavailable": {
+    "description": "Error when the compass native plugin is not linked into the running app."
+  },
+  "qiblaStaticDirectionHint": "Ok kuzeyden kıble yönünü gösterir. Canlı rehberlik için pusulalı bir telefon kullanın.",
+  "@qiblaStaticDirectionHint": {
+    "description": "Hint when only static Qibla bearing is shown."
+  },
+  "qiblaBearing": "{degrees}° kuzeyden",
+  "@qiblaBearing": {
+    "description": "Absolute Qibla bearing from true north.",
+    "placeholders": {
+      "degrees": {
+        "type": "String"
+      }
+    }
+  },
+  "qiblaAligned": "Kıbleye dönüksün",
+  "@qiblaAligned": {
+    "description": "Shown when the device is aligned with the Qibla."
+  },
+  "qiblaOffset": "Kıble'den {degrees}°",
+  "@qiblaOffset": {
+    "description": "Degrees off from the Qibla direction.",
+    "placeholders": {
+      "degrees": {
+        "type": "String"
+      }
+    }
+  },
+  "qiblaDirection": "Yön: {direction}",
+  "@qiblaDirection": {
+    "description": "Cardinal direction towards the Kaaba.",
+    "placeholders": {
+      "direction": {
+        "type": "String"
+      }
+    }
+  },
+  "qiblaDistance": "Mekke'ye {distance} km",
+  "@qiblaDistance": {
+    "description": "Great-circle distance to Makkah.",
+    "placeholders": {
+      "distance": {
+        "type": "String"
+      }
+    }
+  },
+  "qiblaHint": "Telefonunuzu düz tutun ve ok yukarıyı gösterene kadar döndürün.",
+  "@qiblaHint": {
+    "description": "Usage hint on the Qibla compass screen."
+  },
+  "compassNorth": "Kuzey",
+  "@compassNorth": {
+    "description": "Compass direction north."
+  },
+  "compassNortheast": "Kuzeydoğu",
+  "@compassNortheast": {
+    "description": "Compass direction northeast."
+  },
+  "compassEast": "Doğu",
+  "@compassEast": {
+    "description": "Compass direction east."
+  },
+  "compassSoutheast": "Güneydoğu",
+  "@compassSoutheast": {
+    "description": "Compass direction southeast."
+  },
+  "compassSouth": "Güney",
+  "@compassSouth": {
+    "description": "Compass direction south."
+  },
+  "compassSouthwest": "Güneybatı",
+  "@compassSouthwest": {
+    "description": "Compass direction southwest."
+  },
+  "compassWest": "Batı",
+  "@compassWest": {
+    "description": "Compass direction west."
+  },
+  "compassNorthwest": "Kuzeybatı",
+  "@compassNorthwest": {
+    "description": "Compass direction northwest."
+  },
+  "adhanTitle": "Ezan",
+  "@adhanTitle": {
+    "description": "Title on the adhan screen."
+  },
+  "adhanLoading": "Namaz vakitleri yükleniyor…",
+  "@adhanLoading": {
+    "description": "Loading message on the adhan screen."
+  },
+  "adhanError": "Namaz vakitleri yüklenemedi.",
+  "@adhanError": {
+    "description": "Generic error on the adhan screen."
+  },
+  "adhanRetry": "Yeniden dene",
+  "@adhanRetry": {
+    "description": "Retry button on the adhan screen."
+  },
+  "adhanOpenSettings": "Ayarları aç",
+  "@adhanOpenSettings": {
+    "description": "Opens app settings when location permission is denied."
+  },
+  "adhanLocationDenied": "Bulunduğunuz şehrin namaz vakitlerini göstermek için konum izni gereklidir.",
+  "@adhanLocationDenied": {
+    "description": "Error when location permission is denied."
+  },
+  "adhanLocationUnavailable": "Konum hizmetleri devre dışı. Şehriniz için namaz vakitlerini göstermelerini sağlayın.",
+  "@adhanLocationUnavailable": {
+    "description": "Error when device location services are off."
+  },
+  "adhanLocationPluginUnavailable": "Konum henüz hazır değil. Uygulamayı tamamen durdurun, ardından IDE'nizden veya terminalinizden tekrar çalıştırın (konum desteği eklendikten sonra çalışırken yeniden yükleme yeterli değildir).",
+  "@adhanLocationPluginUnavailable": {
+    "description": "Error when the geolocator native plugin is not linked into the running app."
+  },
+  "adhanLocationTimeout": "Konumunuz zamanında tespit edilemedi. Açık bir alana gidin, GPS'i etkinleştirin veya emülatörde sahte bir konum ayarlayıp tekrar deneyin.",
+  "@adhanLocationTimeout": {
+    "description": "Error when GPS location request times out."
+  },
+  "adhanToday": "Bugün",
+  "@adhanToday": {
+    "description": "Label for today's prayer times card."
+  },
+  "adhanChangeCity": "Değiştirmek",
+  "@adhanChangeCity": {
+    "description": "Button to change the selected city on the adhan screen."
+  },
+  "adhanSearchCityTitle": "Şehir ara",
+  "@adhanSearchCityTitle": {
+    "description": "Title for the city search sheet."
+  },
+  "adhanSearchCityHint": "Şehir veya şehir, ülke",
+  "@adhanSearchCityHint": {
+    "description": "Hint text in the city search field."
+  },
+  "adhanSearchCityEmpty": "Hiçbir şehir bulunamadı. Farklı bir ad deneyin.",
+  "@adhanSearchCityEmpty": {
+    "description": "Message when city search returns no results."
+  },
+  "adhanUseMyLocation": "Mevcut konumumu kullan",
+  "@adhanUseMyLocation": {
+    "description": "Option to load prayer times from device GPS."
+  },
+  "prayerFajr": "Sabah",
+  "@prayerFajr": {
+    "description": "Fajr prayer name."
+  },
+  "prayerSunrise": "Gündoğumu",
+  "@prayerSunrise": {
+    "description": "Sunrise time label."
+  },
+  "prayerDhuhr": "Öğle yemeği",
+  "@prayerDhuhr": {
+    "description": "Dhuhr prayer name."
+  },
+  "prayerAsr": "İkindi",
+  "@prayerAsr": {
+    "description": "Asr prayer name."
+  },
+  "prayerMaghrib": "Akşam",
+  "@prayerMaghrib": {
+    "description": "Maghrib prayer name."
+  },
+  "prayerIsha": "Yatsı",
+  "@prayerIsha": {
+    "description": "Isha prayer name."
+  },
+  "adhanAlertSettingsTitle": "{prayer} hatırlatıcı",
+  "@adhanAlertSettingsTitle": {
+    "description": "Title on the per-prayer alert settings sheet.",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "adhanAlertTimingSection": "Ne zaman bildirimde bulunulmalı?",
+  "@adhanAlertTimingSection": {
+    "description": "Section label for alert timing options."
+  },
+  "adhanAlertOff": "Kapalı",
+  "@adhanAlertOff": {
+    "description": "Option to disable prayer alerts."
+  },
+  "adhanAlertBefore": "Önce",
+  "@adhanAlertBefore": {
+    "description": "Notify before the adhan time."
+  },
+  "adhanAlertAtAdhan": "ezanda",
+  "@adhanAlertAtAdhan": {
+    "description": "Notify exactly at adhan time."
+  },
+  "adhanAlertAfter": "Sonrasında",
+  "@adhanAlertAfter": {
+    "description": "Notify after the adhan time."
+  },
+  "adhanAlertMinutesSection": "Ne kadardır",
+  "@adhanAlertMinutesSection": {
+    "description": "Section label for alert offset duration."
+  },
+  "adhanAlertMinutesLabel": "{minutes} dk.",
+  "@adhanAlertMinutesLabel": {
+    "description": "Minute option chip for prayer alert offset.",
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "adhanAlertMaxBeforeHint": "{prayer} saatinden {minutes} dakika öncesine kadar (önceki namazdan önce değil)",
+  "@adhanAlertMaxBeforeHint": {
+    "description": "Explains the maximum allowed before offset for a prayer.",
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      },
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "adhanAlertMaxAfterHint": "{prayer} saatinden {minutes} dakikaya kadar (bir sonraki namazdan sonra değil)",
+  "@adhanAlertMaxAfterHint": {
+    "description": "Explains the maximum allowed after offset for a prayer.",
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      },
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "adhanAlertDeliverySection": "Uyarı stili",
+  "@adhanAlertDeliverySection": {
+    "description": "Section label for sound vs vibrate."
+  },
+  "adhanAlertSound": "Ses",
+  "@adhanAlertSound": {
+    "description": "Play sound for prayer alert."
+  },
+  "adhanAlertVibrate": "Titreşim",
+  "@adhanAlertVibrate": {
+    "description": "Vibrate for prayer alert."
+  },
+  "adhanAlertSave": "Kaydetmek",
+  "@adhanAlertSave": {
+    "description": "Save prayer alert settings."
+  },
+  "adhanNotificationTitle": "{prayer}",
+  "@adhanNotificationTitle": {
+    "description": "Notification title for a prayer alert.",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "adhanNotificationBodyBefore": "{prayer} saatine {minutes} dakika kaldı",
+  "@adhanNotificationBodyBefore": {
+    "description": "Notification body when alerting before adhan.",
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      },
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "adhanNotificationBodyAt": "{prayer} zamanı geldi",
+  "@adhanNotificationBodyAt": {
+    "description": "Notification body when alerting at adhan time.",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "adhanNotificationBodyAfter": "{prayer} tarihinden itibaren {minutes} dakika",
+  "@adhanNotificationBodyAfter": {
+    "description": "Notification body when alerting after adhan.",
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      },
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "adhanNotificationPermissionDenied": "Namaz hatırlatmaları için bildirim izni gerekmektedir.",
+  "@adhanNotificationPermissionDenied": {
+    "description": "Snackbar when notification permission is denied."
+  },
+  "settingsTitle": "Ayarlar",
+  "@settingsTitle": {
+    "description": "Title on the settings screen."
+  },
+  "settingsLanguageSection": "Dil",
+  "@settingsLanguageSection": {
+    "description": "Section header for language selection in settings."
+  },
+  "settingsThemeSection": "Dış görünüş",
+  "@settingsThemeSection": {
+    "description": "Section header for theme selection in settings."
+  },
+  "settingsThemeLight": "Işık",
+  "@settingsThemeLight": {
+    "description": "Light theme option in settings."
+  },
+  "settingsThemeDark": "Karanlık",
+  "@settingsThemeDark": {
+    "description": "Dark theme option in settings."
+  },
+  "settingsDarkMode": "Karanlık mod",
+  "@settingsDarkMode": {
+    "description": "Toggle label for enabling dark theme."
+  },
+  "settingsSelectLanguage": "Dil seçin",
+  "@settingsSelectLanguage": {
+    "description": "Title on the language picker bottom sheet."
+  },
+  "settingsFontSizeSection": "Metin boyutu",
+  "@settingsFontSizeSection": {
+    "description": "Section header for font size settings."
+  },
+  "settingsFontSize": "Yazı tipi boyutu",
+  "@settingsFontSize": {
+    "description": "Slider label for app and Quran reader text size."
+  },
+  "settingsFontSizeValue": "%{percent}",
+  "@settingsFontSizeValue": {
+    "description": "Current font size percentage shown next to a slider.",
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "settingsNotificationsSection": "Bildirimler",
+  "@settingsNotificationsSection": {
+    "description": "Section header for notification settings."
+  },
+  "settingsNotificationsEnabled": "Bildirimleri etkinleştir",
+  "@settingsNotificationsEnabled": {
+    "description": "Toggle label to enable push notifications."
+  },
+  "settingsContactSection": "Destek",
+  "@settingsContactSection": {
+    "description": "Section header for support options."
+  },
+  "settingsReportBug": "Hata bildir",
+  "@settingsReportBug": {
+    "description": "Opens in-app feedback UI that uploads to Sentry."
+  },
+  "settingsReportBugDescription": "Sorunu açıklayın ve ekranı işaretleyin. Raporunuz ekibimize iletilir.",
+  "@settingsReportBugDescription": {
+    "description": "Subtitle for the report-a-bug settings row."
+  },
+  "settingsReportBugSuccess": "Teşekkür ederiz — raporunuz gönderildi.",
+  "@settingsReportBugSuccess": {
+    "description": "Snackbar after bug report is uploaded to Sentry."
+  },
+  "settingsReportBugError": "Raporunuz gönderilemedi. Lütfen tekrar deneyin.",
+  "@settingsReportBugError": {
+    "description": "Snackbar when Sentry feedback upload fails."
+  },
+  "settingsReportBugEmptyMessage": "Lütfen göndermeden önce sorunu açıklayın.",
+  "@settingsReportBugEmptyMessage": {
+    "description": "Snackbar when user submits feedback without a message."
+  },
+  "settingsContactUs": "Bize Ulaşın",
+  "@settingsContactUs": {
+    "description": "Opens the support contact page."
+  },
+  "settingsContactUsError": "İletişim sayfası açılamadı",
+  "@settingsContactUsError": {
+    "description": "Snackbar when the contact URL fails to open."
+  },
+  "settingsStorageSection": "Depolamak",
+  "@settingsStorageSection": {
+    "description": "Section header for storage and cache settings."
+  },
+  "settingsClearCache": "Ses önbelleğini temizle",
+  "@settingsClearCache": {
+    "description": "Settings row that deletes downloaded Quran audio files."
+  },
+  "settingsClearCacheDescription": "İndirilen okuma sesini kaldırın. Oynattığınızda dosyalar tekrar indirilecektir.",
+  "@settingsClearCacheDescription": {
+    "description": "Subtitle for the clear audio cache settings row."
+  },
+  "settingsClearCacheConfirmTitle": "Ses önbelleği temizlensin mi?",
+  "@settingsClearCacheConfirmTitle": {
+    "description": "Title on the confirmation dialog before clearing audio cache."
+  },
+  "settingsClearCacheConfirmMessage": "İndirilen okuma sesi bu cihazdan kaldırılacak.",
+  "@settingsClearCacheConfirmMessage": {
+    "description": "Body text on the confirmation dialog before clearing audio cache."
+  },
+  "settingsClearCacheConfirmAction": "Temizlemek",
+  "@settingsClearCacheConfirmAction": {
+    "description": "Confirm button on the clear audio cache dialog."
+  },
+  "settingsClearCacheCancel": "İptal etmek",
+  "@settingsClearCacheCancel": {
+    "description": "Cancel button on the clear audio cache dialog."
+  },
+  "settingsClearCacheSuccess": "Ses önbelleği temizlendi.",
+  "@settingsClearCacheSuccess": {
+    "description": "Snackbar after audio cache is cleared successfully."
+  },
+  "settingsClearCacheError": "Ses önbelleği temizlenemedi. Lütfen tekrar deneyin.",
+  "@settingsClearCacheError": {
+    "description": "Snackbar when clearing audio cache fails."
+  }
+}

@@ -28,6 +28,10 @@ class HomePlaceholderPage extends StatelessWidget {
                 value: const Locale('ar'),
                 child: Text(l10n.languageArabic),
               ),
+              PopupMenuItem(
+                value: const Locale('tr'),
+                child: Text(l10n.languageTurkish),
+              ),
             ],
           ),
         ],

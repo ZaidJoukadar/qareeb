@@ -7,6 +7,7 @@ import 'package:qareeb/core/locale/locale_resolution.dart';
 import 'package:qareeb/core/locale/presentation/cubit/locale_cubit.dart';
 import 'package:qareeb/core/monitoring/sentry_navigation_observer.dart';
 import 'package:qareeb/core/router/app_start_gate.dart';
+import 'package:qareeb/core/settings/presentation/cubit/app_settings_cubit.dart';
 import 'package:qareeb/core/theme/app_theme.dart';
 import 'package:qareeb/l10n/generated/app_localizations.dart';
 
@@ -15,8 +16,15 @@ class QareebApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => getIt<LocaleCubit>()..load(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (_) => getIt<LocaleCubit>()..load(),
+        ),
+        BlocProvider(
+          create: (_) => getIt<AppSettingsCubit>()..load(),
+        ),
+      ],
       child: BlocBuilder<LocaleCubit, LocaleState>(
         buildWhen: (previous, current) =>
             previous.locale != current.locale ||
@@ -28,23 +36,44 @@ class QareebApp extends StatelessWidget {
             localeState.locale,
           );
 
-          return MaterialApp(
-            title: 'Qareeb',
-            debugShowCheckedModeBanner: false,
-            theme: AppTheme.light,
-            locale: locale,
-            supportedLocales: supportedLocales,
-            localizationsDelegates: const [
-              AppLocalizations.delegate,
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-            ],
-            localeResolutionCallback: localeResolutionCallback,
-            navigatorObservers: Environment.current.isSentryEnabled
-                ? [SentryNavigationObserver()]
-                : const [],
-            home: const AppStartGate(),
+          return BlocBuilder<AppSettingsCubit, AppSettingsState>(
+            buildWhen: (previous, current) =>
+                previous.themeMode != current.themeMode ||
+                previous.fontScale != current.fontScale,
+            builder: (context, settingsState) {
+              return MaterialApp(
+                onGenerateTitle: (context) =>
+                    AppLocalizations.of(context).appTitle,
+                debugShowCheckedModeBanner: false,
+                theme: AppTheme.light,
+                darkTheme: AppTheme.dark,
+                themeMode: settingsState.themeMode,
+                builder: (context, child) {
+                  final mediaQuery = MediaQuery.of(context);
+                  return MediaQuery(
+                    data: mediaQuery.copyWith(
+                      textScaler: TextScaler.linear(
+                        settingsState.fontScale,
+                      ),
+                    ),
+                    child: child ?? const SizedBox.shrink(),
+                  );
+                },
+                locale: locale,
+                supportedLocales: supportedLocales,
+                localizationsDelegates: const [
+                  AppLocalizations.delegate,
+                  GlobalMaterialLocalizations.delegate,
+                  GlobalWidgetsLocalizations.delegate,
+                  GlobalCupertinoLocalizations.delegate,
+                ],
+                localeResolutionCallback: localeResolutionCallback,
+                navigatorObservers: Environment.current.isSentryEnabled
+                    ? [SentryNavigationObserver()]
+                    : const [],
+                home: const AppStartGate(),
+              );
+            },
           );
         },
       ),

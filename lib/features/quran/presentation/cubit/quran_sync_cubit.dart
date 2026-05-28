@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:qareeb/core/constants/quran_editions.dart';
+import 'package:qareeb/core/network/network_errors.dart';
 import 'package:qareeb/features/quran/domain/usecases/get_sync_progress.dart';
 import 'package:qareeb/features/quran/domain/usecases/sync_quran_to_local.dart';
 import 'package:qareeb/features/quran/presentation/cubit/quran_sync_state.dart';
@@ -29,6 +30,7 @@ class QuranSyncCubit extends Cubit<QuranSyncState> {
         status: QuranSyncUiStatus.syncing,
         completedSurahs: existing,
         clearError: true,
+        showConnectionErrorDialog: false,
       ),
     );
 
@@ -54,13 +56,36 @@ class QuranSyncCubit extends Cubit<QuranSyncState> {
     } catch (error) {
       progressTimer.cancel();
       final completed = await _getSyncProgress();
+
+      final isNetworkIssue = isNetworkError(error);
+      if (isNetworkIssue) {
+        emit(
+          state.copyWith(
+            status: QuranSyncUiStatus.failure,
+            completedSurahs: completed,
+            clearError: true, // Avoid rendering raw Dio exception text.
+            showConnectionErrorDialog: true,
+          ),
+        );
+        return;
+      }
+
       emit(
         state.copyWith(
           status: QuranSyncUiStatus.failure,
           completedSurahs: completed,
           errorMessage: error.toString(),
+          showConnectionErrorDialog: false,
         ),
       );
     }
+  }
+
+  void dismissConnectionErrorDialog() {
+    emit(
+      state.copyWith(
+        showConnectionErrorDialog: false,
+      ),
+    );
   }
 }

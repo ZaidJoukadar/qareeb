@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:qareeb/core/di/injection.dart';
 import 'package:qareeb/core/presentation/widgets/app_splash_view.dart';
-import 'package:qareeb/features/home/presentation/pages/surah_list_page.dart';
+import 'package:qareeb/features/home/presentation/pages/home_shell_page.dart';
 import 'package:qareeb/features/onboarding/domain/usecases/get_onboarding_completed.dart';
 import 'package:qareeb/features/onboarding/presentation/pages/onboarding_page.dart';
 import 'package:qareeb/features/quran/data/datasources/quran_local_data_source.dart';
@@ -54,7 +54,7 @@ class _AppStartGateState extends State<AppStartGate> {
         return switch (snapshot.data) {
           AppStartRoute.onboarding => const OnboardingPage(),
           AppStartRoute.quranSync => const QuranSyncPage(),
-          AppStartRoute.home => const SurahListPage(),
+          AppStartRoute.home => const HomeShellPage(),
           null => const OnboardingPage(),
         };
       },

@@ -8,7 +8,19 @@ import 'package:qareeb/features/quran/domain/entities/surah.dart' as entities;
 abstract class QuranLocalDataSource {
   Future<List<entities.Surah>> getSurahs();
 
+  Future<entities.Surah?> getSurahByNumber(int number);
+
   Future<List<entities.Ayah>> getAyahsBySurah(int surahNumber);
+
+  Future<List<entities.Ayah>> getAyahsByPage(int page);
+
+  Future<int> getMaxMushafPage();
+
+  Future<int?> getFirstPageForSurah(int surahNumber);
+
+  Future<int?> getFirstPageForJuz(int juzNumber);
+
+  Future<Map<int, int>> getSurahCountByJuz();
 
   Future<QuranSyncStatus> getSyncStatus();
 
@@ -81,9 +93,39 @@ class QuranLocalDataSourceImpl implements QuranLocalDataSource {
   }
 
   @override
+  Future<entities.Surah?> getSurahByNumber(int number) async {
+    final row = await _db.getSurahByNumber(number);
+    return row == null ? null : _mapSurah(row);
+  }
+
+  @override
   Future<List<entities.Ayah>> getAyahsBySurah(int surahNumber) async {
     final rows = await _db.getAyahsForSurah(surahNumber);
     return rows.map(_mapAyah).toList();
+  }
+
+  @override
+  Future<List<entities.Ayah>> getAyahsByPage(int page) async {
+    final rows = await _db.getAyahsForPage(page);
+    return rows.map(_mapAyah).toList();
+  }
+
+  @override
+  Future<int> getMaxMushafPage() => _db.getMaxMushafPage();
+
+  @override
+  Future<int?> getFirstPageForSurah(int surahNumber) {
+    return _db.getFirstPageForSurah(surahNumber);
+  }
+
+  @override
+  Future<int?> getFirstPageForJuz(int juzNumber) {
+    return _db.getFirstPageForJuz(juzNumber);
+  }
+
+  @override
+  Future<Map<int, int>> getSurahCountByJuz() {
+    return _db.getSurahCountByJuz();
   }
 
   @override

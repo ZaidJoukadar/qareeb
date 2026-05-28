@@ -68,5 +68,7 @@
 		</array>
 		<key>UIStatusBarHidden</key>
 		<false/>
+		<key>NSLocationWhenInUseUsageDescription</key>
+		<string>Qareeb uses your location to show accurate prayer times for your city.</string>
 	</dict>
 </plist>

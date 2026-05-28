@@ -44,3 +44,16 @@ class QuranSyncStateTable extends Table {
   @override
   Set<Column> get primaryKey => {id};
 }
+
+@TableIndex(
+  name: 'read_ayahs_surah_ayah_idx',
+  columns: {#surahNumber, #ayahNumber},
+  unique: true,
+)
+class ReadAyahs extends Table {
+  IntColumn get id => integer().autoIncrement()();
+  IntColumn get surahNumber => integer()();
+  IntColumn get ayahNumber => integer()();
+  DateTimeColumn get readAt =>
+      dateTime().withDefault(currentDateAndTime)();
+}

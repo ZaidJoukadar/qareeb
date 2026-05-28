@@ -8,7 +8,7 @@ void main() {
   });
 
   test('stripFromAyah removes leading Bismillah from ayah 1 text', () {
-    // Exact Uthmani string from alquran.cloud surah 2 ayah 1.
+    // Exact Uthmani string from surah 2 ayah 1.
     const withBismillah =
         'بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ الٓمٓ';
     expect(

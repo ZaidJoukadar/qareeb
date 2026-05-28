@@ -38,7 +38,7 @@ void main() {
     await tester.pump();
 
     expect(find.text('Preparing the Quran'), findsOneWidget);
-    expect(find.text('12 of 114 surahs'), findsOneWidget);
+    expect(find.text('11%'), findsOneWidget);
 
     await cubit.close();
   });

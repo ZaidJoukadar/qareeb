@@ -1614,6 +1614,309 @@ class QuranSyncStateTableCompanion
   }
 }
 
+class $ReadAyahsTable extends ReadAyahs
+    with TableInfo<$ReadAyahsTable, ReadAyah> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $ReadAyahsTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
+    'id',
+    aliasedName,
+    false,
+    hasAutoIncrement: true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'PRIMARY KEY AUTOINCREMENT',
+    ),
+  );
+  static const VerificationMeta _surahNumberMeta = const VerificationMeta(
+    'surahNumber',
+  );
+  @override
+  late final GeneratedColumn<int> surahNumber = GeneratedColumn<int>(
+    'surah_number',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _ayahNumberMeta = const VerificationMeta(
+    'ayahNumber',
+  );
+  @override
+  late final GeneratedColumn<int> ayahNumber = GeneratedColumn<int>(
+    'ayah_number',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _readAtMeta = const VerificationMeta('readAt');
+  @override
+  late final GeneratedColumn<DateTime> readAt = GeneratedColumn<DateTime>(
+    'read_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: false,
+    defaultValue: currentDateAndTime,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [id, surahNumber, ayahNumber, readAt];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'read_ayahs';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<ReadAyah> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('surah_number')) {
+      context.handle(
+        _surahNumberMeta,
+        surahNumber.isAcceptableOrUnknown(
+          data['surah_number']!,
+          _surahNumberMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_surahNumberMeta);
+    }
+    if (data.containsKey('ayah_number')) {
+      context.handle(
+        _ayahNumberMeta,
+        ayahNumber.isAcceptableOrUnknown(data['ayah_number']!, _ayahNumberMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_ayahNumberMeta);
+    }
+    if (data.containsKey('read_at')) {
+      context.handle(
+        _readAtMeta,
+        readAt.isAcceptableOrUnknown(data['read_at']!, _readAtMeta),
+      );
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  ReadAyah map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return ReadAyah(
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id'],
+      )!,
+      surahNumber: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}surah_number'],
+      )!,
+      ayahNumber: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}ayah_number'],
+      )!,
+      readAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}read_at'],
+      )!,
+    );
+  }
+
+  @override
+  $ReadAyahsTable createAlias(String alias) {
+    return $ReadAyahsTable(attachedDatabase, alias);
+  }
+}
+
+class ReadAyah extends DataClass implements Insertable<ReadAyah> {
+  final int id;
+  final int surahNumber;
+  final int ayahNumber;
+  final DateTime readAt;
+  const ReadAyah({
+    required this.id,
+    required this.surahNumber,
+    required this.ayahNumber,
+    required this.readAt,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<int>(id);
+    map['surah_number'] = Variable<int>(surahNumber);
+    map['ayah_number'] = Variable<int>(ayahNumber);
+    map['read_at'] = Variable<DateTime>(readAt);
+    return map;
+  }
+
+  ReadAyahsCompanion toCompanion(bool nullToAbsent) {
+    return ReadAyahsCompanion(
+      id: Value(id),
+      surahNumber: Value(surahNumber),
+      ayahNumber: Value(ayahNumber),
+      readAt: Value(readAt),
+    );
+  }
+
+  factory ReadAyah.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return ReadAyah(
+      id: serializer.fromJson<int>(json['id']),
+      surahNumber: serializer.fromJson<int>(json['surahNumber']),
+      ayahNumber: serializer.fromJson<int>(json['ayahNumber']),
+      readAt: serializer.fromJson<DateTime>(json['readAt']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'surahNumber': serializer.toJson<int>(surahNumber),
+      'ayahNumber': serializer.toJson<int>(ayahNumber),
+      'readAt': serializer.toJson<DateTime>(readAt),
+    };
+  }
+
+  ReadAyah copyWith({
+    int? id,
+    int? surahNumber,
+    int? ayahNumber,
+    DateTime? readAt,
+  }) => ReadAyah(
+    id: id ?? this.id,
+    surahNumber: surahNumber ?? this.surahNumber,
+    ayahNumber: ayahNumber ?? this.ayahNumber,
+    readAt: readAt ?? this.readAt,
+  );
+  ReadAyah copyWithCompanion(ReadAyahsCompanion data) {
+    return ReadAyah(
+      id: data.id.present ? data.id.value : this.id,
+      surahNumber: data.surahNumber.present
+          ? data.surahNumber.value
+          : this.surahNumber,
+      ayahNumber: data.ayahNumber.present
+          ? data.ayahNumber.value
+          : this.ayahNumber,
+      readAt: data.readAt.present ? data.readAt.value : this.readAt,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('ReadAyah(')
+          ..write('id: $id, ')
+          ..write('surahNumber: $surahNumber, ')
+          ..write('ayahNumber: $ayahNumber, ')
+          ..write('readAt: $readAt')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(id, surahNumber, ayahNumber, readAt);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is ReadAyah &&
+          other.id == this.id &&
+          other.surahNumber == this.surahNumber &&
+          other.ayahNumber == this.ayahNumber &&
+          other.readAt == this.readAt);
+}
+
+class ReadAyahsCompanion extends UpdateCompanion<ReadAyah> {
+  final Value<int> id;
+  final Value<int> surahNumber;
+  final Value<int> ayahNumber;
+  final Value<DateTime> readAt;
+  const ReadAyahsCompanion({
+    this.id = const Value.absent(),
+    this.surahNumber = const Value.absent(),
+    this.ayahNumber = const Value.absent(),
+    this.readAt = const Value.absent(),
+  });
+  ReadAyahsCompanion.insert({
+    this.id = const Value.absent(),
+    required int surahNumber,
+    required int ayahNumber,
+    this.readAt = const Value.absent(),
+  }) : surahNumber = Value(surahNumber),
+       ayahNumber = Value(ayahNumber);
+  static Insertable<ReadAyah> custom({
+    Expression<int>? id,
+    Expression<int>? surahNumber,
+    Expression<int>? ayahNumber,
+    Expression<DateTime>? readAt,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (surahNumber != null) 'surah_number': surahNumber,
+      if (ayahNumber != null) 'ayah_number': ayahNumber,
+      if (readAt != null) 'read_at': readAt,
+    });
+  }
+
+  ReadAyahsCompanion copyWith({
+    Value<int>? id,
+    Value<int>? surahNumber,
+    Value<int>? ayahNumber,
+    Value<DateTime>? readAt,
+  }) {
+    return ReadAyahsCompanion(
+      id: id ?? this.id,
+      surahNumber: surahNumber ?? this.surahNumber,
+      ayahNumber: ayahNumber ?? this.ayahNumber,
+      readAt: readAt ?? this.readAt,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (surahNumber.present) {
+      map['surah_number'] = Variable<int>(surahNumber.value);
+    }
+    if (ayahNumber.present) {
+      map['ayah_number'] = Variable<int>(ayahNumber.value);
+    }
+    if (readAt.present) {
+      map['read_at'] = Variable<DateTime>(readAt.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('ReadAyahsCompanion(')
+          ..write('id: $id, ')
+          ..write('surahNumber: $surahNumber, ')
+          ..write('ayahNumber: $ayahNumber, ')
+          ..write('readAt: $readAt')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
@@ -1621,9 +1924,14 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   late final $AyahsTable ayahs = $AyahsTable(this);
   late final $QuranSyncStateTableTable quranSyncStateTable =
       $QuranSyncStateTableTable(this);
+  late final $ReadAyahsTable readAyahs = $ReadAyahsTable(this);
   late final Index ayahsSurahAyahIdx = Index(
     'ayahs_surah_ayah_idx',
     'CREATE UNIQUE INDEX ayahs_surah_ayah_idx ON ayahs (surah_number, ayah_number)',
+  );
+  late final Index readAyahsSurahAyahIdx = Index(
+    'read_ayahs_surah_ayah_idx',
+    'CREATE UNIQUE INDEX read_ayahs_surah_ayah_idx ON read_ayahs (surah_number, ayah_number)',
   );
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
@@ -1633,7 +1941,9 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     surahs,
     ayahs,
     quranSyncStateTable,
+    readAyahs,
     ayahsSurahAyahIdx,
+    readAyahsSurahAyahIdx,
   ];
 }
 
@@ -2440,6 +2750,179 @@ typedef $$QuranSyncStateTableTableProcessedTableManager =
       QuranSyncStateTableData,
       PrefetchHooks Function()
     >;
+typedef $$ReadAyahsTableCreateCompanionBuilder =
+    ReadAyahsCompanion Function({
+      Value<int> id,
+      required int surahNumber,
+      required int ayahNumber,
+      Value<DateTime> readAt,
+    });
+typedef $$ReadAyahsTableUpdateCompanionBuilder =
+    ReadAyahsCompanion Function({
+      Value<int> id,
+      Value<int> surahNumber,
+      Value<int> ayahNumber,
+      Value<DateTime> readAt,
+    });
+
+class $$ReadAyahsTableFilterComposer
+    extends Composer<_$AppDatabase, $ReadAyahsTable> {
+  $$ReadAyahsTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<int> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get surahNumber => $composableBuilder(
+    column: $table.surahNumber,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get ayahNumber => $composableBuilder(
+    column: $table.ayahNumber,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<DateTime> get readAt => $composableBuilder(
+    column: $table.readAt,
+    builder: (column) => ColumnFilters(column),
+  );
+}
+
+class $$ReadAyahsTableOrderingComposer
+    extends Composer<_$AppDatabase, $ReadAyahsTable> {
+  $$ReadAyahsTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<int> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get surahNumber => $composableBuilder(
+    column: $table.surahNumber,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get ayahNumber => $composableBuilder(
+    column: $table.ayahNumber,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<DateTime> get readAt => $composableBuilder(
+    column: $table.readAt,
+    builder: (column) => ColumnOrderings(column),
+  );
+}
+
+class $$ReadAyahsTableAnnotationComposer
+    extends Composer<_$AppDatabase, $ReadAyahsTable> {
+  $$ReadAyahsTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<int> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<int> get surahNumber => $composableBuilder(
+    column: $table.surahNumber,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<int> get ayahNumber => $composableBuilder(
+    column: $table.ayahNumber,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<DateTime> get readAt =>
+      $composableBuilder(column: $table.readAt, builder: (column) => column);
+}
+
+class $$ReadAyahsTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $ReadAyahsTable,
+          ReadAyah,
+          $$ReadAyahsTableFilterComposer,
+          $$ReadAyahsTableOrderingComposer,
+          $$ReadAyahsTableAnnotationComposer,
+          $$ReadAyahsTableCreateCompanionBuilder,
+          $$ReadAyahsTableUpdateCompanionBuilder,
+          (ReadAyah, BaseReferences<_$AppDatabase, $ReadAyahsTable, ReadAyah>),
+          ReadAyah,
+          PrefetchHooks Function()
+        > {
+  $$ReadAyahsTableTableManager(_$AppDatabase db, $ReadAyahsTable table)
+    : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$ReadAyahsTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$ReadAyahsTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$ReadAyahsTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                Value<int> surahNumber = const Value.absent(),
+                Value<int> ayahNumber = const Value.absent(),
+                Value<DateTime> readAt = const Value.absent(),
+              }) => ReadAyahsCompanion(
+                id: id,
+                surahNumber: surahNumber,
+                ayahNumber: ayahNumber,
+                readAt: readAt,
+              ),
+          createCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                required int surahNumber,
+                required int ayahNumber,
+                Value<DateTime> readAt = const Value.absent(),
+              }) => ReadAyahsCompanion.insert(
+                id: id,
+                surahNumber: surahNumber,
+                ayahNumber: ayahNumber,
+                readAt: readAt,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ),
+      );
+}
+
+typedef $$ReadAyahsTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $ReadAyahsTable,
+      ReadAyah,
+      $$ReadAyahsTableFilterComposer,
+      $$ReadAyahsTableOrderingComposer,
+      $$ReadAyahsTableAnnotationComposer,
+      $$ReadAyahsTableCreateCompanionBuilder,
+      $$ReadAyahsTableUpdateCompanionBuilder,
+      (ReadAyah, BaseReferences<_$AppDatabase, $ReadAyahsTable, ReadAyah>),
+      ReadAyah,
+      PrefetchHooks Function()
+    >;
 
 class $AppDatabaseManager {
   final _$AppDatabase _db;
@@ -2450,4 +2933,6 @@ class $AppDatabaseManager {
       $$AyahsTableTableManager(_db, _db.ayahs);
   $$QuranSyncStateTableTableTableManager get quranSyncStateTable =>
       $$QuranSyncStateTableTableTableManager(_db, _db.quranSyncStateTable);
+  $$ReadAyahsTableTableManager get readAyahs =>
+      $$ReadAyahsTableTableManager(_db, _db.readAyahs);
 }

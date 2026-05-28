@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:qareeb/core/constants/asset_paths.dart';
 import 'package:qareeb/core/di/injection.dart';
-import 'package:qareeb/features/home/presentation/pages/surah_list_page.dart';
+import 'package:qareeb/features/home/presentation/pages/home_shell_page.dart';
 import 'package:qareeb/features/quran/presentation/cubit/quran_sync_cubit.dart';
 import 'package:qareeb/features/quran/presentation/cubit/quran_sync_state.dart';
+import 'package:qareeb/features/quran/presentation/widgets/quran_sync_progress_panel.dart';
 import 'package:qareeb/l10n/extensions/l10n_extension.dart';
 
 class QuranSyncPage extends StatefulWidget {
@@ -19,8 +21,6 @@ class QuranSyncPage extends StatefulWidget {
 class _QuranSyncPageState extends State<QuranSyncPage> {
   @override
   Widget build(BuildContext context) {
-    final l10n = context.l10n;
-
     final languageCode = Localizations.localeOf(context).languageCode;
 
     final cubit =
@@ -32,13 +32,54 @@ class _QuranSyncPageState extends State<QuranSyncPage> {
     return BlocProvider(
       create: (_) => cubit,
       child: BlocConsumer<QuranSyncCubit, QuranSyncState>(
-        listener: (context, state) {
+        listener: (context, state) async {
           if (state.status == QuranSyncUiStatus.success) {
             Navigator.of(context).pushReplacement(
               MaterialPageRoute<void>(
-                builder: (_) => const SurahListPage(),
+                builder: (_) => const HomeShellPage(),
               ),
             );
+            return;
+          }
+
+          final l10n = context.l10n;
+          if (state.status == QuranSyncUiStatus.failure &&
+              state.showConnectionErrorDialog) {
+            final cubit = context.read<QuranSyncCubit>();
+            await showDialog<void>(
+              context: context,
+              barrierDismissible: false,
+              builder: (dialogContext) {
+                final theme = Theme.of(dialogContext);
+                return AlertDialog(
+                  icon: Icon(
+                    Icons.wifi_off_rounded,
+                    size: 56,
+                    color: theme.colorScheme.onSurfaceVariant,
+                  ),
+                  title: Text(
+                    l10n.quranSyncConnectionErrorTitle,
+                    style: theme.textTheme.titleMedium?.copyWith(
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                  content: Text(l10n.quranSyncConnectionErrorMessage),
+                  actionsAlignment: MainAxisAlignment.center,
+                  actions: [
+                    FilledButton(
+                      onPressed: () {
+                        Navigator.of(dialogContext).pop();
+                        cubit.startSync();
+                      },
+                      child: Text(l10n.quranSyncRetry),
+                    ),
+                  ],
+                );
+              },
+            );
+
+            if (!context.mounted) return;
+            cubit.dismissConnectionErrorDialog();
           }
         },
         builder: (context, state) {
@@ -46,55 +87,45 @@ class _QuranSyncPageState extends State<QuranSyncPage> {
           final isFailure = state.status == QuranSyncUiStatus.failure;
 
           return Scaffold(
-            body: SafeArea(
-              child: Padding(
-                padding: const EdgeInsets.all(24),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      l10n.quranSyncTitle,
-                      style: Theme.of(context).textTheme.headlineSmall,
-                      textAlign: TextAlign.center,
+            body: Stack(
+              fit: StackFit.expand,
+              children: [
+                const Image(
+                  image: AssetImage(AssetPaths.loadingBackground),
+                  fit: BoxFit.cover,
+                ),
+                DecoratedBox(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.bottomCenter,
+                      end: Alignment.topCenter,
+                      colors: [
+                        Colors.black.withValues(alpha: 0.72),
+                        Colors.black.withValues(alpha: 0.35),
+                        Colors.transparent,
+                      ],
+                      stops: const [0.0, 0.42, 0.78],
                     ),
-                    const SizedBox(height: 16),
-                    Text(
-                      l10n.quranSyncDescription,
-                      textAlign: TextAlign.center,
-                      style: Theme.of(context).textTheme.bodyMedium,
-                    ),
-                    const SizedBox(height: 32),
-                    LinearProgressIndicator(value: state.progress),
-                    const SizedBox(height: 12),
-                    Text(
-                      l10n.quranSyncProgress(
-                        state.completedSurahs,
-                        state.totalSurahs,
-                      ),
-                      style: Theme.of(context).textTheme.bodySmall,
-                    ),
-                    if (isFailure && state.errorMessage != null) ...[
-                      const SizedBox(height: 24),
-                      Text(
-                        state.errorMessage!,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Theme.of(context).colorScheme.error,
-                        ),
-                      ),
-                      const SizedBox(height: 16),
-                      FilledButton(
-                        onPressed: isSyncing
+                  ),
+                ),
+                SafeArea(
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(24, 24, 24, 40),
+                    child: Align(
+                      alignment: Alignment.bottomCenter,
+                      child: QuranSyncProgressPanel(
+                        state: state,
+                        showRetry: isFailure,
+                        onRetry: isSyncing
                             ? null
                             : () {
                                 context.read<QuranSyncCubit>().startSync();
                               },
-                        child: Text(l10n.quranSyncRetry),
                       ),
-                    ],
-                  ],
+                    ),
+                  ),
                 ),
-              ),
+              ],
             ),
           );
         },

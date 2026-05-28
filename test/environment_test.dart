@@ -10,8 +10,8 @@ void main() {
     expect(Environment.current.apiBaseUrl, contains('dev.qareeb.app'));
     expect(Environment.current.isSentryEnabled, isTrue);
     expect(
-      Environment.current.quranApiBaseUrl,
-      'https://api.alquran.cloud/v1',
+      Environment.current.ummahApiBaseUrl,
+      'https://ummahapi.com/api',
     );
   });
 }

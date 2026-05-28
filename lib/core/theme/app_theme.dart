@@ -40,4 +40,40 @@ abstract final class AppTheme {
       ),
     );
   }
+
+  static ThemeData get dark {
+    final colorScheme = ColorScheme.fromSeed(
+      seedColor: AppColors.gold,
+      brightness: Brightness.dark,
+      primary: AppColors.gold,
+      onPrimary: AppColors.navy,
+      surface: AppColors.navy,
+      onSurface: AppColors.cream,
+    );
+
+    return ThemeData(
+      useMaterial3: true,
+      brightness: Brightness.dark,
+      colorScheme: colorScheme,
+      scaffoldBackgroundColor: AppColors.navy,
+      appBarTheme: const AppBarTheme(
+        backgroundColor: AppColors.navy,
+        foregroundColor: AppColors.cream,
+        elevation: 0,
+      ),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: AppColors.gold,
+          foregroundColor: AppColors.navy,
+          padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 14),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+        ),
+      ),
+      textButtonTheme: TextButtonThemeData(
+        style: TextButton.styleFrom(foregroundColor: AppColors.gold),
+      ),
+    );
+  }
 }

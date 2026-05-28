@@ -1,4 +1,5 @@
 import 'package:qareeb/core/monitoring/sentry_service.dart';
+import 'package:qareeb/core/network/network_errors.dart';
 
 /// Runs [action] and reports unexpected errors to Sentry with [report] context.
 ///
@@ -11,11 +12,13 @@ Future<T> runGuarded<T>(
   try {
     return await action();
   } catch (error, stackTrace) {
-    await SentryService.captureException(
-      error,
-      stackTrace: stackTrace,
-      report: report,
-    );
+    if (!isNetworkError(error)) {
+      await SentryService.captureException(
+        error,
+        stackTrace: stackTrace,
+        report: report,
+      );
+    }
     rethrow;
   }
 }
@@ -28,11 +31,13 @@ T runGuardedSync<T>(
   try {
     return action();
   } catch (error, stackTrace) {
-    SentryService.captureException(
-      error,
-      stackTrace: stackTrace,
-      report: report,
-    );
+    if (!isNetworkError(error)) {
+      SentryService.captureException(
+        error,
+        stackTrace: stackTrace,
+        report: report,
+      );
+    }
     rethrow;
   }
 }

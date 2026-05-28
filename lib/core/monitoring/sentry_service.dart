@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:qareeb/core/config/environment.dart';
+import 'package:qareeb/core/monitoring/app_feedback.dart';
 import 'package:qareeb/core/monitoring/sentry_report.dart';
 import 'package:qareeb/core/monitoring/sentry_scope_config.dart';
 import 'package:sentry_flutter/sentry_flutter.dart' as sentry;
@@ -12,10 +13,12 @@ export 'package:qareeb/core/monitoring/sentry_report.dart'
 abstract final class SentryService {
   static PackageInfo? _packageInfo;
 
-  /// Wraps [child] with [SentryWidget] only when a DSN is configured.
+  /// Wraps [child] with [SentryWidget] (when enabled) inside [BetterFeedback].
   static Widget wrapApp(Widget child) {
-    if (!Environment.current.isSentryEnabled) return child;
-    return sentry.SentryWidget(child: child);
+    if (!Environment.current.isSentryEnabled) {
+      return AppFeedback.wrap(child);
+    }
+    return AppFeedback.wrap(sentry.SentryWidget(child: child));
   }
 
   static Future<void> init({
@@ -44,11 +47,14 @@ abstract final class SentryService {
         options.debug = env.isDevelopment && kDebugMode;
         options.tracesSampleRate = env.isProduction ? 0.2 : 1.0;
         options.attachScreenshot = true;
+        options.privacy.maskAllText = false;
+        options.privacy.maskAllImages = false;
         options.attachStacktrace = true;
         options.enableAutoSessionTracking = true;
         options.maxBreadcrumbs = 100;
         options.sendDefaultPii = false;
-        options.beforeSend = _enrichEvent;
+        options.beforeSend = _beforeSend;
+        options.beforeSendFeedback = _beforeSendFeedback;
       },
       appRunner: () async {
         await SentryScopeConfig.apply(packageInfo: packageInfo);
@@ -105,6 +111,21 @@ abstract final class SentryService {
         timestamp: DateTime.now(),
       ),
     );
+  }
+
+  static Future<sentry.SentryEvent?> _beforeSend(
+    sentry.SentryEvent event,
+    sentry.Hint hint,
+  ) async {
+    if (event.type == 'feedback') return event;
+    return _enrichEvent(event, hint);
+  }
+
+  static Future<sentry.SentryEvent?> _beforeSendFeedback(
+    sentry.SentryEvent event,
+    sentry.Hint hint,
+  ) async {
+    return _enrichEvent(event, hint);
   }
 
   static Future<sentry.SentryEvent?> _enrichEvent(
