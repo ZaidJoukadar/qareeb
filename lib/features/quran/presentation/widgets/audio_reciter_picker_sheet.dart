@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:qareeb/core/constants/ummah_quran_mappings.dart';
 import 'package:qareeb/core/di/injection.dart';
 import 'package:qareeb/core/presentation/bottom_sheets/app_bar_modal_bottom_sheet.dart';
 import 'package:qareeb/core/settings/presentation/cubit/app_settings_cubit.dart';
@@ -8,15 +9,22 @@ import 'package:qareeb/features/quran/data/datasources/quran_remote_data_source.
 import 'package:qareeb/features/quran/data/models/audio_edition_dto.dart';
 import 'package:qareeb/l10n/extensions/l10n_extension.dart';
 
-Future<void> showAudioReciterPickerSheet(BuildContext context) {
+Future<void> showAudioReciterPickerSheet(
+  BuildContext context, {
+  Future<void> Function()? onReciterApplied,
+}) {
   return showAppBarModalBottomSheet<void>(
     context: context,
-    builder: (sheetContext) => const _AudioReciterPickerSheet(),
+    builder: (sheetContext) => _AudioReciterPickerSheet(
+      onReciterApplied: onReciterApplied,
+    ),
   );
 }
 
 class _AudioReciterPickerSheet extends StatefulWidget {
-  const _AudioReciterPickerSheet();
+  const _AudioReciterPickerSheet({this.onReciterApplied});
+
+  final Future<void> Function()? onReciterApplied;
 
   @override
   State<_AudioReciterPickerSheet> createState() =>
@@ -64,12 +72,22 @@ class _AudioReciterPickerSheetState extends State<_AudioReciterPickerSheet> {
             );
           }
 
-          final editions = snapshot.data ?? [];
+          final editions = (snapshot.data ?? [])
+              .where(
+                (edition) => UmmahQuranMappings.isAyahAudioAvailableForReciterId(
+                  UmmahQuranMappings.reciterIdForEdition(edition.identifier),
+                ),
+              )
+              .toList();
           return RadioGroup<String>(
             groupValue: selectedReciter,
-            onChanged: (identifier) {
+            onChanged: (identifier) async {
               if (identifier == null) return;
-              context.read<AppSettingsCubit>().setQuranAudioReciter(identifier);
+              await context.read<AppSettingsCubit>().setQuranAudioReciter(
+                identifier,
+              );
+              await widget.onReciterApplied?.call();
+              if (!context.mounted) return;
               Navigator.of(context).pop();
             },
             child: ListView.builder(

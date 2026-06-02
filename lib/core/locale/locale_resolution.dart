@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:qareeb/core/locale/app_default_locale.dart';
 import 'package:qareeb/l10n/generated/app_localizations.dart';
 
 Locale? localeResolutionCallback(
   Locale? locale,
   Iterable<Locale> supportedLocales,
 ) {
-  if (locale == null) return supportedLocales.first;
+  if (locale == null) return appDefaultLocale;
 
   final match = _firstLocaleWithLanguageCode(
     supportedLocales,
     locale.languageCode,
   );
-  return match ?? supportedLocales.first;
+  return match ?? appDefaultLocale;
 }
 
 Locale? _firstLocaleWithLanguageCode(

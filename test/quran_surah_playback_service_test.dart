@@ -65,6 +65,7 @@ void main() {
     when(() => player.seekToNext()).thenAnswer((_) async {});
     when(() => player.stop()).thenAnswer((_) async {});
     when(() => player.dispose()).thenAnswer((_) async {});
+    when(() => player.truncatePlaylistAfterCurrent()).thenAnswer((_) async {});
 
     service = QuranSurahPlaybackService(
       resolveAyahAudioSource: resolveSource,
@@ -317,7 +318,9 @@ void main() {
     },
   );
 
-  test('stops and notifies when the last ayah in range completes', () async {
+  test(
+    'stops and notifies when the last ayah in range completes',
+    () async {
     var stopped = false;
     when(() => player.isPlaying).thenReturn(false);
     when(() => player.duration).thenReturn(const Duration(seconds: 2));
@@ -390,4 +393,77 @@ void main() {
       verifyNever(() => player.play());
     },
   );
+
+  test('switchReciter truncates queue and reloads from next ayah', () async {
+    when(() => player.playlistLength).thenReturn(3);
+
+    await service.playFromAyah(
+      surahNumber: 1,
+      startAyah: 1,
+      endAyah: 7,
+      onTick: ({
+        required int surahNumber,
+        required int ayahNumber,
+        required bool isLoading,
+        required bool isPlaying,
+        position = Duration.zero,
+        duration,
+      }) {},
+      onError: (_) {},
+    );
+
+    await Future<void>.delayed(Duration.zero);
+
+    indexController.add(4);
+    await Future<void>.delayed(Duration.zero);
+
+    expect(await service.switchReciter(onError: (_) {}), isTrue);
+    await Future<void>.delayed(Duration.zero);
+
+    verify(() => player.truncatePlaylistAfterCurrent()).called(1);
+    verify(
+      () => resolveSource(surahNumber: 1, ayahNumber: 6),
+    ).called(greaterThanOrEqualTo(1));
+    verify(
+      () => prefetch(
+        surahNumber: 1,
+        fromAyah: 6,
+        cancelToken: any(named: 'cancelToken'),
+      ),
+    ).called(greaterThanOrEqualTo(1));
+  });
+
+  test('queues reciter switch until playlist seed completes', () async {
+    final startCompleter = Completer<void>();
+
+    when(() => player.startPlaylist(any())).thenAnswer((_) async {
+      return startCompleter.future;
+    });
+
+    unawaited(
+      service.playFromAyah(
+        surahNumber: 1,
+        startAyah: 1,
+        endAyah: 3,
+        onTick: ({
+          required int surahNumber,
+          required int ayahNumber,
+          required bool isLoading,
+          required bool isPlaying,
+          position = Duration.zero,
+          duration,
+        }) {},
+        onError: (_) {},
+      ),
+    );
+
+    await Future<void>.delayed(Duration.zero);
+    expect(await service.switchReciter(onError: (_) {}), isTrue);
+    verifyNever(() => player.truncatePlaylistAfterCurrent());
+
+    startCompleter.complete();
+    await Future<void>.delayed(Duration.zero);
+
+    verify(() => player.truncatePlaylistAfterCurrent()).called(1);
+  });
 }

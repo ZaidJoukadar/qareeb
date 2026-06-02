@@ -30,16 +30,12 @@ class QareebApp extends StatelessWidget {
             previous.locale != current.locale ||
             previous.status != current.status,
         builder: (context, localeState) {
-          final deviceLocale = WidgetsBinding.instance.platformDispatcher.locale;
-          final locale = LocaleCubit.resolveLocale(
-            deviceLocale,
-            localeState.locale,
-          );
+          final locale = LocaleCubit.resolveLocale(localeState.locale);
 
           return BlocBuilder<AppSettingsCubit, AppSettingsState>(
             buildWhen: (previous, current) =>
                 previous.themeMode != current.themeMode ||
-                previous.fontScale != current.fontScale,
+                previous.appFontScale != current.appFontScale,
             builder: (context, settingsState) {
               return MaterialApp(
                 onGenerateTitle: (context) =>
@@ -53,7 +49,7 @@ class QareebApp extends StatelessWidget {
                   return MediaQuery(
                     data: mediaQuery.copyWith(
                       textScaler: TextScaler.linear(
-                        settingsState.fontScale,
+                        settingsState.appFontScale,
                       ),
                     ),
                     child: child ?? const SizedBox.shrink(),

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_compass_v2/flutter_compass_v2.dart';
+import 'package:qareeb/features/qibla/domain/utils/compass_heading.dart';
 
 enum QiblaCompassAvailability {
   loading,
@@ -33,10 +34,17 @@ class QiblaCompassReader {
   StreamSubscription<CompassEvent>? _subscription;
   Timer? _startupTimer;
   QiblaCompassAvailability _availability = QiblaCompassAvailability.loading;
+  double? _latitude;
+  double? _longitude;
 
   QiblaCompassAvailability get availability => _availability;
 
-  Future<void> start() async {
+  Future<void> start({
+    required double latitude,
+    required double longitude,
+  }) async {
+    _latitude = latitude;
+    _longitude = longitude;
     if (_subscription != null) {
       return;
     }
@@ -73,11 +81,21 @@ class QiblaCompassReader {
   void _onCompassEvent(CompassEvent event) {
     _startupTimer?.cancel();
 
-    final heading = event.heading;
-    if (heading == null) {
+    final rawHeading = event.heading;
+    if (rawHeading == null) {
       _setAvailability(QiblaCompassAvailability.noSensor);
       return;
     }
+
+    final latitude = _latitude;
+    final longitude = _longitude;
+    final heading = latitude != null && longitude != null
+        ? trueNorthHeading(
+            compassHeading: rawHeading,
+            latitude: latitude,
+            longitude: longitude,
+          )
+        : normalizeHeading(rawHeading);
 
     _availability = QiblaCompassAvailability.live;
     _controller.add(

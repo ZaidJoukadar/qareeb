@@ -146,6 +146,10 @@
   "@goToFlaggedAyah": {
     "description": "Tooltip for the FAB that jumps to the last flagged ayah."
   },
+  "removeFlag": "İşareti kaldır",
+  "@removeFlag": {
+    "description": "Tooltip for the button that clears the flagged ayah."
+  },
   "ayahInsightAyahLabel": "Ayah {number}",
   "@ayahInsightAyahLabel": {
     "description": "Ayah number label in the insight dialog title.",
@@ -158,6 +162,18 @@
   "ayahInsightMeaning": "Anlam",
   "@ayahInsightMeaning": {
     "description": "Section title for the overall ayah meaning in the insight dialog."
+  },
+  "ayahInsightWordByWord": "Kelime kelime",
+  "@ayahInsightWordByWord": {
+    "description": "Tab label for per-word meanings in the ayah insight dialog."
+  },
+  "ayahInsightWordsError": "Kelime anlamları yüklenemedi",
+  "@ayahInsightWordsError": {
+    "description": "Error when word-by-word meanings fail to load."
+  },
+  "ayahInsightWordTransliteration": "Transliterasyon",
+  "@ayahInsightWordTransliteration": {
+    "description": "Column header for word transliteration in word-by-word view."
   },
   "ayahInsightError": "Ayah anlamı yüklenemedi",
   "@ayahInsightError": {
@@ -232,6 +248,10 @@
     "description": "Skip to the next ayah in the audio player."
   },
   "dismiss": "Azletmek",
+  "quranAudioUnavailable": "Bu kari için ses kaydı mevcut değil. Başka bir kari seçin.",
+  "quranAudioNetworkError": "Ayet sesi indirilemedi. Bağlantınızı kontrol edip tekrar deneyin.",
+  "quranAudioLoadError": "Ayet sesi oynatılamadı. Tekrar deneyin veya başka bir kari seçin.",
+  "quranAudioNextAyahDownloading": "Sonraki ayet hâlâ indiriliyor. Bağlantınızı kontrol edip oynat'a dokunun.",
   "@dismiss": {
     "description": "Dismiss audio error banner."
   },
@@ -839,9 +859,13 @@
   "@settingsFontSizeSection": {
     "description": "Section header for font size settings."
   },
-  "settingsFontSize": "Yazı tipi boyutu",
-  "@settingsFontSize": {
-    "description": "Slider label for app and Quran reader text size."
+  "settingsAppFontSize": "Uygulama yazı tipi boyutu",
+  "@settingsAppFontSize": {
+    "description": "Slider label for general app text size."
+  },
+  "settingsQuranReaderFontSize": "Kur'an okuyucu yazı tipi boyutu",
+  "@settingsQuranReaderFontSize": {
+    "description": "Slider label for Mushaf and Quran reader text size."
   },
   "settingsFontSizeValue": "%{percent}",
   "@settingsFontSizeValue": {
@@ -896,36 +920,36 @@
   "@settingsStorageSection": {
     "description": "Section header for storage and cache settings."
   },
-  "settingsClearCache": "Ses önbelleğini temizle",
+  "settingsClearCache": "Önbelleği temizle",
   "@settingsClearCache": {
-    "description": "Settings row that deletes downloaded Quran audio files."
+    "description": "Settings row that deletes downloaded Quran cache files."
   },
-  "settingsClearCacheDescription": "İndirilen okuma sesini kaldırın. Oynattığınızda dosyalar tekrar indirilecektir.",
+  "settingsClearCacheDescription": "İndirilen ses, ayet anlamları ve kelime anlamlarını kaldırın. Gerektiğinde yeniden yüklenecektir.",
   "@settingsClearCacheDescription": {
-    "description": "Subtitle for the clear audio cache settings row."
+    "description": "Subtitle for the clear cache settings row."
   },
-  "settingsClearCacheConfirmTitle": "Ses önbelleği temizlensin mi?",
+  "settingsClearCacheConfirmTitle": "Önbellek temizlensin mi?",
   "@settingsClearCacheConfirmTitle": {
-    "description": "Title on the confirmation dialog before clearing audio cache."
+    "description": "Title on the confirmation dialog before clearing cache."
   },
-  "settingsClearCacheConfirmMessage": "İndirilen okuma sesi bu cihazdan kaldırılacak.",
+  "settingsClearCacheConfirmMessage": "İndirilen ses, ayet anlamları ve kelime anlamları bu cihazdan kaldırılacak.",
   "@settingsClearCacheConfirmMessage": {
-    "description": "Body text on the confirmation dialog before clearing audio cache."
+    "description": "Body text on the confirmation dialog before clearing cache."
   },
   "settingsClearCacheConfirmAction": "Temizlemek",
   "@settingsClearCacheConfirmAction": {
-    "description": "Confirm button on the clear audio cache dialog."
+    "description": "Confirm button on the clear cache dialog."
   },
   "settingsClearCacheCancel": "İptal etmek",
   "@settingsClearCacheCancel": {
-    "description": "Cancel button on the clear audio cache dialog."
+    "description": "Cancel button on the clear cache dialog."
   },
-  "settingsClearCacheSuccess": "Ses önbelleği temizlendi.",
+  "settingsClearCacheSuccess": "Önbellek temizlendi.",
   "@settingsClearCacheSuccess": {
-    "description": "Snackbar after audio cache is cleared successfully."
+    "description": "Snackbar after cache is cleared successfully."
   },
-  "settingsClearCacheError": "Ses önbelleği temizlenemedi. Lütfen tekrar deneyin.",
+  "settingsClearCacheError": "Önbellek temizlenemedi. Lütfen tekrar deneyin.",
   "@settingsClearCacheError": {
-    "description": "Snackbar when clearing audio cache fails."
+    "description": "Snackbar when clearing cache fails."
   }
 }

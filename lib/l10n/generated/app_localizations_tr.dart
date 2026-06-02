@@ -117,12 +117,24 @@ class AppLocalizationsTr extends AppLocalizations {
   String get goToFlaggedAyah => 'İşaretli ayete git';
 
   @override
+  String get removeFlag => 'İşareti kaldır';
+
+  @override
   String ayahInsightAyahLabel(int number) {
     return 'Ayah $number';
   }
 
   @override
   String get ayahInsightMeaning => 'Anlam';
+
+  @override
+  String get ayahInsightWordByWord => 'Kelime kelime';
+
+  @override
+  String get ayahInsightWordsError => 'Kelime anlamları yüklenemedi';
+
+  @override
+  String get ayahInsightWordTransliteration => 'Transliterasyon';
 
   @override
   String get ayahInsightError => 'Ayah anlamı yüklenemedi';
@@ -177,6 +189,22 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get dismiss => 'Azletmek';
+
+  @override
+  String get quranAudioUnavailable =>
+      'Bu kari için ses kaydı mevcut değil. Başka bir kari seçin.';
+
+  @override
+  String get quranAudioNetworkError =>
+      'Ayet sesi indirilemedi. Bağlantınızı kontrol edip tekrar deneyin.';
+
+  @override
+  String get quranAudioLoadError =>
+      'Ayet sesi oynatılamadı. Tekrar deneyin veya başka bir kari seçin.';
+
+  @override
+  String get quranAudioNextAyahDownloading =>
+      'Sonraki ayet hâlâ indiriliyor. Bağlantınızı kontrol edip oynat\'a dokunun.';
 
   @override
   String get drawerAdhan => 'Ezan';
@@ -629,7 +657,10 @@ class AppLocalizationsTr extends AppLocalizations {
   String get settingsFontSizeSection => 'Metin boyutu';
 
   @override
-  String get settingsFontSize => 'Yazı tipi boyutu';
+  String get settingsAppFontSize => 'Uygulama yazı tipi boyutu';
+
+  @override
+  String get settingsQuranReaderFontSize => 'Kur\'an okuyucu yazı tipi boyutu';
 
   @override
   String settingsFontSizeValue(int percent) {
@@ -674,18 +705,18 @@ class AppLocalizationsTr extends AppLocalizations {
   String get settingsStorageSection => 'Depolamak';
 
   @override
-  String get settingsClearCache => 'Ses önbelleğini temizle';
+  String get settingsClearCache => 'Önbelleği temizle';
 
   @override
   String get settingsClearCacheDescription =>
-      'İndirilen okuma sesini kaldırın. Oynattığınızda dosyalar tekrar indirilecektir.';
+      'İndirilen ses, ayet anlamları ve kelime anlamlarını kaldırın. Gerektiğinde yeniden yüklenecektir.';
 
   @override
-  String get settingsClearCacheConfirmTitle => 'Ses önbelleği temizlensin mi?';
+  String get settingsClearCacheConfirmTitle => 'Önbellek temizlensin mi?';
 
   @override
   String get settingsClearCacheConfirmMessage =>
-      'İndirilen okuma sesi bu cihazdan kaldırılacak.';
+      'İndirilen ses, ayet anlamları ve kelime anlamları bu cihazdan kaldırılacak.';
 
   @override
   String get settingsClearCacheConfirmAction => 'Temizlemek';
@@ -694,9 +725,9 @@ class AppLocalizationsTr extends AppLocalizations {
   String get settingsClearCacheCancel => 'İptal etmek';
 
   @override
-  String get settingsClearCacheSuccess => 'Ses önbelleği temizlendi.';
+  String get settingsClearCacheSuccess => 'Önbellek temizlendi.';
 
   @override
   String get settingsClearCacheError =>
-      'Ses önbelleği temizlenemedi. Lütfen tekrar deneyin.';
+      'Önbellek temizlenemedi. Lütfen tekrar deneyin.';
 }

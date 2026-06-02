@@ -36,5 +36,21 @@ void main() {
       expect(story.howRevealed, 'B');
       expect(story.miracle, 'C');
     });
+
+    test('allows partial fields when at least one field is present', () {
+      const raw = '''
+{
+  "revelationReason": "Reason text.",
+  "howRevealed": "",
+  "miracle": ""
+}
+''';
+
+      final story = AyahStoryParser.parse(raw);
+
+      expect(story.revelationReason, 'Reason text.');
+      expect(story.howRevealed, isEmpty);
+      expect(story.miracle, isEmpty);
+    });
   });
 }

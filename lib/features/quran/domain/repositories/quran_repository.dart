@@ -1,6 +1,7 @@
 import 'package:qareeb/features/quran/data/datasources/quran_local_data_source.dart';
 import 'package:qareeb/features/quran/domain/entities/ayah.dart';
 import 'package:qareeb/features/quran/domain/entities/ayah_insight.dart';
+import 'package:qareeb/features/quran/domain/entities/ayah_word.dart';
 import 'package:qareeb/features/quran/domain/entities/surah.dart';
 
 abstract class QuranRepository {
@@ -44,7 +45,16 @@ abstract class QuranRepository {
     Object? cancelToken,
   });
 
+  /// Drops in-memory ayah audio URL lookups after the reciter changes.
+  void clearAudioUrlCache();
+
   Future<AyahInsight> getAyahInsight({
+    required int surahNumber,
+    required int ayahNumber,
+    required String languageCode,
+  });
+
+  Future<List<AyahWord>> getAyahWords({
     required int surahNumber,
     required int ayahNumber,
     required String languageCode,

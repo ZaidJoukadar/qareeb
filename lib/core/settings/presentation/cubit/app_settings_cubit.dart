@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:qareeb/core/constants/font_scale_defaults.dart';
+import 'package:qareeb/core/constants/ummah_quran_mappings.dart';
 import 'package:qareeb/core/constants/quran_editions.dart';
 import 'package:qareeb/core/quran/quran_audio_reciter_settings.dart';
 import 'package:qareeb/core/settings/data/app_settings_local_data_source.dart';
@@ -26,15 +27,21 @@ class AppSettingsCubit extends Cubit<AppSettingsState> {
   Future<void> load() async {
     final savedTheme = await _dataSource.getThemeMode();
     final notificationsEnabled = await _dataSource.getNotificationsEnabled();
-    final fontScale = await _dataSource.getFontScale();
-    final quranAudioReciter = await _dataSource.getQuranAudioReciter();
+    final appFontScale = await _dataSource.getAppFontScale();
+    final quranFontScale = await _dataSource.getQuranFontScale();
+    final savedReciter = await _dataSource.getQuranAudioReciter();
+    final quranAudioReciter = _normalizeAudioReciter(savedReciter);
+    if (quranAudioReciter != savedReciter) {
+      await _dataSource.saveQuranAudioReciter(quranAudioReciter);
+    }
     _audioReciterSettings.editionIdentifier = quranAudioReciter;
 
     emit(
       state.copyWith(
         themeMode: savedTheme ?? ThemeMode.light,
         notificationsEnabled: notificationsEnabled,
-        fontScale: _clampFontScale(fontScale),
+        appFontScale: _clampFontScale(appFontScale),
+        quranFontScale: _clampFontScale(quranFontScale),
         quranAudioReciter: quranAudioReciter,
         status: AppSettingsStatus.ready,
       ),
@@ -56,17 +63,37 @@ class AppSettingsCubit extends Cubit<AppSettingsState> {
     }
   }
 
-  Future<void> setFontScale(double scale) async {
+  Future<void> setAppFontScale(double scale) async {
     final clamped = _clampFontScale(scale);
-    await _dataSource.saveFontScale(clamped);
-    emit(state.copyWith(fontScale: clamped));
+    await _dataSource.saveAppFontScale(clamped);
+    emit(state.copyWith(appFontScale: clamped));
+  }
+
+  Future<void> setQuranFontScale(double scale) async {
+    final clamped = _clampFontScale(scale);
+    await _dataSource.saveQuranFontScale(clamped);
+    emit(state.copyWith(quranFontScale: clamped));
   }
 
   Future<void> setQuranAudioReciter(String editionIdentifier) async {
     if (editionIdentifier == state.quranAudioReciter) return;
+    if (!_isAyahAudioAvailable(editionIdentifier)) return;
     await _dataSource.saveQuranAudioReciter(editionIdentifier);
     _audioReciterSettings.editionIdentifier = editionIdentifier;
     emit(state.copyWith(quranAudioReciter: editionIdentifier));
+  }
+
+  String _normalizeAudioReciter(String editionIdentifier) {
+    if (_isAyahAudioAvailable(editionIdentifier)) {
+      return editionIdentifier;
+    }
+    return QuranEditions.audioRecitation;
+  }
+
+  bool _isAyahAudioAvailable(String editionIdentifier) {
+    return UmmahQuranMappings.isAyahAudioAvailableForReciterId(
+      UmmahQuranMappings.reciterIdForEdition(editionIdentifier),
+    );
   }
 
   static double _clampFontScale(double scale) {

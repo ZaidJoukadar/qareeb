@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:qareeb/core/quran/quran_audio_playback_errors.dart';
 import 'package:qareeb/features/quran/domain/entities/surah.dart';
 import 'package:qareeb/features/quran/presentation/cubit/ayah_reader_cubit.dart';
 import 'package:qareeb/features/quran/presentation/cubit/ayah_reader_state.dart';
@@ -40,67 +41,93 @@ class SurahReaderBody extends StatelessWidget {
                 !state.isAudioPaused &&
                 !state.isAudioLoading;
 
-            return Column(
+            return Stack(
               children: [
-                if (state.audioError != null)
-                  MaterialBanner(
-                    content: Text(state.audioError!),
-                    backgroundColor: Colors.red.shade50,
-                    actions: [
-                      TextButton(
-                        onPressed: cubit.stopAudio,
-                        child: Text(l10n.dismiss),
+                Column(
+                  children: [
+                    if (state.audioError != null)
+                      MaterialBanner(
+                        content: Text(
+                          QuranAudioPlaybackErrors.message(
+                            l10n,
+                            state.audioError!,
+                          ),
+                        ),
+                        backgroundColor: Colors.red.shade50,
+                        actions: [
+                          TextButton(
+                            onPressed: cubit.stopAudio,
+                            child: Text(l10n.dismiss),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-                Expanded(
-                  child: MushafPageFrame(
-                    child: MushafSurahBody(
-                    surahNumber: surah.number,
-                    surahNameArabic: surah.nameArabic,
-                    showTranslation: showTranslation,
-                    juzNumber: state.ayahs.isNotEmpty
-                        ? state.ayahs.first.juz
-                        : 1,
-                    ayahs: state.ayahs,
-                    readAyahNumbers: state.readAyahNumbers,
-                    flaggedAyahNumber: state.flaggedAyahNumber,
-                    playingAyahNumber: state.playingAyahNumber,
-                    loadingAyahNumber: state.isAudioLoading
-                        ? state.playingAyahNumber
-                        : null,
-                    headerPlayAction: SurahAudioPlayButton(
-                      isPlaying: isSurahPlaying,
-                      isLoading:
-                          state.isSurahPlaybackActive && state.isAudioLoading,
-                      onPressed: cubit.playSurahFromStart,
+                    Expanded(
+                      child: MushafPageFrame(
+                        child: MushafSurahBody(
+                          surahNumber: surah.number,
+                          surahNameArabic: surah.nameArabic,
+                          showTranslation: showTranslation,
+                          juzNumber: state.ayahs.isNotEmpty
+                              ? state.ayahs.first.juz
+                              : 1,
+                          ayahs: state.ayahs,
+                          readAyahNumbers: state.readAyahNumbers,
+                          flaggedAyahNumber: state.flaggedAyahNumber,
+                          playingAyahNumber: state.playingAyahNumber,
+                          loadingAyahNumber: state.isAudioLoading
+                              ? state.playingAyahNumber
+                              : null,
+                          headerPlayAction: SurahAudioPlayButton(
+                            isPlaying: isSurahPlaying,
+                            isLoading: state.isSurahPlaybackActive &&
+                                state.isAudioLoading,
+                            onPressed: cubit.playSurahFromStart,
+                          ),
+                          onAyahDoubleTap: cubit.playFromAyah,
+                          onAyahLongPress: cubit.flagAyah,
+                        ),
+                      ),
                     ),
-                    onAyahDoubleTap: cubit.playFromAyah,
-                    onAyahLongPress: cubit.flagAyah,
-                    ),
-                  ),
+                    if (state.showAudioPlayerBar)
+                      QuranAudioPlayerBar(
+                        surahName: isArabicLocale
+                            ? surah.nameArabic
+                            : surah.nameEnglish,
+                        currentAyah: state.playingAyahNumber ?? 1,
+                        totalAyahs: surah.ayahCount,
+                        isLoading: state.isAudioLoading,
+                        isPaused: state.isAudioPaused,
+                        position: state.playbackPosition,
+                        duration: state.playbackDuration,
+                        showAyahNavigation: !state.isSingleAyahPlayback,
+                        canGoToPreviousAyah: (state.playingAyahNumber ?? 1) > 1,
+                        canGoToNextAyah:
+                            (state.playingAyahNumber ?? 1) < surah.ayahCount,
+                        onTogglePlayPause: cubit.togglePlayPause,
+                        onStop: cubit.stopAudio,
+                        onPreviousAyah: cubit.skipToPreviousAyah,
+                        onNextAyah: cubit.skipToNextAyah,
+                        onSelectReciter: () => showAudioReciterPickerSheet(
+                          context,
+                          onReciterApplied: cubit.onReciterChanged,
+                        ),
+                      ),
+                  ],
                 ),
-                if (state.showAudioPlayerBar)
-                  QuranAudioPlayerBar(
-                    surahName: isArabicLocale
-                        ? surah.nameArabic
-                        : surah.nameEnglish,
-                    currentAyah: state.playingAyahNumber ?? 1,
-                    totalAyahs: surah.ayahCount,
-                    isLoading: state.isAudioLoading,
-                    isPaused: state.isAudioPaused,
-                    position: state.playbackPosition,
-                    duration: state.playbackDuration,
-                    showAyahNavigation: !state.isSingleAyahPlayback,
-                    canGoToPreviousAyah: (state.playingAyahNumber ?? 1) > 1,
-                    canGoToNextAyah:
-                        (state.playingAyahNumber ?? 1) < surah.ayahCount,
-                    onTogglePlayPause: cubit.togglePlayPause,
-                    onStop: cubit.stopAudio,
-                    onPreviousAyah: cubit.skipToPreviousAyah,
-                    onNextAyah: cubit.skipToNextAyah,
-                    onSelectReciter: () =>
-                        showAudioReciterPickerSheet(context),
+                if (state.flaggedAyahNumber != null)
+                  PositionedDirectional(
+                    end: 16,
+                    bottom: state.showAudioPlayerBar ? 88 : 16,
+                    child: FloatingActionButton.extended(
+                      heroTag: 'surah-remove-flagged-ayah',
+                      backgroundColor: Theme.of(context)
+                          .colorScheme
+                          .surfaceContainerHighest,
+                      foregroundColor:
+                          Theme.of(context).colorScheme.onSurface,
+                      onPressed: cubit.removeFlaggedAyah,
+                      label: Text(l10n.removeFlag),
+                    ),
                   ),
               ],
             );

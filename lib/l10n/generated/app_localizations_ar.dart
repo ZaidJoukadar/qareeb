@@ -54,7 +54,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get languageTurkish => 'التركية';
 
   @override
-  String get quranSyncTitle => 'جاري تحضير القرآن';
+  String get quranSyncTitle => 'جاري تنزيل القرآن';
 
   @override
   String get quranSyncDescription =>
@@ -117,12 +117,24 @@ class AppLocalizationsAr extends AppLocalizations {
   String get goToFlaggedAyah => 'الانتقال إلى الآية المعلّمة';
 
   @override
+  String get removeFlag => 'إزالة العلامة';
+
+  @override
   String ayahInsightAyahLabel(int number) {
     return 'آية $number';
   }
 
   @override
   String get ayahInsightMeaning => 'المعنى';
+
+  @override
+  String get ayahInsightWordByWord => 'كلمة بكلمة';
+
+  @override
+  String get ayahInsightWordsError => 'تعذر تحميل معاني الكلمات';
+
+  @override
+  String get ayahInsightWordTransliteration => 'التهجئة';
 
   @override
   String get ayahInsightError => 'تعذر تحميل معنى الآية';
@@ -177,6 +189,22 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get dismiss => 'إغلاق';
+
+  @override
+  String get quranAudioUnavailable =>
+      'تسجيل هذا القارئ غير متاح. اختر قارئاً آخر.';
+
+  @override
+  String get quranAudioNetworkError =>
+      'تعذر تنزيل صوت الآية. تحقق من الاتصال وحاول مرة أخرى.';
+
+  @override
+  String get quranAudioLoadError =>
+      'تعذر تشغيل صوت الآية. حاول مرة أخرى أو اختر قارئاً آخر.';
+
+  @override
+  String get quranAudioNextAyahDownloading =>
+      'الآية التالية ما زالت قيد التنزيل. تحقق من الاتصال واضغط تشغيل.';
 
   @override
   String get drawerAdhan => 'الأذان';
@@ -628,7 +656,10 @@ class AppLocalizationsAr extends AppLocalizations {
   String get settingsFontSizeSection => 'حجم الخط';
 
   @override
-  String get settingsFontSize => 'حجم الخط';
+  String get settingsAppFontSize => 'حجم خط التطبيق';
+
+  @override
+  String get settingsQuranReaderFontSize => 'حجم خط قارئ القرآن';
 
   @override
   String settingsFontSizeValue(int percent) {
@@ -670,19 +701,18 @@ class AppLocalizationsAr extends AppLocalizations {
   String get settingsStorageSection => 'التخزين';
 
   @override
-  String get settingsClearCache => 'مسح ذاكرة التخزين المؤقت للصوت';
+  String get settingsClearCache => 'مسح الذاكرة المؤقتة';
 
   @override
   String get settingsClearCacheDescription =>
-      'إزالة تلاوات القرآن المحمّلة. ستُحمَّل الملفات مجدداً عند التشغيل.';
+      'إزالة الصوت المحمّل ومعاني الآيات ومعاني الكلمات. ستُحمَّل مجدداً عند الحاجة.';
 
   @override
-  String get settingsClearCacheConfirmTitle =>
-      'مسح ذاكرة التخزين المؤقت للصوت؟';
+  String get settingsClearCacheConfirmTitle => 'مسح الذاكرة المؤقتة؟';
 
   @override
   String get settingsClearCacheConfirmMessage =>
-      'ستُزال تلاوات القرآن المحمّلة من هذا الجهاز.';
+      'ستُزال التلاوات المحمّلة ومعاني الآيات ومعاني الكلمات من هذا الجهاز.';
 
   @override
   String get settingsClearCacheConfirmAction => 'مسح';
@@ -691,9 +721,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get settingsClearCacheCancel => 'إلغاء';
 
   @override
-  String get settingsClearCacheSuccess => 'تم مسح ذاكرة التخزين المؤقت للصوت.';
+  String get settingsClearCacheSuccess => 'تم مسح الذاكرة المؤقتة.';
 
   @override
   String get settingsClearCacheError =>
-      'تعذر مسح ذاكرة التخزين المؤقت للصوت. حاول مرة أخرى.';
+      'تعذر مسح الذاكرة المؤقتة. حاول مرة أخرى.';
 }

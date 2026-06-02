@@ -101,22 +101,28 @@ class LocationService {
     return location;
   }
 
-  Future<Position?> _resolvePosition() async {
-    final lastKnown = await Geolocator.getLastKnownPosition();
-    if (lastKnown != null) {
-      return lastKnown;
-    }
+  static const Duration _maxLastKnownPositionAge = Duration(minutes: 10);
 
+  Future<Position?> _resolvePosition() async {
     try {
       return await Geolocator.getCurrentPosition(
         locationSettings: const LocationSettings(
-          accuracy: LocationAccuracy.low,
+          accuracy: LocationAccuracy.medium,
           timeLimit: _gpsTimeLimit,
         ),
       );
     } on TimeoutException {
+      final lastKnown = await Geolocator.getLastKnownPosition();
+      if (lastKnown != null && _isRecentPosition(lastKnown)) {
+        return lastKnown;
+      }
       return null;
     }
+  }
+
+  bool _isRecentPosition(Position position) {
+    final age = DateTime.now().difference(position.timestamp);
+    return age <= _maxLastKnownPositionAge;
   }
 
   Future<({String city, String country})> _resolvePlaceLabel({

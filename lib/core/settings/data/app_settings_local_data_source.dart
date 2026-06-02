@@ -9,8 +9,10 @@ abstract class AppSettingsLocalDataSource {
   Future<void> saveThemeMode(ThemeMode themeMode);
   Future<bool> getNotificationsEnabled();
   Future<void> setNotificationsEnabled(bool enabled);
-  Future<double> getFontScale();
-  Future<void> saveFontScale(double scale);
+  Future<double> getAppFontScale();
+  Future<void> saveAppFontScale(double scale);
+  Future<double> getQuranFontScale();
+  Future<void> saveQuranFontScale(double scale);
   Future<String> getQuranAudioReciter();
   Future<void> saveQuranAudioReciter(String editionIdentifier);
 }
@@ -51,26 +53,45 @@ class AppSettingsLocalDataSourceImpl implements AppSettingsLocalDataSource {
   }
 
   @override
-  Future<double> getFontScale() async {
-    final stored = _prefs.getDouble(StorageKeys.fontScale);
+  Future<double> getAppFontScale() async {
+    final stored = _prefs.getDouble(StorageKeys.appFontScale);
     if (stored != null) {
       return stored;
     }
 
-    final legacyApp = _prefs.getDouble(StorageKeys.appFontScale);
-    final legacyQuran = _prefs.getDouble(StorageKeys.quranFontScale);
-    final migrated = legacyApp ?? legacyQuran;
-    if (migrated != null) {
-      await saveFontScale(migrated);
-      return migrated;
+    final unified = _prefs.getDouble(StorageKeys.fontScale);
+    if (unified != null) {
+      await saveAppFontScale(unified);
+      return unified;
     }
 
     return FontScaleDefaults.defaultScale;
   }
 
   @override
-  Future<void> saveFontScale(double scale) async {
-    await _prefs.setDouble(StorageKeys.fontScale, scale);
+  Future<void> saveAppFontScale(double scale) async {
+    await _prefs.setDouble(StorageKeys.appFontScale, scale);
+  }
+
+  @override
+  Future<double> getQuranFontScale() async {
+    final stored = _prefs.getDouble(StorageKeys.quranFontScale);
+    if (stored != null) {
+      return stored;
+    }
+
+    final unified = _prefs.getDouble(StorageKeys.fontScale);
+    if (unified != null) {
+      await saveQuranFontScale(unified);
+      return unified;
+    }
+
+    return FontScaleDefaults.defaultScale;
+  }
+
+  @override
+  Future<void> saveQuranFontScale(double scale) async {
+    await _prefs.setDouble(StorageKeys.quranFontScale, scale);
   }
 
   @override

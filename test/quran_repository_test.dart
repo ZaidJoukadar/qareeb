@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:qareeb/features/quran/data/datasources/ayah_insight_cache_local_data_source.dart';
 import 'package:qareeb/features/quran/data/datasources/quran_audio_cache_data_source.dart';
 import 'package:qareeb/features/quran/data/datasources/quran_local_data_source.dart';
 import 'package:qareeb/features/quran/data/datasources/quran_remote_data_source.dart';
@@ -15,20 +16,25 @@ class _MockLocal extends Mock implements QuranLocalDataSource {}
 
 class _MockAudioCache extends Mock implements QuranAudioCacheDataSource {}
 
+class _MockInsightCache extends Mock implements AyahInsightCacheLocalDataSource {}
+
 void main() {
   late _MockRemote remote;
   late _MockLocal local;
   late _MockAudioCache audioCache;
+  late _MockInsightCache insightCache;
   late QuranRepositoryImpl repository;
 
   setUp(() {
     remote = _MockRemote();
     local = _MockLocal();
     audioCache = _MockAudioCache();
+    insightCache = _MockInsightCache();
     repository = QuranRepositoryImpl(
       remote,
       local,
       audioCache,
+      insightCache,
       QuranAudioReciterSettings(),
     );
   });

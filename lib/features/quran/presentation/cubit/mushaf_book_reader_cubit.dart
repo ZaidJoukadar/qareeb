@@ -2,8 +2,10 @@ import 'dart:async';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:qareeb/core/quran/quran_audio_playback_errors.dart';
 import 'package:qareeb/features/quran/domain/entities/ayah.dart';
 import 'package:qareeb/features/quran/domain/entities/surah.dart';
+import 'package:qareeb/features/quran/domain/usecases/clear_quran_audio_url_cache.dart';
 import 'package:qareeb/features/quran/domain/usecases/get_all_read_ayah_keys.dart';
 import 'package:qareeb/features/quran/domain/usecases/get_ayahs_by_page.dart';
 import 'package:qareeb/features/quran/domain/usecases/get_first_page_for_surah.dart';
@@ -25,6 +27,7 @@ class MushafBookReaderCubit extends Cubit<MushafBookReaderState> {
     required GetAllReadAyahKeys getAllReadAyahKeys,
     required ToggleAyahRead toggleAyahRead,
     required MarkSurahAsRead markSurahAsRead,
+    required ClearQuranAudioUrlCache clearAudioUrlCache,
     required QuranSurahPlaybackService playback,
     required bool showTranslation,
     int? initialPage,
@@ -36,6 +39,7 @@ class MushafBookReaderCubit extends Cubit<MushafBookReaderState> {
        _getAllReadAyahKeys = getAllReadAyahKeys,
        _toggleAyahRead = toggleAyahRead,
        _markSurahAsRead = markSurahAsRead,
+       _clearAudioUrlCache = clearAudioUrlCache,
        _playback = playback,
        _initialPage = initialPage,
        _initialSurahNumber = initialSurahNumber,
@@ -48,6 +52,7 @@ class MushafBookReaderCubit extends Cubit<MushafBookReaderState> {
   final GetAllReadAyahKeys _getAllReadAyahKeys;
   final ToggleAyahRead _toggleAyahRead;
   final MarkSurahAsRead _markSurahAsRead;
+  final ClearQuranAudioUrlCache _clearAudioUrlCache;
   final QuranSurahPlaybackService _playback;
   final int? _initialPage;
   final int? _initialSurahNumber;
@@ -209,15 +214,21 @@ class MushafBookReaderCubit extends Cubit<MushafBookReaderState> {
       return;
     }
 
+    final page = _pageForAyah(surahNumber, ayahNumber);
     emit(
       state.copyWith(
         flaggedAyah: FlaggedAyahBookmark(
           surahNumber: surahNumber,
           ayahNumber: ayahNumber,
-          page: _pageForAyah(surahNumber, ayahNumber),
+          page: page,
         ),
       ),
     );
+  }
+
+  void removeFlaggedAyah() {
+    if (state.flaggedAyah == null) return;
+    emit(state.copyWith(clearFlaggedAyah: true));
   }
 
   int _pageForAyah(int surahNumber, int ayahNumber) {
@@ -266,14 +277,14 @@ class MushafBookReaderCubit extends Cubit<MushafBookReaderState> {
   }
 
   Future<int?> pageForFlaggedAyah() async {
-    final bookmark = state.flaggedAyah;
-    if (bookmark == null) return null;
+    final page = state.flaggedAyah?.page;
+    if (page == null) return null;
 
-    if (!state.pagesCache.containsKey(bookmark.page)) {
-      await _ensurePagesCachedAround(bookmark.page);
+    if (!state.pagesCache.containsKey(page)) {
+      await _ensurePagesCachedAround(page);
     }
 
-    return bookmark.page;
+    return page;
   }
 
   bool isSurahFullyRead(int surahNumber) {
@@ -305,11 +316,13 @@ class MushafBookReaderCubit extends Cubit<MushafBookReaderState> {
     );
   }
 
-  void _onPlaybackError(String message) {
+  void _onPlaybackError(Object error) {
     emit(
       state.copyWith(
         isAudioLoading: false,
-        audioError: message,
+        audioError: error is String
+            ? error
+            : QuranAudioPlaybackErrors.keyFor(error),
       ),
     );
   }
@@ -419,6 +432,26 @@ class MushafBookReaderCubit extends Cubit<MushafBookReaderState> {
       await resumeAudio();
     } else if (state.isSurahPlaybackActive) {
       await pauseAudio();
+    }
+  }
+
+  Future<void> onReciterChanged() async {
+    if (state.isSingleAyahPlayback || !_playback.isActive) return;
+
+    _clearAudioUrlCache();
+    emit(state.copyWith(clearAudioError: true));
+
+    if (await _playback.switchReciter(onError: _onPlaybackError)) {
+      return;
+    }
+
+    // Retry while the playlist is still starting up.
+    for (var attempt = 0; attempt < 20; attempt++) {
+      await Future<void>.delayed(const Duration(milliseconds: 100));
+      if (!_playback.isActive || isClosed) return;
+      if (await _playback.switchReciter(onError: _onPlaybackError)) {
+        return;
+      }
     }
   }
 

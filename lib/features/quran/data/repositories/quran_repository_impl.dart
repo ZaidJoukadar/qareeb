@@ -3,12 +3,14 @@ import 'package:qareeb/core/constants/quran_editions.dart';
 import 'package:qareeb/core/monitoring/run_guarded.dart';
 import 'package:qareeb/core/quran/quran_audio_reciter_settings.dart';
 import 'package:qareeb/core/monitoring/sentry_report.dart';
+import 'package:qareeb/features/quran/data/datasources/ayah_insight_cache_local_data_source.dart';
 import 'package:qareeb/features/quran/data/datasources/quran_audio_cache_data_source.dart';
 import 'package:qareeb/features/quran/data/datasources/quran_local_data_source.dart';
 import 'package:qareeb/features/quran/data/datasources/quran_remote_data_source.dart';
 import 'package:qareeb/features/quran/data/models/ayah_dto.dart';
 import 'package:qareeb/features/quran/domain/entities/ayah.dart';
 import 'package:qareeb/features/quran/domain/entities/ayah_insight.dart';
+import 'package:qareeb/features/quran/domain/entities/ayah_word.dart';
 import 'package:qareeb/features/quran/domain/entities/surah.dart';
 import 'package:qareeb/features/quran/domain/repositories/quran_repository.dart';
 
@@ -17,12 +19,14 @@ class QuranRepositoryImpl implements QuranRepository {
     this._remote,
     this._local,
     this._audioCache,
+    this._insightCache,
     this._audioReciterSettings,
   );
 
   final QuranRemoteDataSource _remote;
   final QuranLocalDataSource _local;
   final QuranAudioCacheDataSource _audioCache;
+  final AyahInsightCacheLocalDataSource _insightCache;
   final QuranAudioReciterSettings _audioReciterSettings;
 
   static const int _totalSurahs = 114;
@@ -251,12 +255,23 @@ class QuranRepositoryImpl implements QuranRepository {
     _audioUrlCacheEdition = edition;
   }
 
+  @override
+  void clearAudioUrlCache() {
+    _audioUrlCache.clear();
+    _audioUrlCacheEdition = null;
+  }
+
   Future<Map<int, String>> _loadSurahAudioUrls(int surahNumber) async {
+    final edition = _audioReciterSettings.editionIdentifier;
     _ensureAudioUrlCacheEdition();
     final cached = _audioUrlCache[surahNumber];
     if (cached != null) return cached;
 
     final ayahs = await _remote.fetchSurahAudioAyahs(surahNumber);
+    if (_audioReciterSettings.editionIdentifier != edition) {
+      return _loadSurahAudioUrls(surahNumber);
+    }
+
     final urlMap = _audioUrlMapFrom(ayahs);
     _audioUrlCache[surahNumber] = urlMap;
     return urlMap;
@@ -266,14 +281,28 @@ class QuranRepositoryImpl implements QuranRepository {
     required int surahNumber,
     required int ayahNumber,
   }) async {
+    final edition = _audioReciterSettings.editionIdentifier;
     _ensureAudioUrlCacheEdition();
     final cached = _audioUrlCache[surahNumber]?[ayahNumber];
     if (cached != null) return cached;
 
-    final single = await _remote.fetchAyahAudioUrl(
-      surahNumber: surahNumber,
-      ayahNumber: ayahNumber,
-    );
+    String? single;
+    try {
+      single = await _remote.fetchAyahAudioUrl(
+        surahNumber: surahNumber,
+        ayahNumber: ayahNumber,
+      );
+    } on DioException {
+      single = null;
+    }
+
+    if (_audioReciterSettings.editionIdentifier != edition) {
+      return _urlForAyah(
+        surahNumber: surahNumber,
+        ayahNumber: ayahNumber,
+      );
+    }
+
     if (single != null) {
       _audioUrlCache.putIfAbsent(surahNumber, () => {})[ayahNumber] = single;
       return single;
@@ -312,16 +341,27 @@ class QuranRepositoryImpl implements QuranRepository {
     required int ayahNumber,
   }) => runGuarded(
     () async {
+      final edition = _audioReciterSettings.editionIdentifier;
+
       final cached = await _audioCache.cachedFile(
         surahNumber: surahNumber,
         ayahNumber: ayahNumber,
       );
-      if (cached != null) return cached.path;
+      if (cached != null &&
+          _audioReciterSettings.editionIdentifier == edition) {
+        return cached.path;
+      }
 
       final url = await _urlForAyah(
         surahNumber: surahNumber,
         ayahNumber: ayahNumber,
       );
+      if (_audioReciterSettings.editionIdentifier != edition) {
+        return resolveAyahAudioSource(
+          surahNumber: surahNumber,
+          ayahNumber: ayahNumber,
+        );
+      }
       if (url == null) {
         throw StateError(
           'Audio not available for $surahNumber:$ayahNumber',
@@ -333,6 +373,12 @@ class QuranRepositoryImpl implements QuranRepository {
         ayahNumber: ayahNumber,
         url: url,
       );
+      if (_audioReciterSettings.editionIdentifier != edition) {
+        return resolveAyahAudioSource(
+          surahNumber: surahNumber,
+          ayahNumber: ayahNumber,
+        );
+      }
       return file.path;
     },
     report: SentryReport(
@@ -349,7 +395,9 @@ class QuranRepositoryImpl implements QuranRepository {
     Object? cancelToken,
   }) => runGuarded(
     () async {
+      final edition = _audioReciterSettings.editionIdentifier;
       final urls = await _loadSurahAudioUrls(surahNumber);
+      if (_audioReciterSettings.editionIdentifier != edition) return;
       await _audioCache.prefetchAyahs(
         surahNumber: surahNumber,
         urls: urls,
@@ -370,14 +418,63 @@ class QuranRepositoryImpl implements QuranRepository {
     required int ayahNumber,
     required String languageCode,
   }) => runGuarded(
-    () => _remote.fetchAyahInsight(
-      surahNumber: surahNumber,
-      ayahNumber: ayahNumber,
-      languageCode: languageCode,
-    ),
+    () async {
+      final cached = await _insightCache.getInsight(
+        surahNumber: surahNumber,
+        ayahNumber: ayahNumber,
+        languageCode: languageCode,
+      );
+      if (cached != null) return cached;
+
+      final insight = await _remote.fetchAyahInsight(
+        surahNumber: surahNumber,
+        ayahNumber: ayahNumber,
+        languageCode: languageCode,
+      );
+      await _insightCache.saveInsight(insight, languageCode: languageCode);
+      return insight;
+    },
     report: SentryReport(
       feature: 'quran',
       action: 'get_ayah_insight',
+      extra: {
+        'surah': surahNumber,
+        'ayah': ayahNumber,
+        'language': languageCode,
+      },
+    ),
+  );
+
+  @override
+  Future<List<AyahWord>> getAyahWords({
+    required int surahNumber,
+    required int ayahNumber,
+    required String languageCode,
+  }) => runGuarded(
+    () async {
+      final cached = await _insightCache.getWords(
+        surahNumber: surahNumber,
+        ayahNumber: ayahNumber,
+        languageCode: languageCode,
+      );
+      if (cached != null) return cached;
+
+      final words = await _remote.fetchAyahWords(
+        surahNumber: surahNumber,
+        ayahNumber: ayahNumber,
+        languageCode: languageCode,
+      );
+      await _insightCache.saveWords(
+        surahNumber: surahNumber,
+        ayahNumber: ayahNumber,
+        languageCode: languageCode,
+        words: words,
+      );
+      return words;
+    },
+    report: SentryReport(
+      feature: 'quran',
+      action: 'get_ayah_words',
       extra: {
         'surah': surahNumber,
         'ayah': ayahNumber,

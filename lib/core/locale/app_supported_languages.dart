@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:qareeb/core/locale/app_default_locale.dart';
 import 'package:qareeb/l10n/generated/app_localizations.dart';
 
 /// Display metadata for a supported app language.
@@ -36,6 +37,9 @@ List<AppSupportedLanguage> get appSupportedLanguages {
 AppSupportedLanguage languageForLocale(Locale locale) {
   return appSupportedLanguages.firstWhere(
     (language) => language.locale.languageCode == locale.languageCode,
-    orElse: () => appSupportedLanguages.first,
+    orElse: () => appSupportedLanguages.firstWhere(
+      (language) =>
+          language.locale.languageCode == appDefaultLocale.languageCode,
+    ),
   );
 }

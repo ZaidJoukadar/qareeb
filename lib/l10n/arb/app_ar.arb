@@ -14,7 +14,7 @@
   "languageEnglish": "الإنجليزية",
   "languageArabic": "العربية",
   "languageTurkish": "التركية",
-  "quranSyncTitle": "جاري تحضير القرآن",
+  "quranSyncTitle": "جاري تنزيل القرآن",
   "quranSyncDescription": "يتم تنزيل السور والآيات للقراءة دون اتصال. قد يستغرق ذلك بضع دقائق.",
   "quranSyncProgressPercent": "{percent}٪",
   "@quranSyncProgressPercent": {
@@ -56,6 +56,7 @@
     }
   },
   "goToFlaggedAyah": "الانتقال إلى الآية المعلّمة",
+  "removeFlag": "إزالة العلامة",
   "ayahInsightAyahLabel": "آية {number}",
   "@ayahInsightAyahLabel": {
     "placeholders": {
@@ -65,6 +66,9 @@
     }
   },
   "ayahInsightMeaning": "المعنى",
+  "ayahInsightWordByWord": "كلمة بكلمة",
+  "ayahInsightWordsError": "تعذر تحميل معاني الكلمات",
+  "ayahInsightWordTransliteration": "التهجئة",
   "ayahInsightError": "تعذر تحميل معنى الآية",
   "ayahInsightPlayAudio": "تشغيل صوت الآية",
   "ayahInsightStory": "القصة",
@@ -92,6 +96,10 @@
     }
   },
   "dismiss": "إغلاق",
+  "quranAudioUnavailable": "تسجيل هذا القارئ غير متاح. اختر قارئاً آخر.",
+  "quranAudioNetworkError": "تعذر تنزيل صوت الآية. تحقق من الاتصال وحاول مرة أخرى.",
+  "quranAudioLoadError": "تعذر تشغيل صوت الآية. حاول مرة أخرى أو اختر قارئاً آخر.",
+  "quranAudioNextAyahDownloading": "الآية التالية ما زالت قيد التنزيل. تحقق من الاتصال واضغط تشغيل.",
   "drawerAdhan": "الأذان",
   "drawerSurahs": "السور",
   "drawerJuz": "الأجزاء",
@@ -366,7 +374,8 @@
   "settingsDarkMode": "الوضع الداكن",
   "settingsSelectLanguage": "اختر اللغة",
   "settingsFontSizeSection": "حجم الخط",
-  "settingsFontSize": "حجم الخط",
+  "settingsAppFontSize": "حجم خط التطبيق",
+  "settingsQuranReaderFontSize": "حجم خط قارئ القرآن",
   "settingsFontSizeValue": "{percent}٪",
   "@settingsFontSizeValue": {
     "placeholders": {
@@ -386,12 +395,12 @@
   "settingsContactUs": "تواصل معنا",
   "settingsContactUsError": "تعذر فتح صفحة التواصل",
   "settingsStorageSection": "التخزين",
-  "settingsClearCache": "مسح ذاكرة التخزين المؤقت للصوت",
-  "settingsClearCacheDescription": "إزالة تلاوات القرآن المحمّلة. ستُحمَّل الملفات مجدداً عند التشغيل.",
-  "settingsClearCacheConfirmTitle": "مسح ذاكرة التخزين المؤقت للصوت؟",
-  "settingsClearCacheConfirmMessage": "ستُزال تلاوات القرآن المحمّلة من هذا الجهاز.",
+  "settingsClearCache": "مسح الذاكرة المؤقتة",
+  "settingsClearCacheDescription": "إزالة الصوت المحمّل ومعاني الآيات ومعاني الكلمات. ستُحمَّل مجدداً عند الحاجة.",
+  "settingsClearCacheConfirmTitle": "مسح الذاكرة المؤقتة؟",
+  "settingsClearCacheConfirmMessage": "ستُزال التلاوات المحمّلة ومعاني الآيات ومعاني الكلمات من هذا الجهاز.",
   "settingsClearCacheConfirmAction": "مسح",
   "settingsClearCacheCancel": "إلغاء",
-  "settingsClearCacheSuccess": "تم مسح ذاكرة التخزين المؤقت للصوت.",
-  "settingsClearCacheError": "تعذر مسح ذاكرة التخزين المؤقت للصوت. حاول مرة أخرى."
+  "settingsClearCacheSuccess": "تم مسح الذاكرة المؤقتة.",
+  "settingsClearCacheError": "تعذر مسح الذاكرة المؤقتة. حاول مرة أخرى."
 }

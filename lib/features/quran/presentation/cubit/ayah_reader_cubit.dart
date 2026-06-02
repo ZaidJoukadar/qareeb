@@ -1,7 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:qareeb/core/quran/quran_audio_playback_errors.dart';
 import 'package:qareeb/features/quran/domain/entities/surah.dart';
+import 'package:qareeb/features/quran/domain/usecases/clear_quran_audio_url_cache.dart';
 import 'package:qareeb/features/quran/domain/usecases/get_ayahs_by_surah.dart';
 import 'package:qareeb/features/quran/domain/usecases/get_read_ayah_numbers.dart';
 import 'package:qareeb/features/quran/domain/usecases/mark_surah_as_read.dart';
@@ -15,6 +17,7 @@ class AyahReaderCubit extends Cubit<AyahReaderState> {
     required GetReadAyahNumbers getReadAyahNumbers,
     required ToggleAyahRead toggleAyahRead,
     required MarkSurahAsRead markSurahAsRead,
+    required ClearQuranAudioUrlCache clearAudioUrlCache,
     required QuranSurahPlaybackService playback,
     required Surah surah,
     required bool showTranslation,
@@ -22,6 +25,7 @@ class AyahReaderCubit extends Cubit<AyahReaderState> {
        _getReadAyahNumbers = getReadAyahNumbers,
        _toggleAyahRead = toggleAyahRead,
        _markSurahAsRead = markSurahAsRead,
+       _clearAudioUrlCache = clearAudioUrlCache,
        _playback = playback,
        _showTranslation = showTranslation,
        super(AyahReaderState(surah: surah));
@@ -30,6 +34,7 @@ class AyahReaderCubit extends Cubit<AyahReaderState> {
   final GetReadAyahNumbers _getReadAyahNumbers;
   final ToggleAyahRead _toggleAyahRead;
   final MarkSurahAsRead _markSurahAsRead;
+  final ClearQuranAudioUrlCache _clearAudioUrlCache;
   final QuranSurahPlaybackService _playback;
   final bool _showTranslation;
 
@@ -127,11 +132,13 @@ class AyahReaderCubit extends Cubit<AyahReaderState> {
     );
   }
 
-  void _onPlaybackError(String message) {
+  void _onPlaybackError(Object error) {
     emit(
       state.copyWith(
         isAudioLoading: false,
-        audioError: message,
+        audioError: error is String
+            ? error
+            : QuranAudioPlaybackErrors.keyFor(error),
       ),
     );
   }
@@ -166,6 +173,11 @@ class AyahReaderCubit extends Cubit<AyahReaderState> {
       return;
     }
     emit(state.copyWith(flaggedAyahNumber: ayahNumber));
+  }
+
+  void removeFlaggedAyah() {
+    if (state.flaggedAyahNumber == null) return;
+    emit(state.copyWith(clearFlaggedAyah: true));
   }
 
   Future<void> _startPlayback({
@@ -206,11 +218,7 @@ class AyahReaderCubit extends Cubit<AyahReaderState> {
           ),
         );
 
-        // For double-tap (single ayah) we fully dispose the audio resources
-        // when the track ends naturally.
-        if (isSingleAyah) {
-          unawaited(_playback.dispose());
-        }
+        unawaited(_playback.dispose());
       },
     );
   }
@@ -233,6 +241,25 @@ class AyahReaderCubit extends Cubit<AyahReaderState> {
       await resumeAudio();
     } else if (state.isSurahPlaybackActive) {
       await pauseAudio();
+    }
+  }
+
+  Future<void> onReciterChanged() async {
+    if (state.isSingleAyahPlayback || !_playback.isActive) return;
+
+    _clearAudioUrlCache();
+    emit(state.copyWith(clearAudioError: true));
+
+    if (await _playback.switchReciter(onError: _onPlaybackError)) {
+      return;
+    }
+
+    for (var attempt = 0; attempt < 20; attempt++) {
+      await Future<void>.delayed(const Duration(milliseconds: 100));
+      if (!_playback.isActive || isClosed) return;
+      if (await _playback.switchReciter(onError: _onPlaybackError)) {
+        return;
+      }
     }
   }
 

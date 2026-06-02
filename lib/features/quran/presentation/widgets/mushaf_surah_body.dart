@@ -339,9 +339,13 @@ class _MushafSurahBodyState extends State<MushafSurahBody> {
   Widget build(BuildContext context) {
     return BlocBuilder<AppSettingsCubit, AppSettingsState>(
       buildWhen: (previous, current) =>
-          previous.fontScale != current.fontScale,
+          previous.quranFontScale != current.quranFontScale,
       builder: (context, settings) {
-        return _buildContent(context, settings.fontScale);
+        final mediaQuery = MediaQuery.of(context);
+        return MediaQuery(
+          data: mediaQuery.copyWith(textScaler: TextScaler.noScaling),
+          child: _buildContent(context, settings.quranFontScale),
+        );
       },
     );
   }
@@ -424,7 +428,7 @@ class _MushafSurahBodyState extends State<MushafSurahBody> {
         ],
         Directionality(
           textDirection: textDirection,
-          child: SelectableText.rich(
+          child: Text.rich(
             TextSpan(children: ayahSpans),
             textAlign: textAlign,
             textDirection: textDirection,

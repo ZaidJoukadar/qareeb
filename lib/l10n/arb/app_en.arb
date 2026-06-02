@@ -146,6 +146,10 @@
   "@goToFlaggedAyah": {
     "description": "Tooltip for the FAB that jumps to the last flagged ayah."
   },
+  "removeFlag": "Remove the flag",
+  "@removeFlag": {
+    "description": "Tooltip for the button that clears the flagged ayah."
+  },
   "ayahInsightAyahLabel": "Ayah {number}",
   "@ayahInsightAyahLabel": {
     "description": "Ayah number label in the insight dialog title.",
@@ -158,6 +162,18 @@
   "ayahInsightMeaning": "Meaning",
   "@ayahInsightMeaning": {
     "description": "Section title for the overall ayah meaning in the insight dialog."
+  },
+  "ayahInsightWordByWord": "Word by word",
+  "@ayahInsightWordByWord": {
+    "description": "Tab label for per-word meanings in the ayah insight dialog."
+  },
+  "ayahInsightWordsError": "Could not load word meanings",
+  "@ayahInsightWordsError": {
+    "description": "Error when word-by-word meanings fail to load."
+  },
+  "ayahInsightWordTransliteration": "Transliteration",
+  "@ayahInsightWordTransliteration": {
+    "description": "Column header for word transliteration in word-by-word view."
   },
   "ayahInsightError": "Could not load ayah meaning",
   "@ayahInsightError": {
@@ -234,6 +250,22 @@
   "dismiss": "Dismiss",
   "@dismiss": {
     "description": "Dismiss audio error banner."
+  },
+  "quranAudioUnavailable": "Audio for this reciter is not available. Choose another reciter.",
+  "@quranAudioUnavailable": {
+    "description": "Shown when ayah audio files are missing for the selected reciter."
+  },
+  "quranAudioNetworkError": "Could not download ayah audio. Check your connection and try again.",
+  "@quranAudioNetworkError": {
+    "description": "Shown when ayah audio fails due to connectivity."
+  },
+  "quranAudioLoadError": "Could not play ayah audio. Try again or choose another reciter.",
+  "@quranAudioLoadError": {
+    "description": "Generic ayah audio playback failure."
+  },
+  "quranAudioNextAyahDownloading": "The next ayah is still downloading. Check your connection and tap play.",
+  "@quranAudioNextAyahDownloading": {
+    "description": "Shown when playback cannot advance because the next ayah is not ready yet."
   },
   "drawerAdhan": "Adhan",
   "@drawerAdhan": {
@@ -853,9 +885,13 @@
   "@settingsFontSizeSection": {
     "description": "Section header for font size settings."
   },
-  "settingsFontSize": "Font size",
-  "@settingsFontSize": {
-    "description": "Slider label for app and Quran reader text size."
+  "settingsAppFontSize": "App font size",
+  "@settingsAppFontSize": {
+    "description": "Slider label for general app text size."
+  },
+  "settingsQuranReaderFontSize": "Quran reader font size",
+  "@settingsQuranReaderFontSize": {
+    "description": "Slider label for Mushaf and Quran reader text size."
   },
   "settingsFontSizeValue": "{percent}%",
   "@settingsFontSizeValue": {
@@ -910,36 +946,36 @@
   "@settingsStorageSection": {
     "description": "Section header for storage and cache settings."
   },
-  "settingsClearCache": "Clear audio cache",
+  "settingsClearCache": "Clear cache",
   "@settingsClearCache": {
-    "description": "Settings row that deletes downloaded Quran audio files."
+    "description": "Settings row that deletes downloaded Quran cache files."
   },
-  "settingsClearCacheDescription": "Remove downloaded recitation audio. Files will download again when you play them.",
+  "settingsClearCacheDescription": "Remove downloaded audio, ayah meanings, and word meanings. They will load again when needed.",
   "@settingsClearCacheDescription": {
-    "description": "Subtitle for the clear audio cache settings row."
+    "description": "Subtitle for the clear cache settings row."
   },
-  "settingsClearCacheConfirmTitle": "Clear audio cache?",
+  "settingsClearCacheConfirmTitle": "Clear cache?",
   "@settingsClearCacheConfirmTitle": {
-    "description": "Title on the confirmation dialog before clearing audio cache."
+    "description": "Title on the confirmation dialog before clearing cache."
   },
-  "settingsClearCacheConfirmMessage": "Downloaded recitation audio will be removed from this device.",
+  "settingsClearCacheConfirmMessage": "Downloaded audio, ayah meanings, and word meanings will be removed from this device.",
   "@settingsClearCacheConfirmMessage": {
-    "description": "Body text on the confirmation dialog before clearing audio cache."
+    "description": "Body text on the confirmation dialog before clearing cache."
   },
   "settingsClearCacheConfirmAction": "Clear",
   "@settingsClearCacheConfirmAction": {
-    "description": "Confirm button on the clear audio cache dialog."
+    "description": "Confirm button on the clear cache dialog."
   },
   "settingsClearCacheCancel": "Cancel",
   "@settingsClearCacheCancel": {
-    "description": "Cancel button on the clear audio cache dialog."
+    "description": "Cancel button on the clear cache dialog."
   },
-  "settingsClearCacheSuccess": "Audio cache cleared.",
+  "settingsClearCacheSuccess": "Cache cleared.",
   "@settingsClearCacheSuccess": {
-    "description": "Snackbar after audio cache is cleared successfully."
+    "description": "Snackbar after cache is cleared successfully."
   },
-  "settingsClearCacheError": "Could not clear audio cache. Please try again.",
+  "settingsClearCacheError": "Could not clear cache. Please try again.",
   "@settingsClearCacheError": {
-    "description": "Snackbar when clearing audio cache fails."
+    "description": "Snackbar when clearing cache fails."
   }
 }

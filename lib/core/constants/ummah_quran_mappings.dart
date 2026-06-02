@@ -31,8 +31,23 @@ abstract final class UmmahQuranMappings {
     'en.yusufali': 'yusuf_ali',
   };
 
+  /// Reciters whose per-ayah CDN links are missing or broken in UmmahAPI.
+  static const unavailableAyahAudioReciterIds = <int>{5, 6, 12};
+
   static int reciterIdForEdition(String editionIdentifier) {
-    return reciterIdByEdition[editionIdentifier] ?? 1;
+    final mapped = reciterIdByEdition[editionIdentifier];
+    if (mapped != null) return mapped;
+
+    const prefix = 'ummah.reciter.';
+    if (editionIdentifier.startsWith(prefix)) {
+      return int.tryParse(editionIdentifier.substring(prefix.length)) ?? 1;
+    }
+
+    return 1;
+  }
+
+  static bool isAyahAudioAvailableForReciterId(int reciterId) {
+    return !unavailableAyahAudioReciterIds.contains(reciterId);
   }
 
   static String editionForReciterId(int reciterId) {

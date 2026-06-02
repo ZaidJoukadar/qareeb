@@ -73,6 +73,18 @@ class QuranAudioPlayerService {
     await player.addAudioSource(AudioSource.file(path));
   }
 
+  /// Removes queued tracks after the one currently playing.
+  Future<void> truncatePlaylistAfterCurrent() async {
+    if (!_hasActivePlaylist || _player == null) return;
+
+    final player = _player!;
+    final currentIndex = player.currentIndex ?? 0;
+    final length = player.audioSources.length;
+    if (currentIndex + 1 >= length) return;
+
+    await player.removeAudioSourceRange(currentIndex + 1, length);
+  }
+
   Future<void> seekToPrevious() => _ensurePlayer().seekToPrevious();
 
   Future<void> seekToNext() => _ensurePlayer().seekToNext();

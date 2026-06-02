@@ -3,9 +3,12 @@ import 'package:qareeb/core/constants/quran_editions.dart';
 import 'package:qareeb/core/constants/ummah_quran_mappings.dart';
 import 'package:qareeb/core/network/ummah_api_response.dart';
 import 'package:qareeb/core/quran/quran_audio_reciter_settings.dart';
+import 'package:qareeb/features/quran/data/datasources/ayah_word_arabic_meaning_remote_data_source.dart';
 import 'package:qareeb/features/quran/data/datasources/quran_ayah_metadata_index.dart';
 import 'package:qareeb/features/quran/data/models/audio_edition_dto.dart';
 import 'package:qareeb/features/quran/data/models/ayah_dto.dart';
+import 'package:qareeb/features/quran/data/models/ayah_word_dto.dart';
+import 'package:qareeb/features/quran/domain/entities/ayah_word.dart';
 import 'package:qareeb/features/quran/data/models/surah_detail_dto.dart';
 import 'package:qareeb/features/quran/data/models/surah_summary_dto.dart';
 import 'package:qareeb/features/quran/domain/entities/ayah_insight.dart';
@@ -33,16 +36,26 @@ abstract class QuranRemoteDataSource {
     required int ayahNumber,
     required String languageCode,
   });
+
+  Future<List<AyahWord>> fetchAyahWords({
+    required int surahNumber,
+    required int ayahNumber,
+    required String languageCode,
+  });
 }
 
 class QuranRemoteDataSourceImpl implements QuranRemoteDataSource {
   QuranRemoteDataSourceImpl(
     this._dio,
+    this._quranComDio,
+    this._arabicWordMeanings,
     this._audioReciterSettings,
     this._metadataIndex,
   );
 
   final Dio _dio;
+  final Dio _quranComDio;
+  final AyahWordArabicMeaningRemoteDataSource _arabicWordMeanings;
   final QuranAudioReciterSettings _audioReciterSettings;
   final QuranAyahMetadataIndex _metadataIndex;
 
@@ -189,8 +202,7 @@ class QuranRemoteDataSourceImpl implements QuranRemoteDataSource {
       return preferredReciter.first['ayah_audio'] as String?;
     }
 
-    if (audioMaps.isEmpty) return null;
-    return audioMaps.first['ayah_audio'] as String?;
+    return null;
   }
 
   @override
@@ -293,6 +305,108 @@ class QuranRemoteDataSourceImpl implements QuranRemoteDataSource {
       ayahNumber: ayahNumber,
       meaning: text.trim(),
     );
+  }
+
+  @override
+  Future<List<AyahWord>> fetchAyahWords({
+    required int surahNumber,
+    required int ayahNumber,
+    required String languageCode,
+  }) async {
+    if (languageCode == 'en') {
+      return _fetchAyahWordsFromUmmah(
+        surahNumber: surahNumber,
+        ayahNumber: ayahNumber,
+      );
+    }
+
+    if (languageCode == 'ar') {
+      final words = await _fetchAyahWordsFromUmmah(
+        surahNumber: surahNumber,
+        ayahNumber: ayahNumber,
+      );
+      return _arabicWordMeanings.enrichWithArabicMeanings(
+        surahNumber: surahNumber,
+        ayahNumber: ayahNumber,
+        words: words,
+      );
+    }
+
+    return _fetchAyahWordsFromQuranCom(
+      surahNumber: surahNumber,
+      ayahNumber: ayahNumber,
+      languageCode: languageCode,
+    );
+  }
+
+  Future<List<AyahWord>> _fetchAyahWordsFromUmmah({
+    required int surahNumber,
+    required int ayahNumber,
+  }) async {
+    final response = await _dio.get<Map<String, dynamic>>(
+      '/quran/words/$surahNumber/$ayahNumber',
+    );
+    final parsed = _parseResponse(
+      response.data,
+      (data) => data as Map<String, dynamic>,
+    );
+
+    final wordsJson = parsed.data['words'] as List<dynamic>? ?? [];
+    final words = wordsJson
+        .cast<Map<String, dynamic>>()
+        .where(
+          (json) => (json['type'] as String? ?? 'word') == 'word',
+        )
+        .map(AyahWordDto.fromJson)
+        .map((dto) => dto.toEntity())
+        .toList();
+    if (words.isEmpty) {
+      throw StateError(
+        'Missing word meanings for $surahNumber:$ayahNumber',
+      );
+    }
+
+    return words;
+  }
+
+  Future<List<AyahWord>> _fetchAyahWordsFromQuranCom({
+    required int surahNumber,
+    required int ayahNumber,
+    required String languageCode,
+  }) async {
+    final language = QuranEditions.wordTranslationLanguageForLocale(
+      languageCode,
+    );
+    final response = await _quranComDio.get<Map<String, dynamic>>(
+      '/verses/by_key/$surahNumber:$ayahNumber',
+      queryParameters: {
+        'words': true,
+        'language': language,
+        'word_fields': 'text_uthmani,translation,transliteration',
+      },
+    );
+
+    final body = response.data;
+    if (body == null) {
+      throw StateError('Empty response from Quran.com');
+    }
+
+    final verse = body['verse'] as Map<String, dynamic>?;
+    final wordsJson = verse?['words'] as List<dynamic>? ?? [];
+    final words = wordsJson
+        .cast<Map<String, dynamic>>()
+        .where((json) => (json['char_type_name'] as String? ?? 'word') == 'word')
+        .map(AyahWordDto.fromQuranComJson)
+        .map((dto) => dto.toEntity())
+        .toList();
+
+    if (words.isEmpty) {
+      throw StateError(
+        'Missing word meanings for $surahNumber:$ayahNumber',
+      );
+    }
+
+    return words;
   }
 
   Future<void> _ensureSurahAyahCounts() async {

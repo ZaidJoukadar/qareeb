@@ -98,6 +98,8 @@ class MushafBookReaderState extends Equatable {
         isAudioLoading;
   }
 
+  bool get hasFlaggedAyah => flaggedAyah != null;
+
   bool get showFlagNavigationFab {
     final bookmark = flaggedAyah;
     if (bookmark == null) return false;

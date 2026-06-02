@@ -116,7 +116,10 @@ class _QiblaCompassViewState extends State<_QiblaCompassView> {
   }
 
   Future<void> _startCompass() async {
-    await _compassReader.start();
+    await _compassReader.start(
+      latitude: widget.location.latitude,
+      longitude: widget.location.longitude,
+    );
 
     if (!mounted) {
       return;
@@ -249,7 +252,7 @@ class _QiblaCompassViewState extends State<_QiblaCompassView> {
         ),
         const SizedBox(height: 4),
         Text(
-          l10n.qiblaDistance(distanceKm.toStringAsFixed(0)),
+          l10n.qiblaDistance(_formatDistanceKm(distanceKm)),
           textAlign: TextAlign.center,
           style: Theme.of(context).textTheme.bodyMedium?.copyWith(
             color: AppColors.navy.withValues(alpha: 0.7),
@@ -271,6 +274,16 @@ class _QiblaCompassViewState extends State<_QiblaCompassView> {
     var offset = qiblaBearing - heading;
     offset = (offset + 540) % 360 - 180;
     return offset;
+  }
+
+  static String _formatDistanceKm(double distanceKm) {
+    if (distanceKm >= 100) {
+      return distanceKm.round().toString();
+    }
+    if (distanceKm >= 10) {
+      return distanceKm.toStringAsFixed(0);
+    }
+    return distanceKm.toStringAsFixed(1);
   }
 }
 

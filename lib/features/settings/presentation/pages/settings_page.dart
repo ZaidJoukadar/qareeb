@@ -8,6 +8,7 @@ import 'package:qareeb/core/locale/app_supported_languages.dart';
 import 'package:qareeb/core/monitoring/app_feedback.dart';
 import 'package:qareeb/core/presentation/responsive/responsive.dart';
 import 'package:qareeb/core/settings/presentation/cubit/app_settings_cubit.dart';
+import 'package:qareeb/features/quran/data/datasources/ayah_insight_cache_local_data_source.dart';
 import 'package:qareeb/features/quran/data/datasources/quran_audio_cache_data_source.dart';
 import 'package:qareeb/features/settings/presentation/widgets/language_picker_sheet.dart';
 import 'package:qareeb/features/settings/presentation/widgets/settings_ui.dart';
@@ -71,17 +72,34 @@ class SettingsPage extends StatelessWidget {
             children: [
               BlocBuilder<AppSettingsCubit, AppSettingsState>(
                 buildWhen: (previous, current) =>
-                    previous.fontScale != current.fontScale,
+                    previous.appFontScale != current.appFontScale ||
+                    previous.quranFontScale != current.quranFontScale,
                 builder: (context, settingsState) {
-                  return SettingsFontScaleCard(
-                    title: l10n.settingsFontSize,
-                    value: settingsState.fontScale,
-                    min: FontScaleDefaults.min,
-                    max: FontScaleDefaults.max,
-                    valueLabel: l10n.settingsFontSizeValue(
-                      (settingsState.fontScale * 100).round(),
-                    ),
-                    onChanged: context.read<AppSettingsCubit>().setFontScale,
+                  final cubit = context.read<AppSettingsCubit>();
+                  return Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      SettingsFontScaleCard(
+                        title: l10n.settingsAppFontSize,
+                        value: settingsState.appFontScale,
+                        min: FontScaleDefaults.min,
+                        max: FontScaleDefaults.max,
+                        valueLabel: l10n.settingsFontSizeValue(
+                          (settingsState.appFontScale * 100).round(),
+                        ),
+                        onChanged: cubit.setAppFontScale,
+                      ),
+                      SettingsFontScaleCard(
+                        title: l10n.settingsQuranReaderFontSize,
+                        value: settingsState.quranFontScale,
+                        min: FontScaleDefaults.min,
+                        max: FontScaleDefaults.max,
+                        valueLabel: l10n.settingsFontSizeValue(
+                          (settingsState.quranFontScale * 100).round(),
+                        ),
+                        onChanged: cubit.setQuranFontScale,
+                      ),
+                    ],
                   );
                 },
               ),
@@ -117,7 +135,7 @@ class SettingsPage extends StatelessWidget {
                 title: l10n.settingsClearCache,
                 subtitle: l10n.settingsClearCacheDescription,
                 destructive: true,
-                onTap: () => _confirmClearAudioCache(context),
+                onTap: () => _confirmClearCache(context),
               ),
             ],
           ),
@@ -146,7 +164,7 @@ class SettingsPage extends StatelessWidget {
     );
   }
 
-  Future<void> _confirmClearAudioCache(BuildContext context) async {
+  Future<void> _confirmClearCache(BuildContext context) async {
     final l10n = context.l10n;
     final colorScheme = Theme.of(context).colorScheme;
 
@@ -180,7 +198,10 @@ class SettingsPage extends StatelessWidget {
     if (confirmed != true || !context.mounted) return;
 
     try {
-      await getIt<QuranAudioCacheDataSource>().clearAll();
+      await Future.wait([
+        getIt<QuranAudioCacheDataSource>().clearAll(),
+        getIt<AyahInsightCacheLocalDataSource>().clearAll(),
+      ]);
       if (!context.mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(l10n.settingsClearCacheSuccess)),

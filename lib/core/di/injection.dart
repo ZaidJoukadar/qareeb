@@ -12,6 +12,8 @@ import 'package:qareeb/core/constants/quran_editions.dart';
 import 'package:qareeb/core/constants/storage_keys.dart';
 import 'package:qareeb/core/quran/quran_audio_reciter_settings.dart';
 import 'package:qareeb/core/network/pollinations_api_client.dart';
+import 'package:qareeb/core/network/quran_com_api_client.dart';
+import 'package:qareeb/features/quran/data/datasources/ayah_word_arabic_meaning_remote_data_source.dart';
 import 'package:qareeb/core/settings/data/app_settings_local_data_source.dart';
 import 'package:qareeb/core/settings/presentation/cubit/app_settings_cubit.dart';
 import 'package:qareeb/features/onboarding/data/datasources/onboarding_local_data_source.dart';
@@ -59,6 +61,7 @@ import 'package:qareeb/features/hadith/presentation/cubit/hadith_category_cubit.
 import 'package:qareeb/features/hadith/presentation/cubit/hadith_collection_cubit.dart';
 import 'package:qareeb/features/hadith/presentation/cubit/hadith_collections_cubit.dart';
 import 'package:qareeb/features/quran/data/database/app_database.dart';
+import 'package:qareeb/features/quran/data/datasources/ayah_insight_cache_local_data_source.dart';
 import 'package:qareeb/features/quran/data/datasources/ayah_story_remote_data_source.dart';
 import 'package:qareeb/features/quran/data/datasources/quran_audio_cache_data_source.dart';
 import 'package:qareeb/features/quran/data/datasources/quran_local_data_source.dart';
@@ -74,9 +77,11 @@ import 'package:qareeb/features/quran/domain/repositories/ayah_story_repository.
 import 'package:qareeb/features/quran/domain/repositories/quran_repository.dart';
 import 'package:qareeb/features/quran/domain/usecases/get_ayah_audio_url.dart';
 import 'package:qareeb/features/quran/domain/usecases/get_surah_audio_urls.dart';
+import 'package:qareeb/features/quran/domain/usecases/clear_quran_audio_url_cache.dart';
 import 'package:qareeb/features/quran/domain/usecases/prefetch_surah_audio.dart';
 import 'package:qareeb/features/quran/domain/usecases/resolve_ayah_audio_source.dart';
 import 'package:qareeb/features/quran/domain/usecases/get_ayah_insight.dart';
+import 'package:qareeb/features/quran/domain/usecases/get_ayah_words.dart';
 import 'package:qareeb/features/quran/domain/usecases/get_ayah_story.dart';
 import 'package:qareeb/features/quran/domain/usecases/get_ayahs_by_surah.dart';
 import 'package:qareeb/features/quran/domain/usecases/get_quran_sync_status.dart';
@@ -154,11 +159,26 @@ Future<void> setupInjection() async {
       createPollinationsApiClient,
       instanceName: 'pollinations',
     )
+    ..registerLazySingleton<Dio>(
+      createQuranComApiClient,
+      instanceName: 'quranCom',
+    )
     ..registerLazySingleton<QuranAyahMetadataIndex>(
       () => QuranAyahMetadataIndex(getIt()),
     )
+    ..registerLazySingleton<AyahWordArabicMeaningRemoteDataSource>(
+      () => PollinationsAyahWordArabicMeaningRemoteDataSource(
+        getIt(instanceName: 'pollinations'),
+      ),
+    )
     ..registerLazySingleton<QuranRemoteDataSource>(
-      () => QuranRemoteDataSourceImpl(getIt(), getIt(), getIt()),
+      () => QuranRemoteDataSourceImpl(
+        getIt(),
+        getIt(instanceName: 'quranCom'),
+        getIt(),
+        getIt(),
+        getIt(),
+      ),
     )
     ..registerLazySingleton<AppDatabase>(AppDatabase.new)
     ..registerLazySingleton<AyahStoryRemoteDataSource>(
@@ -168,6 +188,9 @@ Future<void> setupInjection() async {
     )
     ..registerLazySingleton<QuranLocalDataSource>(
       () => QuranLocalDataSourceImpl(getIt()),
+    )
+    ..registerLazySingleton<AyahInsightCacheLocalDataSource>(
+      AyahInsightCacheLocalDataSourceImpl.new,
     )
     ..registerLazySingleton<QuranAudioCacheDataSource>(
       () => QuranAudioCacheDataSourceImpl(getIt(), getIt()),
@@ -179,7 +202,7 @@ Future<void> setupInjection() async {
       () => ReadingProgressRepositoryImpl(getIt()),
     )
     ..registerLazySingleton<QuranRepository>(
-      () => QuranRepositoryImpl(getIt(), getIt(), getIt(), getIt()),
+      () => QuranRepositoryImpl(getIt(), getIt(), getIt(), getIt(), getIt()),
     )
     ..registerLazySingleton<AyahStoryRepository>(
       () => AyahStoryRepositoryImpl(getIt(), getIt()),
@@ -203,7 +226,9 @@ Future<void> setupInjection() async {
     ..registerLazySingleton(() => GetSurahAudioUrls(getIt()))
     ..registerLazySingleton(() => ResolveAyahAudioSource(getIt()))
     ..registerLazySingleton(() => PrefetchSurahAudio(getIt()))
+    ..registerLazySingleton(() => ClearQuranAudioUrlCache(getIt()))
     ..registerLazySingleton(() => GetAyahInsight(getIt()))
+    ..registerLazySingleton(() => GetAyahWords(getIt()))
     ..registerLazySingleton(() => GetAyahStory(getIt()))
     ..registerLazySingleton(() => GetSyncProgress(getIt()))
     ..registerFactoryParam<QuranSyncCubit, String, void>(
@@ -239,6 +264,7 @@ Future<void> setupInjection() async {
         getAllReadAyahKeys: getIt(),
         toggleAyahRead: getIt(),
         markSurahAsRead: getIt(),
+        clearAudioUrlCache: getIt(),
         playback: getIt(),
         showTranslation: params.showTranslation,
         initialPage: params.initialPage,
@@ -251,6 +277,7 @@ Future<void> setupInjection() async {
         getReadAyahNumbers: getIt(),
         toggleAyahRead: getIt(),
         markSurahAsRead: getIt(),
+        clearAudioUrlCache: getIt(),
         playback: getIt(),
         surah: surah,
         showTranslation: showTranslation,

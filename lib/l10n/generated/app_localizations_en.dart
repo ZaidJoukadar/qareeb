@@ -117,12 +117,24 @@ class AppLocalizationsEn extends AppLocalizations {
   String get goToFlaggedAyah => 'Go to flagged ayah';
 
   @override
+  String get removeFlag => 'Remove the flag';
+
+  @override
   String ayahInsightAyahLabel(int number) {
     return 'Ayah $number';
   }
 
   @override
   String get ayahInsightMeaning => 'Meaning';
+
+  @override
+  String get ayahInsightWordByWord => 'Word by word';
+
+  @override
+  String get ayahInsightWordsError => 'Could not load word meanings';
+
+  @override
+  String get ayahInsightWordTransliteration => 'Transliteration';
 
   @override
   String get ayahInsightError => 'Could not load ayah meaning';
@@ -178,6 +190,22 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get dismiss => 'Dismiss';
+
+  @override
+  String get quranAudioUnavailable =>
+      'Audio for this reciter is not available. Choose another reciter.';
+
+  @override
+  String get quranAudioNetworkError =>
+      'Could not download ayah audio. Check your connection and try again.';
+
+  @override
+  String get quranAudioLoadError =>
+      'Could not play ayah audio. Try again or choose another reciter.';
+
+  @override
+  String get quranAudioNextAyahDownloading =>
+      'The next ayah is still downloading. Check your connection and tap play.';
 
   @override
   String get drawerAdhan => 'Adhan';
@@ -630,7 +658,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settingsFontSizeSection => 'Text size';
 
   @override
-  String get settingsFontSize => 'Font size';
+  String get settingsAppFontSize => 'App font size';
+
+  @override
+  String get settingsQuranReaderFontSize => 'Quran reader font size';
 
   @override
   String settingsFontSizeValue(int percent) {
@@ -674,18 +705,18 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settingsStorageSection => 'Storage';
 
   @override
-  String get settingsClearCache => 'Clear audio cache';
+  String get settingsClearCache => 'Clear cache';
 
   @override
   String get settingsClearCacheDescription =>
-      'Remove downloaded recitation audio. Files will download again when you play them.';
+      'Remove downloaded audio, ayah meanings, and word meanings. They will load again when needed.';
 
   @override
-  String get settingsClearCacheConfirmTitle => 'Clear audio cache?';
+  String get settingsClearCacheConfirmTitle => 'Clear cache?';
 
   @override
   String get settingsClearCacheConfirmMessage =>
-      'Downloaded recitation audio will be removed from this device.';
+      'Downloaded audio, ayah meanings, and word meanings will be removed from this device.';
 
   @override
   String get settingsClearCacheConfirmAction => 'Clear';
@@ -694,9 +725,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settingsClearCacheCancel => 'Cancel';
 
   @override
-  String get settingsClearCacheSuccess => 'Audio cache cleared.';
+  String get settingsClearCacheSuccess => 'Cache cleared.';
 
   @override
   String get settingsClearCacheError =>
-      'Could not clear audio cache. Please try again.';
+      'Could not clear cache. Please try again.';
 }

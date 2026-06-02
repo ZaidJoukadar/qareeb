@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:dio/dio.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:qareeb/core/quran/quran_audio_playback_errors.dart';
 import 'package:qareeb/features/quran/domain/usecases/prefetch_surah_audio.dart';
 import 'package:qareeb/features/quran/domain/usecases/resolve_ayah_audio_source.dart';
 import 'package:qareeb/features/quran/presentation/services/quran_audio_player_service.dart';
@@ -15,7 +16,7 @@ typedef SurahPlaybackTick = void Function({
   Duration? duration,
 });
 
-typedef SurahPlaybackError = void Function(String message);
+typedef SurahPlaybackError = void Function(Object error);
 
 typedef SurahPlaybackStopped = void Function();
 
@@ -51,6 +52,9 @@ class QuranSurahPlaybackService {
   bool _playlistSeeded = false;
   bool _handlingTrackCompletion = false;
   bool _kickstartInFlight = false;
+  int _reciterGeneration = 0;
+  bool _pendingReciterSwitch = false;
+  Future<void> _reciterSwitchChain = Future<void>.value();
   Future<void>? _playlistExtensionTask;
 
   static const int _resolveMaxAttempts = 6;
@@ -306,10 +310,9 @@ class QuranSurahPlaybackService {
   bool _hasFinishedCurrentTrackNaturally() {
     if (_audioPlayer.isPlaying) return false;
 
-    // just_audio often reports [ProcessingState.completed] with position reset
-    // to zero; for a one-ayah (double-tap) session that still means finished.
-    if (_isSingleAyahPlayback &&
-        _audioPlayer.processingState == ProcessingState.completed) {
+    // When just_audio marks the queue item as completed, we consider it a
+    // natural finish even if the position has already reset to zero.
+    if (_audioPlayer.processingState == ProcessingState.completed) {
       return true;
     }
 
@@ -417,6 +420,23 @@ class QuranSurahPlaybackService {
     throw lastError ?? StateError('Failed to resolve ayah audio');
   }
 
+  Future<bool> _appendResolvedAyah({
+    required int generation,
+    required int surahNumber,
+    required int ayahNumber,
+  }) async {
+    final path = await _resolveAyahAudioSourceWithRetry(
+      surahNumber: surahNumber,
+      ayahNumber: ayahNumber,
+    );
+    if (!_isActive || generation != _reciterGeneration) {
+      return false;
+    }
+
+    await _audioPlayer.appendToPlaylist(path);
+    return true;
+  }
+
   Future<bool> _tryAppendOneNextAyah() async {
     await _waitForPlaylistExtension();
 
@@ -428,14 +448,15 @@ class QuranSurahPlaybackService {
     if (_nextAyahToAppend > end) return false;
 
     final ayah = _nextAyahToAppend;
+    final generation = _reciterGeneration;
     try {
-      final path = await _resolveAyahAudioSourceWithRetry(
+      final appended = await _appendResolvedAyah(
+        generation: generation,
         surahNumber: surah,
         ayahNumber: ayah,
       );
-      if (!_isActive) return false;
+      if (!appended) return false;
 
-      await _audioPlayer.appendToPlaylist(path);
       _nextAyahToAppend++;
       return true;
     } catch (_) {
@@ -537,7 +558,7 @@ class QuranSurahPlaybackService {
     if (!_isActive) return;
 
     onError(
-      'The next ayah is still downloading. Check your connection and tap play.',
+      QuranAudioPlaybackErrors.nextAyahDownloading,
     );
     _emitPlaybackTick(
       onTick,
@@ -610,6 +631,10 @@ class QuranSurahPlaybackService {
       await _runPlaylistExtension(onError: onError);
       if (sessionId != _playbackSessionId || !_isActive) return;
 
+      if (_pendingReciterSwitch) {
+        await switchReciter(onError: onError);
+      }
+
       await _kickstartPlaybackIfStalled();
       _emitPlaybackTick(
         onTick,
@@ -620,7 +645,7 @@ class QuranSurahPlaybackService {
       );
     } catch (error) {
       if (!_isActive || sessionId != _playbackSessionId) return;
-      onError(error.toString());
+      onError(QuranAudioPlaybackErrors.keyFor(error));
       await stop(notify: true);
     }
   }
@@ -649,15 +674,16 @@ class QuranSurahPlaybackService {
     if (!_isActive || surah == null || end == null) return;
     if (_nextAyahToAppend > end) return;
 
-    while (_nextAyahToAppend <= end && _isActive) {
+    final generation = _reciterGeneration;
+    while (_nextAyahToAppend <= end && _isActive && generation == _reciterGeneration) {
       try {
-        final path = await _resolveAyahAudioSourceWithRetry(
+        final appended = await _appendResolvedAyah(
+          generation: generation,
           surahNumber: surah,
           ayahNumber: _nextAyahToAppend,
         );
-        if (!_isActive) return;
+        if (!appended) break;
 
-        await _audioPlayer.appendToPlaylist(path);
         _nextAyahToAppend++;
       } catch (_) {
         // Stop batch append; [_advanceToNextAyah] retries the next ayah.
@@ -683,6 +709,51 @@ class QuranSurahPlaybackService {
     if (!_isActive) return;
     _isPaused = true;
     await _audioPlayer.pause();
+  }
+
+  /// Keeps the current ayah playing, but reloads the queue from the next ayah
+  /// using the newly selected reciter.
+  Future<bool> switchReciter({
+    required SurahPlaybackError onError,
+  }) {
+    final switchTask = _reciterSwitchChain.then(
+      (_) => _switchReciterImpl(onError: onError),
+    );
+    _reciterSwitchChain =
+        switchTask.catchError((_) => false).then((_) {});
+    return switchTask;
+  }
+
+  Future<bool> _switchReciterImpl({
+    required SurahPlaybackError onError,
+  }) async {
+    if (!_isActive || _isSingleAyahPlayback) return false;
+
+    if (!_playlistSeeded) {
+      _pendingReciterSwitch = true;
+      return true;
+    }
+
+    final surah = _surahNumber;
+    final current = _currentAyah;
+    final end = _endAyah;
+    if (surah == null || current == null || end == null || current >= end) {
+      return false;
+    }
+
+    _pendingReciterSwitch = false;
+    await _waitForPlaylistExtension();
+
+    _reciterGeneration++;
+    _prefetchCancelToken?.cancel();
+    _prefetchCancelToken = null;
+
+    await _audioPlayer.truncatePlaylistAfterCurrent();
+
+    _nextAyahToAppend = current + 1;
+    _startPrefetch(surahNumber: surah, fromAyah: current + 1);
+    await _runPlaylistExtension(onError: onError);
+    return true;
   }
 
   /// Moves to the next ayah in the active playlist, extending it when needed.
@@ -795,6 +866,8 @@ class QuranSurahPlaybackService {
     _playlistSeeded = false;
     _handlingTrackCompletion = false;
     _playlistExtensionTask = null;
+    _pendingReciterSwitch = false;
+    _reciterSwitchChain = Future<void>.value();
     _prefetchCancelToken?.cancel();
     _prefetchCancelToken = null;
     _surahNumber = null;

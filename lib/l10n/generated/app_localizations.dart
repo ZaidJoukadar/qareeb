@@ -292,6 +292,12 @@ abstract class AppLocalizations {
   /// **'Go to flagged ayah'**
   String get goToFlaggedAyah;
 
+  /// Tooltip for the button that clears the flagged ayah.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove the flag'**
+  String get removeFlag;
+
   /// Ayah number label in the insight dialog title.
   ///
   /// In en, this message translates to:
@@ -303,6 +309,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Meaning'**
   String get ayahInsightMeaning;
+
+  /// Tab label for per-word meanings in the ayah insight dialog.
+  ///
+  /// In en, this message translates to:
+  /// **'Word by word'**
+  String get ayahInsightWordByWord;
+
+  /// Error when word-by-word meanings fail to load.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load word meanings'**
+  String get ayahInsightWordsError;
+
+  /// Column header for word transliteration in word-by-word view.
+  ///
+  /// In en, this message translates to:
+  /// **'Transliteration'**
+  String get ayahInsightWordTransliteration;
 
   /// Error when ayah insight fails to load.
   ///
@@ -405,6 +429,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Dismiss'**
   String get dismiss;
+
+  /// Shown when ayah audio files are missing for the selected reciter.
+  ///
+  /// In en, this message translates to:
+  /// **'Audio for this reciter is not available. Choose another reciter.'**
+  String get quranAudioUnavailable;
+
+  /// Shown when ayah audio fails due to connectivity.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not download ayah audio. Check your connection and try again.'**
+  String get quranAudioNetworkError;
+
+  /// Generic ayah audio playback failure.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not play ayah audio. Try again or choose another reciter.'**
+  String get quranAudioLoadError;
+
+  /// Shown when playback cannot advance because the next ayah is not ready yet.
+  ///
+  /// In en, this message translates to:
+  /// **'The next ayah is still downloading. Check your connection and tap play.'**
+  String get quranAudioNextAyahDownloading;
 
   /// Drawer menu item for prayer times and adhan.
   ///
@@ -1162,11 +1210,17 @@ abstract class AppLocalizations {
   /// **'Text size'**
   String get settingsFontSizeSection;
 
-  /// Slider label for app and Quran reader text size.
+  /// Slider label for general app text size.
   ///
   /// In en, this message translates to:
-  /// **'Font size'**
-  String get settingsFontSize;
+  /// **'App font size'**
+  String get settingsAppFontSize;
+
+  /// Slider label for Mushaf and Quran reader text size.
+  ///
+  /// In en, this message translates to:
+  /// **'Quran reader font size'**
+  String get settingsQuranReaderFontSize;
 
   /// Current font size percentage shown next to a slider.
   ///
@@ -1240,52 +1294,52 @@ abstract class AppLocalizations {
   /// **'Storage'**
   String get settingsStorageSection;
 
-  /// Settings row that deletes downloaded Quran audio files.
+  /// Settings row that deletes downloaded Quran cache files.
   ///
   /// In en, this message translates to:
-  /// **'Clear audio cache'**
+  /// **'Clear cache'**
   String get settingsClearCache;
 
-  /// Subtitle for the clear audio cache settings row.
+  /// Subtitle for the clear cache settings row.
   ///
   /// In en, this message translates to:
-  /// **'Remove downloaded recitation audio. Files will download again when you play them.'**
+  /// **'Remove downloaded audio, ayah meanings, and word meanings. They will load again when needed.'**
   String get settingsClearCacheDescription;
 
-  /// Title on the confirmation dialog before clearing audio cache.
+  /// Title on the confirmation dialog before clearing cache.
   ///
   /// In en, this message translates to:
-  /// **'Clear audio cache?'**
+  /// **'Clear cache?'**
   String get settingsClearCacheConfirmTitle;
 
-  /// Body text on the confirmation dialog before clearing audio cache.
+  /// Body text on the confirmation dialog before clearing cache.
   ///
   /// In en, this message translates to:
-  /// **'Downloaded recitation audio will be removed from this device.'**
+  /// **'Downloaded audio, ayah meanings, and word meanings will be removed from this device.'**
   String get settingsClearCacheConfirmMessage;
 
-  /// Confirm button on the clear audio cache dialog.
+  /// Confirm button on the clear cache dialog.
   ///
   /// In en, this message translates to:
   /// **'Clear'**
   String get settingsClearCacheConfirmAction;
 
-  /// Cancel button on the clear audio cache dialog.
+  /// Cancel button on the clear cache dialog.
   ///
   /// In en, this message translates to:
   /// **'Cancel'**
   String get settingsClearCacheCancel;
 
-  /// Snackbar after audio cache is cleared successfully.
+  /// Snackbar after cache is cleared successfully.
   ///
   /// In en, this message translates to:
-  /// **'Audio cache cleared.'**
+  /// **'Cache cleared.'**
   String get settingsClearCacheSuccess;
 
-  /// Snackbar when clearing audio cache fails.
+  /// Snackbar when clearing cache fails.
   ///
   /// In en, this message translates to:
-  /// **'Could not clear audio cache. Please try again.'**
+  /// **'Could not clear cache. Please try again.'**
   String get settingsClearCacheError;
 }
 

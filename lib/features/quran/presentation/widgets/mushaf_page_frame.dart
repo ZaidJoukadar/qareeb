@@ -4,9 +4,10 @@ import 'package:qareeb/features/quran/presentation/theme/quran_reader_theme.dart
 
 /// Traditional mushaf-style double border with corner ornaments around page content.
 class MushafPageFrame extends StatelessWidget {
-  const MushafPageFrame({required this.child, super.key});
+  const MushafPageFrame({required this.child, this.topTrailing, super.key});
 
   final Widget child;
+  final Widget? topTrailing;
 
   @override
   Widget build(BuildContext context) {
@@ -91,6 +92,12 @@ class MushafPageFrame extends StatelessWidget {
                   ),
                 ),
               ),
+              if (topTrailing != null)
+                PositionedDirectional(
+                  top: innerGap + Responsive.spacing(context, 2),
+                  end: innerGap + Responsive.spacing(context, 2),
+                  child: topTrailing!,
+                ),
               Padding(
                 padding: EdgeInsets.fromLTRB(
                   innerGap + contentInset,

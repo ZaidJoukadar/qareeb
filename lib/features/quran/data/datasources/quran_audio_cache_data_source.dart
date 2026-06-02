@@ -227,6 +227,7 @@ class QuranAudioCacheDataSourceImpl implements QuranAudioCacheDataSource {
             );
           } on DioException catch (error) {
             if (CancelToken.isCancel(error)) return;
+            if (error.response?.statusCode == 404) return;
             rethrow;
           }
         }),

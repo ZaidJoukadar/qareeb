@@ -16,6 +16,20 @@ abstract final class Responsive {
   static double shortestSideOf(BuildContext context) =>
       MediaQuery.sizeOf(context).shortestSide;
 
+  static bool isLandscape(BuildContext context) =>
+      MediaQuery.orientationOf(context) == Orientation.landscape;
+
+  /// True when vertical space is tight (landscape phones, split screen, etc.).
+  static bool useCompactDrawer(BuildContext context) =>
+      isLandscape(context) || heightOf(context) < 500;
+
+  static double drawerWidth(BuildContext context) {
+    if (isLandscape(context)) {
+      return (widthOf(context) * 0.36).clamp(260.0, 300.0);
+    }
+    return 304.0;
+  }
+
   /// Continuous scale factor derived from [shortestSideOf].
   static double scaleOf(BuildContext context) {
     return (shortestSideOf(context) / designShortestSide).clamp(
