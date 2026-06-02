@@ -1,0 +1,9 @@
+{
+  "tr": [
+    "nearbyMosquesRouteTo",
+    "nearbyMosquesRouteHint",
+    "nearbyMosquesRouteFallbackHint",
+    "nearbyMosquesRouteDurationUnknown",
+    "nearbyMosquesRouteDurationMinutes"
+  ]
+}

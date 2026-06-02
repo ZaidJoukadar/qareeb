@@ -1,0 +1,981 @@
+{
+  "@@locale": "en",
+  "appTitle": "Qareeb",
+  "@appTitle": {
+    "description": "Application name shown in the app bar and system UI."
+  },
+  "homeTitle": "Qareeb Home",
+  "@homeTitle": {
+    "description": "Title on the home placeholder screen body."
+  },
+  "skip": "Skip",
+  "@skip": {
+    "description": "Onboarding skip action."
+  },
+  "next": "Next",
+  "@next": {
+    "description": "Onboarding next page action."
+  },
+  "getStarted": "Get Started",
+  "@getStarted": {
+    "description": "Onboarding final action to enter the app."
+  },
+  "onboardingSlide1Title": "Begin Your Journey with the Quran",
+  "@onboardingSlide1Title": {
+    "description": "Onboarding slide 1 title — commit to reading."
+  },
+  "onboardingSlide1Description": "Set your intention and build a daily habit of reading — one step at a time, closer to Allah.",
+  "@onboardingSlide1Description": {
+    "description": "Onboarding slide 1 description."
+  },
+  "onboardingSlide2Title": "Understand Every Verse",
+  "@onboardingSlide2Title": {
+    "description": "Onboarding slide 2 title — understand meanings."
+  },
+  "onboardingSlide2Description": "Explore clear meanings and tafsir so every ayah speaks to your heart and mind.",
+  "@onboardingSlide2Description": {
+    "description": "Onboarding slide 2 description."
+  },
+  "onboardingSlide3Title": "Stay Committed, Stay Close",
+  "@onboardingSlide3Title": {
+    "description": "Onboarding slide 3 title — persevere on the path."
+  },
+  "onboardingSlide3Description": "Reminders, progress, and gentle encouragement — we help you persevere on the path.",
+  "@onboardingSlide3Description": {
+    "description": "Onboarding slide 3 description."
+  },
+  "languageEnglish": "English",
+  "@languageEnglish": {
+    "description": "English language label in settings."
+  },
+  "languageArabic": "Arabic",
+  "@languageArabic": {
+    "description": "Arabic language label in settings."
+  },
+  "languageTurkish": "Turkish",
+  "@languageTurkish": {
+    "description": "Turkish language label in settings."
+  },
+  "quranSyncTitle": "Preparing the Quran",
+  "@quranSyncTitle": {
+    "description": "Title on the Quran download/sync screen."
+  },
+  "quranSyncDescription": "Downloading surahs and ayahs for offline reading. This may take a few minutes.",
+  "@quranSyncDescription": {
+    "description": "Description on the Quran sync screen."
+  },
+  "quranSyncProgressPercent": "{percent}%",
+  "@quranSyncProgressPercent": {
+    "description": "Sync progress shown as a percentage.",
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "quranSyncRetry": "Retry",
+  "@quranSyncRetry": {
+    "description": "Retry button on sync failure."
+  },
+  "quranSyncConnectionErrorTitle": "Check your connection",
+  "@quranSyncConnectionErrorTitle": {
+    "description": "Title on the Quran sync connectivity error dialog."
+  },
+  "quranSyncConnectionErrorMessage": "Couldn’t download the Quran. Please check your internet connection and try again.",
+  "@quranSyncConnectionErrorMessage": {
+    "description": "Message on the Quran sync connectivity error dialog."
+  },
+  "surahListError": "Could not load surahs",
+  "@surahListError": {
+    "description": "Error when surah list fails to load."
+  },
+  "surahListTitle": "Surahs",
+  "@surahListTitle": {
+    "description": "Title on the surah list screen."
+  },
+  "surahListSearchHint": "Search surahs by name or number…",
+  "@surahListSearchHint": {
+    "description": "Hint on the surah list search field."
+  },
+  "surahListSearchTooltip": "Search surahs",
+  "@surahListSearchTooltip": {
+    "description": "Tooltip for the surah list search action."
+  },
+  "surahListNoResults": "No surahs match your search.",
+  "@surahListNoResults": {
+    "description": "Empty state when surah search has no matches."
+  },
+  "surahRevelationMakki": "Makki",
+  "@surahRevelationMakki": {
+    "description": "Label for surahs revealed in Mecca."
+  },
+  "surahRevelationMadani": "Madani",
+  "@surahRevelationMadani": {
+    "description": "Label for surahs revealed in Medina."
+  },
+  "readProgressLabel": "{read}/{total} read",
+  "@readProgressLabel": {
+    "description": "Read ayah progress for a surah.",
+    "placeholders": {
+      "read": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "markSurahAsRead": "Mark surah as read",
+  "@markSurahAsRead": {
+    "description": "Marks every ayah in the current surah as read."
+  },
+  "readAyahHint": "Long press an ayah to mark it as read. Double-tap an ayah to play audio.",
+  "@readAyahHint": {
+    "description": "Hint shown above the mushaf reader."
+  },
+  "mushafPageNumber": "Page {page}",
+  "@mushafPageNumber": {
+    "description": "Current mushaf page number in the book reader.",
+    "placeholders": {
+      "page": {
+        "type": "int"
+      }
+    }
+  },
+  "goToFlaggedAyah": "Go to flagged ayah",
+  "@goToFlaggedAyah": {
+    "description": "Tooltip for the FAB that jumps to the last flagged ayah."
+  },
+  "removeFlag": "Remove the flag",
+  "@removeFlag": {
+    "description": "Tooltip for the button that clears the flagged ayah."
+  },
+  "ayahInsightAyahLabel": "Ayah {number}",
+  "@ayahInsightAyahLabel": {
+    "description": "Ayah number label in the insight dialog title.",
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "ayahInsightMeaning": "Meaning",
+  "@ayahInsightMeaning": {
+    "description": "Section title for the overall ayah meaning in the insight dialog."
+  },
+  "ayahInsightWordByWord": "Word by word",
+  "@ayahInsightWordByWord": {
+    "description": "Tab label for per-word meanings in the ayah insight dialog."
+  },
+  "ayahInsightWordsError": "Could not load word meanings",
+  "@ayahInsightWordsError": {
+    "description": "Error when word-by-word meanings fail to load."
+  },
+  "ayahInsightWordTransliteration": "Transliteration",
+  "@ayahInsightWordTransliteration": {
+    "description": "Column header for word transliteration in word-by-word view."
+  },
+  "ayahInsightError": "Could not load ayah meaning",
+  "@ayahInsightError": {
+    "description": "Error when ayah insight fails to load."
+  },
+  "ayahInsightPlayAudio": "Play ayah audio",
+  "@ayahInsightPlayAudio": {
+    "description": "Tooltip for the play button in the ayah insight dialog."
+  },
+  "ayahInsightStory": "Story",
+  "@ayahInsightStory": {
+    "description": "Button label to open the ayah story bottom sheet."
+  },
+  "ayahInsightStoryLoading": "Loading story ...",
+  "@ayahInsightStoryLoading": {
+    "description": "Loading message while AI generates the ayah story."
+  },
+  "ayahInsightStoryAiHint": "Explanation covering the reason for revelation, how it was revealed, and the miracle in the verse.",
+  "@ayahInsightStoryAiHint": {
+    "description": "Hint shown above the AI-generated ayah story."
+  },
+  "ayahInsightStoryRevelationReason": "Reason for revelation",
+  "@ayahInsightStoryRevelationReason": {
+    "description": "Section title for why the ayah was revealed."
+  },
+  "ayahInsightStoryHowRevealed": "How it was revealed to the Prophet",
+  "@ayahInsightStoryHowRevealed": {
+    "description": "Section title for the manner of revelation to the Prophet."
+  },
+  "ayahInsightStoryMiracle": "Miracle in the verse",
+  "@ayahInsightStoryMiracle": {
+    "description": "Section title for the miracle or sign in the ayah."
+  },
+  "ayahInsightStoryError": "Could not load the ayah story",
+  "@ayahInsightStoryError": {
+    "description": "Error when ayah story fails to load."
+  },
+  "ayahCountLabel": "ayahs",
+  "@ayahCountLabel": {
+    "description": "Label for ayah count on surah list."
+  },
+  "playSurah": "Play surah",
+  "@playSurah": {
+    "description": "Play audio for the surah from the current page."
+  },
+  "pauseAudio": "Pause",
+  "@pauseAudio": {
+    "description": "Pause surah audio playback."
+  },
+  "stopAudio": "Stop",
+  "@stopAudio": {
+    "description": "Stop surah audio playback."
+  },
+  "audioAyahProgress": "Ayah {current} of {total}",
+  "@audioAyahProgress": {
+    "description": "Current ayah progress in the audio player bar.",
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "previousAyah": "Previous ayah",
+  "@previousAyah": {
+    "description": "Skip to the previous ayah in the audio player."
+  },
+  "nextAyah": "Next ayah",
+  "@nextAyah": {
+    "description": "Skip to the next ayah in the audio player."
+  },
+  "dismiss": "Dismiss",
+  "@dismiss": {
+    "description": "Dismiss audio error banner."
+  },
+  "quranAudioUnavailable": "Audio for this reciter is not available. Choose another reciter.",
+  "@quranAudioUnavailable": {
+    "description": "Shown when ayah audio files are missing for the selected reciter."
+  },
+  "quranAudioNetworkError": "Could not download ayah audio. Check your connection and try again.",
+  "@quranAudioNetworkError": {
+    "description": "Shown when ayah audio fails due to connectivity."
+  },
+  "quranAudioLoadError": "Could not play ayah audio. Try again or choose another reciter.",
+  "@quranAudioLoadError": {
+    "description": "Generic ayah audio playback failure."
+  },
+  "quranAudioNextAyahDownloading": "The next ayah is still downloading. Check your connection and tap play.",
+  "@quranAudioNextAyahDownloading": {
+    "description": "Shown when playback cannot advance because the next ayah is not ready yet."
+  },
+  "drawerAdhan": "Adhan",
+  "@drawerAdhan": {
+    "description": "Drawer menu item for prayer times and adhan."
+  },
+  "drawerSurahs": "Surahs",
+  "@drawerSurahs": {
+    "description": "Drawer menu item for the surah list."
+  },
+  "drawerJuz": "Juz",
+  "@drawerJuz": {
+    "description": "Drawer menu item for the juz list."
+  },
+  "juzListTitle": "Juz",
+  "@juzListTitle": {
+    "description": "Title on the juz list screen."
+  },
+  "juzSurahCountLabel": "{count} surahs",
+  "@juzSurahCountLabel": {
+    "description": "Subtitle on the juz list showing how many surahs are in the juz.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "drawerSettings": "Settings",
+  "@drawerSettings": {
+    "description": "Drawer menu item for app settings."
+  },
+  "drawerQibla": "Qibla",
+  "@drawerQibla": {
+    "description": "Drawer menu item for the Qibla compass."
+  },
+  "drawerNearbyMosques": "Nearby Mosques",
+  "@drawerNearbyMosques": {
+    "description": "Drawer menu item that opens nearby mosques in maps."
+  },
+  "drawerNearbyMosquesLaunchError": "Could not open maps.",
+  "@drawerNearbyMosquesLaunchError": {
+    "description": "Shown when opening nearby mosques in maps fails."
+  },
+  "nearbyMosquesTitle": "Nearby Mosques",
+  "@nearbyMosquesTitle": {
+    "description": "Title of the in-app nearby mosques map and list screen."
+  },
+  "nearbyMosquesLoading": "Finding nearby mosques…",
+  "@nearbyMosquesLoading": {
+    "description": "Loading state while fetching nearby mosques."
+  },
+  "nearbyMosquesError": "Could not load nearby mosques.",
+  "@nearbyMosquesError": {
+    "description": "Error state when nearby mosques cannot be loaded."
+  },
+  "nearbyMosquesRetry": "Retry",
+  "@nearbyMosquesRetry": {
+    "description": "Retry button for nearby mosques loading."
+  },
+  "nearbyMosquesEmpty": "No nearby mosques found.",
+  "@nearbyMosquesEmpty": {
+    "description": "Empty state when no mosques are returned near the user."
+  },
+  "nearbyMosquesDistanceMeters": "{meters} m away",
+  "@nearbyMosquesDistanceMeters": {
+    "description": "Distance label in meters for a mosque.",
+    "placeholders": {
+      "meters": {
+        "type": "int"
+      }
+    }
+  },
+  "nearbyMosquesDistanceKm": "{kilometers} km away",
+  "@nearbyMosquesDistanceKm": {
+    "description": "Distance label in kilometers for a mosque.",
+    "placeholders": {
+      "kilometers": {
+        "type": "String"
+      }
+    }
+  },
+  "nearbyMosquesRouteTo": "Route to {mosque}",
+  "@nearbyMosquesRouteTo": {
+    "description": "Route summary title for selected mosque.",
+    "placeholders": {
+      "mosque": {
+        "type": "String"
+      }
+    }
+  },
+  "nearbyMosquesRouteHint": "Follow the blue route line on the map to reach the mosque.",
+  "@nearbyMosquesRouteHint": {
+    "description": "Hint instructing user to follow the route line."
+  },
+  "nearbyMosquesRouteFallbackHint": "Showing direct path. Turn-by-turn route is currently unavailable.",
+  "@nearbyMosquesRouteFallbackHint": {
+    "description": "Shown when route service is unavailable and app falls back to direct line."
+  },
+  "nearbyMosquesRouteDurationUnknown": "ETA unavailable",
+  "@nearbyMosquesRouteDurationUnknown": {
+    "description": "Shown when route duration cannot be calculated."
+  },
+  "nearbyMosquesRouteDurationMinutes": "{minutes} min",
+  "@nearbyMosquesRouteDurationMinutes": {
+    "description": "Estimated route duration in minutes.",
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "drawerAsmaUlHusna": "99 Names of Allah",
+  "@drawerAsmaUlHusna": {
+    "description": "Drawer menu item for Asma ul Husna."
+  },
+  "drawerSelectReciter": "Quran reciter",
+  "@drawerSelectReciter": {
+    "description": "Drawer menu item to choose audio recitation edition."
+  },
+  "drawerRecitersLoadError": "Could not load reciters. Check your connection and try again.",
+  "@drawerRecitersLoadError": {
+    "description": "Error when the audio reciter list fails to load."
+  },
+  "asmaUlHusnaTitle": "99 Names of Allah",
+  "@asmaUlHusnaTitle": {
+    "description": "Title on the Asma ul Husna screen."
+  },
+  "asmaUlHusnaSearchHint": "Search by name or meaning…",
+  "@asmaUlHusnaSearchHint": {
+    "description": "Placeholder for the Asma ul Husna search field."
+  },
+  "asmaUlHusnaError": "Could not load the names of Allah.",
+  "@asmaUlHusnaError": {
+    "description": "Error message when Asma ul Husna fails to load."
+  },
+  "asmaUlHusnaNoResults": "No names match your search.",
+  "@asmaUlHusnaNoResults": {
+    "description": "Empty state when search has no matches."
+  },
+  "asmaUlHusnaMeaningLabel": "Meaning",
+  "@asmaUlHusnaMeaningLabel": {
+    "description": "Label above the meaning text in the name detail sheet."
+  },
+  "asmaUlHusnaNameNumber": "Name {number} of 99",
+  "@asmaUlHusnaNameNumber": {
+    "description": "Label showing the position of a divine name.",
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "drawerDuaa": "Duaa",
+  "@drawerDuaa": {
+    "description": "Drawer menu item for supplications."
+  },
+  "drawerHadith": "Hadith",
+  "@drawerHadith": {
+    "description": "Drawer menu item for hadith collections."
+  },
+  "drawerTagline": "Your companion for Quran & worship",
+  "@drawerTagline": {
+    "description": "Short subtitle under the app name in the navigation drawer header."
+  },
+  "drawerSectionQuran": "Quran",
+  "@drawerSectionQuran": {
+    "description": "Section label in the drawer for Quran-related destinations."
+  },
+  "drawerSectionWorship": "Worship",
+  "@drawerSectionWorship": {
+    "description": "Section label in the drawer for prayer and Qibla."
+  },
+  "drawerSectionKnowledge": "Knowledge",
+  "@drawerSectionKnowledge": {
+    "description": "Section label in the drawer for duas, hadith, and names of Allah."
+  },
+  "hadithTitle": "Hadith",
+  "@hadithTitle": {
+    "description": "Title on the hadith collections screen."
+  },
+  "hadithSearchHint": "Search all collections…",
+  "@hadithSearchHint": {
+    "description": "Placeholder for global hadith search on collections screen."
+  },
+  "hadithSectionsTitle": "Sections",
+  "@hadithSectionsTitle": {
+    "description": "Header for themed hadith categories on the main hadith screen."
+  },
+  "hadithBooksTitle": "Books",
+  "@hadithBooksTitle": {
+    "description": "Header for hadith books (Bukhari, Muslim, etc.)."
+  },
+  "hadithFilterCategoryHint": "Filter in this section…",
+  "@hadithFilterCategoryHint": {
+    "description": "Placeholder for filtering loaded hadiths within a category."
+  },
+  "hadithSearchCollectionHint": "Search this collection…",
+  "@hadithSearchCollectionHint": {
+    "description": "Placeholder for hadith search within one collection."
+  },
+  "hadithError": "Could not load hadith. Check your connection and try again.",
+  "@hadithError": {
+    "description": "Error message when hadith fails to load."
+  },
+  "hadithNoResults": "No results match your search.",
+  "@hadithNoResults": {
+    "description": "Empty state when hadith search has no matches."
+  },
+  "hadithCountLabel": "{count, plural, =1{1 hadith} other{{count} hadiths}}",
+  "@hadithCountLabel": {
+    "description": "Subtitle showing how many hadiths are in a collection.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "hadithNumberLabel": "Hadith {number}",
+  "@hadithNumberLabel": {
+    "description": "Title for a hadith detail sheet showing its number.",
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "hadithSourceLabel": "Source",
+  "@hadithSourceLabel": {
+    "description": "Label above the hadith source reference."
+  },
+  "hadithSourceReference": "{collection}, {number}",
+  "@hadithSourceReference": {
+    "description": "Hadith book name and number in the detail sheet.",
+    "placeholders": {
+      "collection": {
+        "type": "String"
+      },
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "hadithOpenDetailHint": "Open hadith",
+  "@hadithOpenDetailHint": {
+    "description": "Accessibility hint for opening a hadith from the list."
+  },
+  "duaaTitle": "Duaa",
+  "@duaaTitle": {
+    "description": "Title on the Duaa categories screen."
+  },
+  "duaaSearchCategoriesHint": "Search categories…",
+  "@duaaSearchCategoriesHint": {
+    "description": "Placeholder for the Duaa category search field."
+  },
+  "duaaSearchDuasHint": "Search duas…",
+  "@duaaSearchDuasHint": {
+    "description": "Placeholder for the Duaa search field within a category."
+  },
+  "duaaError": "Could not load duas. Check your connection and try again.",
+  "@duaaError": {
+    "description": "Error message when Duaa fails to load."
+  },
+  "duaaNoResults": "No results match your search.",
+  "@duaaNoResults": {
+    "description": "Empty state when Duaa search has no matches."
+  },
+  "duaaCountLabel": "{count, plural, =1{1 dua} other{{count} duas}}",
+  "@duaaCountLabel": {
+    "description": "Subtitle showing how many duas are in a category.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "duaaSourceLabel": "Source",
+  "@duaaSourceLabel": {
+    "description": "Label above the hadith source in the dua detail sheet."
+  },
+  "duaaRepeatLabel": "Repeat {count} times",
+  "@duaaRepeatLabel": {
+    "description": "Label showing how many times to repeat a dua.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "qiblaTitle": "Qibla",
+  "@qiblaTitle": {
+    "description": "Title on the Qibla compass screen."
+  },
+  "qiblaDescription": "The direction of prayer is towards the Kaaba.",
+  "@qiblaDescription": {
+    "description": "Subtitle explaining the purpose of the Qibla screen."
+  },
+  "qiblaLoading": "Finding your direction…",
+  "@qiblaLoading": {
+    "description": "Loading message on the Qibla screen."
+  },
+  "qiblaError": "Could not determine the Qibla direction.",
+  "@qiblaError": {
+    "description": "Generic error on the Qibla screen."
+  },
+  "qiblaNoCompass": "Your device does not have a compass sensor.",
+  "@qiblaNoCompass": {
+    "description": "Error when the device lacks a magnetometer."
+  },
+  "qiblaCompassPluginUnavailable": "Live compass is not ready yet. Fully stop the app, then run it again from your IDE or terminal (hot reload is not enough after adding compass support).",
+  "@qiblaCompassPluginUnavailable": {
+    "description": "Error when the compass native plugin is not linked into the running app."
+  },
+  "qiblaStaticDirectionHint": "The arrow shows the Qibla direction from north. Use a phone with a compass for live guidance.",
+  "@qiblaStaticDirectionHint": {
+    "description": "Hint when only static Qibla bearing is shown."
+  },
+  "qiblaBearing": "{degrees}° from north",
+  "@qiblaBearing": {
+    "description": "Absolute Qibla bearing from true north.",
+    "placeholders": {
+      "degrees": {
+        "type": "String"
+      }
+    }
+  },
+  "qiblaAligned": "You are facing the Qiblah",
+  "@qiblaAligned": {
+    "description": "Shown when the device is aligned with the Qibla."
+  },
+  "qiblaOffset": "{degrees}° from Qiblah",
+  "@qiblaOffset": {
+    "description": "Degrees off from the Qibla direction.",
+    "placeholders": {
+      "degrees": {
+        "type": "String"
+      }
+    }
+  },
+  "qiblaDirection": "Direction: {direction}",
+  "@qiblaDirection": {
+    "description": "Cardinal direction towards the Kaaba.",
+    "placeholders": {
+      "direction": {
+        "type": "String"
+      }
+    }
+  },
+  "qiblaDistance": "{distance} km to Makkah",
+  "@qiblaDistance": {
+    "description": "Great-circle distance to Makkah.",
+    "placeholders": {
+      "distance": {
+        "type": "String"
+      }
+    }
+  },
+  "qiblaHint": "Hold your phone flat and rotate until the arrow points up.",
+  "@qiblaHint": {
+    "description": "Usage hint on the Qibla compass screen."
+  },
+  "compassNorth": "North",
+  "@compassNorth": { "description": "Compass direction north." },
+  "compassNortheast": "Northeast",
+  "@compassNortheast": { "description": "Compass direction northeast." },
+  "compassEast": "East",
+  "@compassEast": { "description": "Compass direction east." },
+  "compassSoutheast": "Southeast",
+  "@compassSoutheast": { "description": "Compass direction southeast." },
+  "compassSouth": "South",
+  "@compassSouth": { "description": "Compass direction south." },
+  "compassSouthwest": "Southwest",
+  "@compassSouthwest": { "description": "Compass direction southwest." },
+  "compassWest": "West",
+  "@compassWest": { "description": "Compass direction west." },
+  "compassNorthwest": "Northwest",
+  "@compassNorthwest": { "description": "Compass direction northwest." },
+  "adhanTitle": "Adhan",
+  "@adhanTitle": {
+    "description": "Title on the adhan screen."
+  },
+  "adhanLoading": "Loading prayer times…",
+  "@adhanLoading": {
+    "description": "Loading message on the adhan screen."
+  },
+  "adhanError": "Could not load prayer times.",
+  "@adhanError": {
+    "description": "Generic error on the adhan screen."
+  },
+  "adhanRetry": "Retry",
+  "@adhanRetry": {
+    "description": "Retry button on the adhan screen."
+  },
+  "adhanOpenSettings": "Open settings",
+  "@adhanOpenSettings": {
+    "description": "Opens app settings when location permission is denied."
+  },
+  "adhanLocationDenied": "Location permission is required to show prayer times for your city.",
+  "@adhanLocationDenied": {
+    "description": "Error when location permission is denied."
+  },
+  "adhanLocationUnavailable": "Location services are disabled. Enable them to show prayer times for your city.",
+  "@adhanLocationUnavailable": {
+    "description": "Error when device location services are off."
+  },
+  "adhanLocationPluginUnavailable": "Location is not ready yet. Fully stop the app, then run it again from your IDE or terminal (hot reload is not enough after adding location support).",
+  "@adhanLocationPluginUnavailable": {
+    "description": "Error when the geolocator native plugin is not linked into the running app."
+  },
+  "adhanLocationTimeout": "Could not detect your location in time. Move to an open area, enable GPS, or set a mock location on the emulator and try again.",
+  "@adhanLocationTimeout": {
+    "description": "Error when GPS location request times out."
+  },
+  "adhanToday": "Today",
+  "@adhanToday": {
+    "description": "Label for today's prayer times card."
+  },
+  "adhanChangeCity": "Change",
+  "@adhanChangeCity": {
+    "description": "Button to change the selected city on the adhan screen."
+  },
+  "adhanSearchCityTitle": "Search city",
+  "@adhanSearchCityTitle": {
+    "description": "Title for the city search sheet."
+  },
+  "adhanSearchCityHint": "City or city, country",
+  "@adhanSearchCityHint": {
+    "description": "Hint text in the city search field."
+  },
+  "adhanSearchCityEmpty": "No cities found. Try a different name.",
+  "@adhanSearchCityEmpty": {
+    "description": "Message when city search returns no results."
+  },
+  "adhanUseMyLocation": "Use my current location",
+  "@adhanUseMyLocation": {
+    "description": "Option to load prayer times from device GPS."
+  },
+  "prayerFajr": "Fajr",
+  "@prayerFajr": {
+    "description": "Fajr prayer name."
+  },
+  "prayerSunrise": "Sunrise",
+  "@prayerSunrise": {
+    "description": "Sunrise time label."
+  },
+  "prayerDhuhr": "Dhuhr",
+  "@prayerDhuhr": {
+    "description": "Dhuhr prayer name."
+  },
+  "prayerAsr": "Asr",
+  "@prayerAsr": {
+    "description": "Asr prayer name."
+  },
+  "prayerMaghrib": "Maghrib",
+  "@prayerMaghrib": {
+    "description": "Maghrib prayer name."
+  },
+  "prayerIsha": "Isha",
+  "@prayerIsha": {
+    "description": "Isha prayer name."
+  },
+  "adhanAlertSettingsTitle": "{prayer} reminder",
+  "@adhanAlertSettingsTitle": {
+    "description": "Title on the per-prayer alert settings sheet.",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "adhanAlertTimingSection": "When to notify",
+  "@adhanAlertTimingSection": {
+    "description": "Section label for alert timing options."
+  },
+  "adhanAlertOff": "Off",
+  "@adhanAlertOff": {
+    "description": "Option to disable prayer alerts."
+  },
+  "adhanAlertBefore": "Before",
+  "@adhanAlertBefore": {
+    "description": "Notify before the adhan time."
+  },
+  "adhanAlertAtAdhan": "At adhan",
+  "@adhanAlertAtAdhan": {
+    "description": "Notify exactly at adhan time."
+  },
+  "adhanAlertAfter": "After",
+  "@adhanAlertAfter": {
+    "description": "Notify after the adhan time."
+  },
+  "adhanAlertMinutesSection": "How long",
+  "@adhanAlertMinutesSection": {
+    "description": "Section label for alert offset duration."
+  },
+  "adhanAlertMinutesLabel": "{minutes} min",
+  "@adhanAlertMinutesLabel": {
+    "description": "Minute option chip for prayer alert offset.",
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "adhanAlertMaxBeforeHint": "Up to {minutes} min before {prayer} (not before the previous prayer)",
+  "@adhanAlertMaxBeforeHint": {
+    "description": "Explains the maximum allowed before offset for a prayer.",
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      },
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "adhanAlertMaxAfterHint": "Up to {minutes} min after {prayer} (not after the next prayer)",
+  "@adhanAlertMaxAfterHint": {
+    "description": "Explains the maximum allowed after offset for a prayer.",
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      },
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "adhanAlertDeliverySection": "Alert style",
+  "@adhanAlertDeliverySection": {
+    "description": "Section label for sound vs vibrate."
+  },
+  "adhanAlertSound": "Sound",
+  "@adhanAlertSound": {
+    "description": "Play sound for prayer alert."
+  },
+  "adhanAlertVibrate": "Vibrate",
+  "@adhanAlertVibrate": {
+    "description": "Vibrate for prayer alert."
+  },
+  "adhanAlertSave": "Save",
+  "@adhanAlertSave": {
+    "description": "Save prayer alert settings."
+  },
+  "adhanNotificationTitle": "{prayer}",
+  "@adhanNotificationTitle": {
+    "description": "Notification title for a prayer alert.",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "adhanNotificationBodyBefore": "{minutes} minutes until {prayer}",
+  "@adhanNotificationBodyBefore": {
+    "description": "Notification body when alerting before adhan.",
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      },
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "adhanNotificationBodyAt": "It is time for {prayer}",
+  "@adhanNotificationBodyAt": {
+    "description": "Notification body when alerting at adhan time.",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "adhanNotificationBodyAfter": "{minutes} minutes since {prayer}",
+  "@adhanNotificationBodyAfter": {
+    "description": "Notification body when alerting after adhan.",
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      },
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "adhanNotificationPermissionDenied": "Notification permission is required for prayer reminders.",
+  "@adhanNotificationPermissionDenied": {
+    "description": "Snackbar when notification permission is denied."
+  },
+  "settingsTitle": "Settings",
+  "@settingsTitle": {
+    "description": "Title on the settings screen."
+  },
+  "settingsLanguageSection": "Language",
+  "@settingsLanguageSection": {
+    "description": "Section header for language selection in settings."
+  },
+  "settingsThemeSection": "Appearance",
+  "@settingsThemeSection": {
+    "description": "Section header for theme selection in settings."
+  },
+  "settingsThemeLight": "Light",
+  "@settingsThemeLight": {
+    "description": "Light theme option in settings."
+  },
+  "settingsThemeDark": "Dark",
+  "@settingsThemeDark": {
+    "description": "Dark theme option in settings."
+  },
+  "settingsDarkMode": "Dark mode",
+  "@settingsDarkMode": {
+    "description": "Toggle label for enabling dark theme."
+  },
+  "settingsSelectLanguage": "Select language",
+  "@settingsSelectLanguage": {
+    "description": "Title on the language picker bottom sheet."
+  },
+  "settingsFontSizeSection": "Text size",
+  "@settingsFontSizeSection": {
+    "description": "Section header for font size settings."
+  },
+  "settingsAppFontSize": "App font size",
+  "@settingsAppFontSize": {
+    "description": "Slider label for general app text size."
+  },
+  "settingsQuranReaderFontSize": "Quran reader font size",
+  "@settingsQuranReaderFontSize": {
+    "description": "Slider label for Mushaf and Quran reader text size."
+  },
+  "settingsFontSizeValue": "{percent}%",
+  "@settingsFontSizeValue": {
+    "description": "Current font size percentage shown next to a slider.",
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "settingsNotificationsSection": "Notifications",
+  "@settingsNotificationsSection": {
+    "description": "Section header for notification settings."
+  },
+  "settingsNotificationsEnabled": "Enable notifications",
+  "@settingsNotificationsEnabled": {
+    "description": "Toggle label to enable push notifications."
+  },
+  "settingsContactSection": "Support",
+  "@settingsContactSection": {
+    "description": "Section header for support options."
+  },
+  "settingsReportBug": "Report a bug",
+  "@settingsReportBug": {
+    "description": "Opens in-app feedback UI that uploads to Sentry."
+  },
+  "settingsReportBugDescription": "Describe the issue and mark the screen. Your report is sent to our team.",
+  "@settingsReportBugDescription": {
+    "description": "Subtitle for the report-a-bug settings row."
+  },
+  "settingsReportBugSuccess": "Thank you — your report was sent.",
+  "@settingsReportBugSuccess": {
+    "description": "Snackbar after bug report is uploaded to Sentry."
+  },
+  "settingsReportBugError": "Could not send your report. Please try again.",
+  "@settingsReportBugError": {
+    "description": "Snackbar when Sentry feedback upload fails."
+  },
+  "settingsReportBugEmptyMessage": "Please describe the issue before submitting.",
+  "@settingsReportBugEmptyMessage": {
+    "description": "Snackbar when user submits feedback without a message."
+  },
+  "settingsContactUs": "Contact us",
+  "@settingsContactUs": {
+    "description": "Opens the support contact page."
+  },
+  "settingsContactUsError": "Could not open contact page",
+  "@settingsContactUsError": {
+    "description": "Snackbar when the contact URL fails to open."
+  },
+  "settingsStorageSection": "Storage",
+  "@settingsStorageSection": {
+    "description": "Section header for storage and cache settings."
+  },
+  "settingsClearCache": "Clear cache",
+  "@settingsClearCache": {
+    "description": "Settings row that deletes downloaded Quran cache files."
+  },
+  "settingsClearCacheDescription": "Remove downloaded audio, ayah meanings, and word meanings. They will load again when needed.",
+  "@settingsClearCacheDescription": {
+    "description": "Subtitle for the clear cache settings row."
+  },
+  "settingsClearCacheConfirmTitle": "Clear cache?",
+  "@settingsClearCacheConfirmTitle": {
+    "description": "Title on the confirmation dialog before clearing cache."
+  },
+  "settingsClearCacheConfirmMessage": "Downloaded audio, ayah meanings, and word meanings will be removed from this device.",
+  "@settingsClearCacheConfirmMessage": {
+    "description": "Body text on the confirmation dialog before clearing cache."
+  },
+  "settingsClearCacheConfirmAction": "Clear",
+  "@settingsClearCacheConfirmAction": {
+    "description": "Confirm button on the clear cache dialog."
+  },
+  "settingsClearCacheCancel": "Cancel",
+  "@settingsClearCacheCancel": {
+    "description": "Cancel button on the clear cache dialog."
+  },
+  "settingsClearCacheSuccess": "Cache cleared.",
+  "@settingsClearCacheSuccess": {
+    "description": "Snackbar after cache is cleared successfully."
+  },
+  "settingsClearCacheError": "Could not clear cache. Please try again.",
+  "@settingsClearCacheError": {
+    "description": "Snackbar when clearing cache fails."
+  }
+}

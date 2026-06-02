@@ -1,30 +1,45 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
 
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mocktail/mocktail.dart';
+import 'package:qareeb/features/quran/domain/usecases/get_sync_progress.dart';
+import 'package:qareeb/features/quran/domain/usecases/sync_quran_to_local.dart';
+import 'package:qareeb/features/quran/presentation/cubit/quran_sync_cubit.dart';
+import 'package:qareeb/features/quran/presentation/cubit/quran_sync_state.dart';
+import 'package:qareeb/features/quran/presentation/pages/quran_sync_page.dart';
+import 'helpers/app_test_helper.dart';
 
-import 'package:qareeb/main.dart';
+class _MockSyncQuranToLocal extends Mock implements SyncQuranToLocal {}
+
+class _MockGetSyncProgress extends Mock implements GetSyncProgress {}
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  testWidgets('Quran sync page shows progress in English',
+      (WidgetTester tester) async {
+    final syncQuran = _MockSyncQuranToLocal();
+    final getProgress = _MockGetSyncProgress();
+    when(() => getProgress()).thenAnswer((_) async => 12);
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    final cubit = QuranSyncCubit(
+      syncQuranToLocal: syncQuran,
+      getSyncProgress: getProgress,
+      languageCode: 'en',
+    )..emit(
+      const QuranSyncState(
+        status: QuranSyncUiStatus.syncing,
+        completedSurahs: 12,
+      ),
+    );
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
+    await tester.pumpWidget(
+      buildTestApp(
+        child: QuranSyncPage(cubit: cubit),
+      ),
+    );
     await tester.pump();
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    expect(find.text('Preparing the Quran'), findsOneWidget);
+    expect(find.text('11%'), findsOneWidget);
+
+    await cubit.close();
   });
 }

@@ -1,0 +1,406 @@
+{
+  "@@locale": "ar",
+  "appTitle": "قريب",
+  "homeTitle": "الرئيسية",
+  "skip": "تخطي",
+  "next": "التالي",
+  "getStarted": "ابدأ",
+  "onboardingSlide1Title": "ابدأ رحلتك مع القرآن",
+  "onboardingSlide1Description": "اضبط نيتك وابنِ عادة يومية للقراءة خطوة بخطوة، أقرب إلى الله.",
+  "onboardingSlide2Title": "افهم كل آية",
+  "onboardingSlide2Description": "استكشف المعاني والتفسير بوضوح حتى تتكلم كل آية إلى قلبك وعقلك.",
+  "onboardingSlide3Title": "اثبت وابقَ قريبًا",
+  "onboardingSlide3Description": "تذكيرات وتقدم وتشجيع لطيف — نساعدك على الثبات في الطريق.",
+  "languageEnglish": "الإنجليزية",
+  "languageArabic": "العربية",
+  "languageTurkish": "التركية",
+  "quranSyncTitle": "جاري تنزيل القرآن",
+  "quranSyncDescription": "يتم تنزيل السور والآيات للقراءة دون اتصال. قد يستغرق ذلك بضع دقائق.",
+  "quranSyncProgressPercent": "{percent}٪",
+  "@quranSyncProgressPercent": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "quranSyncRetry": "إعادة المحاولة",
+  "quranSyncConnectionErrorTitle": "تحقق من الاتصال",
+  "quranSyncConnectionErrorMessage": "تعذر تنزيل القرآن بسبب مشكلة في الاتصال. يُرجى التحقق من اتصالك وإعادة المحاولة.",
+  "surahListError": "تعذر تحميل السور",
+  "surahListTitle": "السور",
+  "surahListSearchHint": "ابحث عن سورة بالاسم أو الرقم…",
+  "surahListSearchTooltip": "بحث السور",
+  "surahListNoResults": "لا توجد سور مطابقة لبحثك.",
+  "surahRevelationMakki": "مكية",
+  "surahRevelationMadani": "مدنية",
+  "readProgressLabel": "{read}/{total} مقروءة",
+  "@readProgressLabel": {
+    "placeholders": {
+      "read": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "markSurahAsRead": "تعليم السورة كمقروءة",
+  "readAyahHint": "اضغط مطولًا على الآية لتعليمها كمقروءة. اضغط مرتين على الآية لتشغيل الصوت.",
+  "mushafPageNumber": "صفحة {page}",
+  "@mushafPageNumber": {
+    "placeholders": {
+      "page": {
+        "type": "int"
+      }
+    }
+  },
+  "goToFlaggedAyah": "الانتقال إلى الآية المعلّمة",
+  "removeFlag": "إزالة العلامة",
+  "ayahInsightAyahLabel": "آية {number}",
+  "@ayahInsightAyahLabel": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "ayahInsightMeaning": "المعنى",
+  "ayahInsightWordByWord": "كلمة بكلمة",
+  "ayahInsightWordsError": "تعذر تحميل معاني الكلمات",
+  "ayahInsightWordTransliteration": "التهجئة",
+  "ayahInsightError": "تعذر تحميل معنى الآية",
+  "ayahInsightPlayAudio": "تشغيل صوت الآية",
+  "ayahInsightStory": "القصة",
+  "ayahInsightStoryLoading": "جاري تحميل القصة",
+  "ayahInsightStoryAiHint": "شرح الاية يتضمن سبب النزول، وكيفية النزول، والمعجزة في الآية.",
+  "ayahInsightStoryRevelationReason": "سبب نزول الآية",
+  "ayahInsightStoryHowRevealed": "كيف نزلت على النبي ﷺ",
+  "ayahInsightStoryMiracle": "المعجزة في الآية",
+  "ayahInsightStoryError": "تعذر تحميل قصة الآية",
+  "ayahCountLabel": "آيات",
+  "playSurah": "تشغيل السورة",
+  "pauseAudio": "إيقاف مؤقت",
+  "stopAudio": "إيقاف",
+  "previousAyah": "الآية السابقة",
+  "nextAyah": "الآية التالية",
+  "audioAyahProgress": "الآية {current} من {total}",
+  "@audioAyahProgress": {
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "dismiss": "إغلاق",
+  "quranAudioUnavailable": "تسجيل هذا القارئ غير متاح. اختر قارئاً آخر.",
+  "quranAudioNetworkError": "تعذر تنزيل صوت الآية. تحقق من الاتصال وحاول مرة أخرى.",
+  "quranAudioLoadError": "تعذر تشغيل صوت الآية. حاول مرة أخرى أو اختر قارئاً آخر.",
+  "quranAudioNextAyahDownloading": "الآية التالية ما زالت قيد التنزيل. تحقق من الاتصال واضغط تشغيل.",
+  "drawerAdhan": "الأذان",
+  "drawerSurahs": "السور",
+  "drawerJuz": "الأجزاء",
+  "juzListTitle": "الأجزاء",
+  "juzSurahCountLabel": "{count} سورة",
+  "@juzSurahCountLabel": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "drawerSettings": "الإعدادات",
+  "drawerQibla": "القبلة",
+  "drawerNearbyMosques": "المساجد القريبة",
+  "drawerNearbyMosquesLaunchError": "تعذر فتح الخرائط.",
+  "nearbyMosquesTitle": "المساجد القريبة",
+  "nearbyMosquesLoading": "جاري العثور على المساجد القريبة…",
+  "nearbyMosquesError": "تعذر تحميل المساجد القريبة.",
+  "nearbyMosquesRetry": "إعادة المحاولة",
+  "nearbyMosquesEmpty": "لم يتم العثور على مساجد قريبة.",
+  "nearbyMosquesDistanceMeters": "يبعد {meters} م",
+  "@nearbyMosquesDistanceMeters": {
+    "placeholders": {
+      "meters": {
+        "type": "int"
+      }
+    }
+  },
+  "nearbyMosquesDistanceKm": "يبعد {kilometers} كم",
+  "@nearbyMosquesDistanceKm": {
+    "placeholders": {
+      "kilometers": {
+        "type": "String"
+      }
+    }
+  },
+  "nearbyMosquesRouteTo": "المسار إلى {mosque}",
+  "@nearbyMosquesRouteTo": {
+    "placeholders": {
+      "mosque": {
+        "type": "String"
+      }
+    }
+  },
+  "nearbyMosquesRouteHint": "اتبع الخط الأزرق على الخريطة للوصول إلى المسجد.",
+  "nearbyMosquesRouteFallbackHint": "يتم عرض المسار المباشر فقط حالياً. تعذر تحميل مسار خطوة بخطوة.",
+  "nearbyMosquesRouteDurationUnknown": "الوقت المتوقع غير متاح",
+  "nearbyMosquesRouteDurationMinutes": "{minutes} د",
+  "@nearbyMosquesRouteDurationMinutes": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "drawerAsmaUlHusna": "أسماء الله الحسنى",
+  "drawerDuaa": "الأدعية",
+  "drawerHadith": "الأحاديث",
+  "drawerTagline": "رفيقك في القرآن والعبادة",
+  "drawerSectionQuran": "القرآن",
+  "drawerSectionWorship": "العبادة",
+  "drawerSectionKnowledge": "المعرفة",
+  "hadithTitle": "الأحاديث",
+  "hadithSearchHint": "ابحث في جميع الكتب…",
+  "hadithSectionsTitle": "الأقسام",
+  "hadithBooksTitle": "الكتب",
+  "hadithFilterCategoryHint": "تصفية في هذا القسم…",
+  "hadithSearchCollectionHint": "ابحث في هذا الكتاب…",
+  "hadithError": "تعذّر تحميل الأحاديث. تحقق من الاتصال وحاول مرة أخرى.",
+  "hadithNoResults": "لا توجد نتائج مطابقة لبحثك.",
+  "hadithCountLabel": "{count, plural, =1{حديث واحد} other{{count} حديث}}",
+  "@hadithCountLabel": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "hadithNumberLabel": "حديث {number}",
+  "@hadithNumberLabel": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "hadithSourceLabel": "المصدر",
+  "hadithSourceReference": "{collection}، {number}",
+  "@hadithSourceReference": {
+    "placeholders": {
+      "collection": {
+        "type": "String"
+      },
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "hadithOpenDetailHint": "فتح الحديث",
+  "drawerSelectReciter": "قارئ القرآن",
+  "drawerRecitersLoadError": "تعذّر تحميل قائمة القرّاء. تحقق من الاتصال وحاول مرة أخرى.",
+  "asmaUlHusnaTitle": "أسماء الله الحسنى",
+  "asmaUlHusnaSearchHint": "ابحث بالاسم أو المعنى…",
+  "asmaUlHusnaError": "تعذّر تحميل أسماء الله الحسنى.",
+  "asmaUlHusnaNoResults": "لا توجد أسماء مطابقة لبحثك.",
+  "asmaUlHusnaMeaningLabel": "المعنى",
+  "asmaUlHusnaNameNumber": "الاسم {number} من ٩٩",
+  "@asmaUlHusnaNameNumber": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "duaaTitle": "الأدعية",
+  "duaaSearchCategoriesHint": "ابحث في التصنيفات…",
+  "duaaSearchDuasHint": "ابحث في الأدعية…",
+  "duaaError": "تعذّر تحميل الأدعية. تحقق من الاتصال وحاول مرة أخرى.",
+  "duaaNoResults": "لا توجد نتائج مطابقة لبحثك.",
+  "duaaCountLabel": "{count, plural, =1{دعاء واحد} other{{count} أدعية}}",
+  "@duaaCountLabel": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "duaaSourceLabel": "المصدر",
+  "duaaRepeatLabel": "يُكرَّر {count} مرات",
+  "@duaaRepeatLabel": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "qiblaTitle": "القبلة",
+  "qiblaDescription": "اتجاه الصلاة نحو الكعبة المشرفة.",
+  "qiblaLoading": "جاري تحديد اتجاهك…",
+  "qiblaError": "تعذّر تحديد اتجاه القبلة.",
+  "qiblaNoCompass": "جهازك لا يحتوي على مستشعر بوصلة.",
+  "qiblaCompassPluginUnavailable": "البوصلة الحية غير جاهزة بعد. أغلق التطبيق بالكامل ثم شغّله من جديد من المحرر أو الطرفية (إعادة التحميل السريع لا تكفي بعد إضافة دعم البوصلة).",
+  "qiblaStaticDirectionHint": "السهم يوضح اتجاه القبلة من الشمال. استخدم هاتفًا يحتوي على بوصلة للتوجيه المباشر.",
+  "qiblaBearing": "{degrees}° من الشمال",
+  "qiblaAligned": "أنت في اتجاه القبلة",
+  "qiblaOffset": "{degrees}° عن القبلة",
+  "qiblaDirection": "الاتجاه: {direction}",
+  "qiblaDistance": "{distance} كم إلى مكة",
+  "qiblaHint": "أمسك هاتفك بشكل مسطح واستدر حتى يشير السهم إلى الأعلى.",
+  "compassNorth": "شمال",
+  "compassNortheast": "شمال شرق",
+  "compassEast": "شرق",
+  "compassSoutheast": "جنوب شرق",
+  "compassSouth": "جنوب",
+  "compassSouthwest": "جنوب غرب",
+  "compassWest": "غرب",
+  "compassNorthwest": "شمال غرب",
+  "adhanTitle": "الأذان",
+  "adhanLoading": "جاري تحميل مواقيت الصلاة…",
+  "adhanError": "تعذر تحميل مواقيت الصلاة.",
+  "adhanRetry": "إعادة المحاولة",
+  "adhanOpenSettings": "فتح الإعدادات",
+  "adhanLocationDenied": "يلزم إذن الموقع لعرض مواقيت الصلاة لمدينتك.",
+  "adhanLocationUnavailable": "خدمات الموقع معطّلة. فعّلها لعرض مواقيت الصلاة لمدينتك.",
+  "adhanLocationPluginUnavailable": "خدمة الموقع غير جاهزة بعد. أغلق التطبيق بالكامل ثم شغّله من جديد من المحرر أو الطرفية (إعادة التحميل السريع لا تكفي بعد إضافة دعم الموقع).",
+  "adhanLocationTimeout": "تعذّر تحديد موقعك في الوقت المحدد. انتقل إلى مكان مفتوح، أو فعّل GPS، أو عيّن موقعًا تجريبيًا على المحاكي ثم أعد المحاولة.",
+  "adhanToday": "اليوم",
+  "adhanChangeCity": "تغيير",
+  "adhanSearchCityTitle": "بحث عن مدينة",
+  "adhanSearchCityHint": "المدينة أو المدينة، الدولة",
+  "adhanSearchCityEmpty": "لم يتم العثور على مدن. جرّب اسمًا آخر.",
+  "adhanUseMyLocation": "استخدام موقعي الحالي",
+  "prayerFajr": "الفجر",
+  "prayerSunrise": "الشروق",
+  "prayerDhuhr": "الظهر",
+  "prayerAsr": "العصر",
+  "prayerMaghrib": "المغرب",
+  "prayerIsha": "العشاء",
+  "adhanAlertSettingsTitle": "تذكير {prayer}",
+  "@adhanAlertSettingsTitle": {
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "adhanAlertTimingSection": "وقت التذكير",
+  "adhanAlertOff": "إيقاف",
+  "adhanAlertBefore": "قبل",
+  "adhanAlertAtAdhan": "عند الأذان",
+  "adhanAlertAfter": "بعد",
+  "adhanAlertMinutesSection": "المدة",
+  "adhanAlertMinutesLabel": "{minutes} د",
+  "@adhanAlertMinutesLabel": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "adhanAlertMaxBeforeHint": "بحد أقصى {minutes} د قبل {prayer} (وليس قبل صلاة سابقة)",
+  "@adhanAlertMaxBeforeHint": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      },
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "adhanAlertMaxAfterHint": "بحد أقصى {minutes} د بعد {prayer} (وليس بعد الصلاة التالية)",
+  "@adhanAlertMaxAfterHint": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      },
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "adhanAlertDeliverySection": "نوع التنبيه",
+  "adhanAlertSound": "صوت",
+  "adhanAlertVibrate": "اهتزاز",
+  "adhanAlertSave": "حفظ",
+  "adhanNotificationTitle": "{prayer}",
+  "@adhanNotificationTitle": {
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "adhanNotificationBodyBefore": "متبقّ {minutes} د على {prayer}",
+  "@adhanNotificationBodyBefore": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      },
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "adhanNotificationBodyAt": "حان وقت {prayer}",
+  "@adhanNotificationBodyAt": {
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "adhanNotificationBodyAfter": "مرّ {minutes} د على {prayer}",
+  "@adhanNotificationBodyAfter": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      },
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "adhanNotificationPermissionDenied": "يلزم إذن الإشعارات لتذكيرات الصلاة.",
+  "settingsTitle": "الإعدادات",
+  "settingsLanguageSection": "اللغة",
+  "settingsThemeSection": "المظهر",
+  "settingsThemeLight": "فاتح",
+  "settingsThemeDark": "داكن",
+  "settingsDarkMode": "الوضع الداكن",
+  "settingsSelectLanguage": "اختر اللغة",
+  "settingsFontSizeSection": "حجم الخط",
+  "settingsAppFontSize": "حجم خط التطبيق",
+  "settingsQuranReaderFontSize": "حجم خط قارئ القرآن",
+  "settingsFontSizeValue": "{percent}٪",
+  "@settingsFontSizeValue": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "settingsNotificationsSection": "الإشعارات",
+  "settingsNotificationsEnabled": "تفعيل الإشعارات",
+  "settingsContactSection": "الدعم",
+  "settingsReportBug": "الإبلاغ عن مشكلة",
+  "settingsReportBugDescription": "صف المشكلة وحدّد موضعها على الشاشة. يُرسل تقريرك إلى فريقنا.",
+  "settingsReportBugSuccess": "شكراً — تم إرسال تقريرك.",
+  "settingsReportBugError": "تعذر إرسال التقرير. حاول مرة أخرى.",
+  "settingsReportBugEmptyMessage": "يرجى وصف المشكلة قبل الإرسال.",
+  "settingsContactUs": "تواصل معنا",
+  "settingsContactUsError": "تعذر فتح صفحة التواصل",
+  "settingsStorageSection": "التخزين",
+  "settingsClearCache": "مسح الذاكرة المؤقتة",
+  "settingsClearCacheDescription": "إزالة الصوت المحمّل ومعاني الآيات ومعاني الكلمات. ستُحمَّل مجدداً عند الحاجة.",
+  "settingsClearCacheConfirmTitle": "مسح الذاكرة المؤقتة؟",
+  "settingsClearCacheConfirmMessage": "ستُزال التلاوات المحمّلة ومعاني الآيات ومعاني الكلمات من هذا الجهاز.",
+  "settingsClearCacheConfirmAction": "مسح",
+  "settingsClearCacheCancel": "إلغاء",
+  "settingsClearCacheSuccess": "تم مسح الذاكرة المؤقتة.",
+  "settingsClearCacheError": "تعذر مسح الذاكرة المؤقتة. حاول مرة أخرى."
+}
